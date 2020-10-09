@@ -10,6 +10,7 @@ namespace AscendedRPG
     [ProtoContract]
     public class Enemy : ICloneable
     {
+        //TESTING
         [ProtoMember(1)]
         public int Turns { get; set; }
         [ProtoMember(2)]
