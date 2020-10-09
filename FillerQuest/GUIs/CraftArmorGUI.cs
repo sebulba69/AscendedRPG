@@ -1,0 +1,274 @@
+﻿using AscendedRPG;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace AscendedRPG.GUIs
+{
+    public partial class CraftArmorGUI : Form
+    {
+        private FormState _state;
+        private List<RadioButton> rbuttons;
+
+        public CraftArmorGUI(FormState state)
+        {
+            _state = state;
+            rbuttons = new List<RadioButton>();
+            InitializeComponent();
+        }
+
+        private void CraftArmorGUI_Load(object sender, EventArgs e)
+        {
+            var recipes = _state.Player.Loot.Recipes;
+            var display = recipes.FindAll(x => x.Ingredients.Count == 4);
+
+            rbuttons.Add(headButton);
+            rbuttons.Add(torsoButton);
+            rbuttons.Add(armsButton);
+            rbuttons.Add(waistButton);
+            rbuttons.Add(legButton);
+
+            // display all ingredients that aren't null
+            display.ForEach(x =>
+            {
+                if (x.Result == null)
+                {
+                    int tier = (int)x.Ingredients.Average(i => i.Tier);
+
+                    string namePrefix = "";
+
+                    if (x.Ingredients.Find(i => i.Name.Contains("EX")) != null)
+                    {
+                        tier += 10;
+                        namePrefix = "EX ";
+                    }
+
+                    if (x.Ingredients.Find(i => i.Name.Contains("ASC")) != null)
+                    {
+                        tier += 20;
+                        namePrefix = "ASC ";
+                    }
+
+                    x.Result = _state.AManager.GetRandomArmorPiece(_state, tier, _state.Random.Next(0, 5));
+                    x.Result.Name = namePrefix + x.Result.Name;
+
+                }
+            });
+
+            recipeList.DataSource = display;
+        }
+
+        private void recipeList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var selected = recipeList.SelectedItem as Recipes.Recipe;
+                resultBox.Text = selected.Result.ToString();
+                skillBox.DataSource = selected.Result.Skills;
+                recipeIngredients.Items.Clear();
+                foreach (Recipes.Ingredient i in selected.Ingredients)
+                {
+                    var l = _state.Player.Loot.EnemyLoot.Find(loot => loot.GetName().Equals(i.GetName()));
+                    if (l == null)
+                        recipeIngredients.Items.Add(i.DisplayString(0));
+                    else
+                        recipeIngredients.Items.Add(i.DisplayString(l.Quantity));
+                }
+            }
+            catch (NullReferenceException)
+            { }
+        }
+
+        private void craftButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                var selected = recipeList.SelectedItem as Recipes.Recipe;
+
+                // do we have enough materials to craft this item?
+                bool canCraft = selected.Ingredients.TrueForAll(i =>
+                {
+                    var item = _state.Player.Loot.EnemyLoot.Find(l => l.GetName().Equals(i.GetName()));
+                    return (item == null) ? false : item.Quantity >= i.Quantity;
+                });
+
+                if (canCraft)
+                {
+                    if (_state.Player.Inventory.CanAdd())
+                    {
+                        _state.Player.Inventory.AddArmor(selected.Result);
+
+                        // find and reduce the quantity of materials you're spending on the armor
+                        selected.Ingredients.ForEach(i =>
+                        {
+                            var loot = _state.Player.Loot.EnemyLoot.Find(l => i.GetName().Equals(l.GetName()));
+                            loot.Quantity -= i.Quantity;
+                        });
+
+                        _state.Player.Loot.EnemyLoot.RemoveAll(l => l.Quantity <= 0);
+
+                        RemoveRecipeFromList(selected);
+
+                        _state.Save.SaveGame(_state.Player);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your inventory is currently full. You can craft this item, but you can't add it at this time.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You do not have enough materials to craft this item.");
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("You do not have enough materials to craft this item.");
+            }
+        }
+
+        private void deleteRecipe_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                var selected = recipeList.SelectedItem as Recipes.Recipe;
+                RemoveRecipeFromList(selected);
+                if (_state.Player.Loot.Wishlist.Contains(selected))
+                    _state.Player.Loot.Wishlist.Remove(selected);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("You don't have any recipes to delete.");
+            }
+        }
+
+
+        private void saveRecipe_MouseClick(object sender, MouseEventArgs e)
+        {
+            var selected = recipeList.SelectedItem as Recipes.Recipe;
+            _state.Player.Loot.Wishlist.Add(selected);
+            MessageBox.Show("Recipe saved.");
+            _state.Save.SaveGame(_state.Player);
+        }
+
+        private void RemoveRecipeFromList(Recipes.Recipe selected)
+        {
+            var loot = _state.Player.Loot;
+            loot.Recipes.Remove(selected);
+
+            if(loot.Wishlist.Contains(selected))
+                loot.Wishlist.Remove(selected);
+
+            recipeList.DataSource = null;
+            
+            if(loot.Recipes.Count == 0)
+            {
+                recipeIngredients.Items.Clear();
+                resultBox.Clear();
+            }
+            else
+            {
+                for (int i = 0; i < rbuttons.Count; i++)
+                    if (rbuttons[i].Checked)
+                        FindPiece(i);
+
+                if (allButton.Checked)
+                    recipeList.DataSource = loot.Recipes;
+
+                if (wlistButton.Checked)
+                    recipeList.DataSource = loot.Wishlist;
+            }
+        }
+
+        private void inventoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _state.Type = FTypes.MOVE;
+            _state.Location = Location;
+            Close();
+        }
+
+        private void CraftArmorGUI_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_state.Type == FTypes.CRAFTING_ARMOR)
+                _state.Type = FTypes.CLOSE;
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HelpGUI help = new HelpGUI();
+            help.StartPosition = FormStartPosition.Manual;
+            help.Location = Location;
+            help.ShowDialog();
+        }
+
+        private void enemyIndexToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EnemyIndexGUI eigui = new EnemyIndexGUI(_state.Player.EnemyIndex);
+            eigui.StartPosition = FormStartPosition.Manual;
+            eigui.Location = Location;
+            eigui.ShowDialog();
+        }
+
+        private void headButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if(headButton.Checked)
+                FindPiece(ArmorPiece.HEAD);
+        }
+
+        private void torsoButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (torsoButton.Checked)
+                FindPiece(ArmorPiece.TORSO);
+        }
+
+        private void armsButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (armsButton.Checked)
+                FindPiece(ArmorPiece.ARMS);
+        }
+
+        private void waistButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (waistButton.Checked)
+                FindPiece(ArmorPiece.WAIST);
+        }
+
+        private void legButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (legButton.Checked)
+                FindPiece(ArmorPiece.LEGS);
+        }
+
+        private void allButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (allButton.Checked)
+                recipeList.DataSource = _state.Player.Loot.Recipes;
+        }
+
+        private void wlistButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (wlistButton.Checked)
+                recipeList.DataSource = _state.Player.Loot.Wishlist;
+        }
+
+        private void FindPiece(int piece)
+        {
+            try
+            {
+                recipeList.DataSource = _state.Player.Loot.Recipes.FindAll(r => r.Result != null && r.Result.Piece == piece);
+            }
+            catch(NullReferenceException)
+            {
+                recipeList.DataSource = null;
+            }
+        }
+
+
+    }
+}
