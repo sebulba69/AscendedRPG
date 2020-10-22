@@ -296,7 +296,7 @@ namespace AscendedRPG.GUIs
                     parry = " Player parried the attack!";
                 }
                 _dgc.ReducePlayerHealth(damage);
-                _dgc.UpdateCombatLog($"{attacker.Name} used {skill.Name}. It hit for {damage}" + parry);
+                _dgc.UpdateCombatLog($"{attacker.Name} used {skill.Name}. It hit for {damage}." + parry);
                 if (_dgc.IsPlayerDead())
                 {
                     _dgc.StopTimer();
