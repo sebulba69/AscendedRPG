@@ -244,28 +244,7 @@ namespace AscendedRPG.GUIs
                         // end the dungeon
                         _state.Music.Stop();
                         MessageBox.Show("Dungeon Complete.");
-                        int d_tier = _state.dungeonTiers[_state.DungeonType];
-
-                        int quantity = _state.Random.Next(3, 5) + battleMembers.Count;
-                        int boss = (d_tier % 10 == 0) ? 2 : 0;
-                        quantity += boss;
-
-                        var tiers = _state.Player.Tiers;
-                        tiers[_state.DungeonType] += (d_tier == tiers[_state.DungeonType]) ? 1 : 0;
-
-                        for (int i = 0; i < quantity; i++)
-                        {
-                            int xp = _state.Random.Next(d_tier, d_tier * 2) + d_tier;
-                            _state.Player.Weapon.IncreaseXP(xp);
-                            _state.Player.Minions.ForEach(m =>
-                            {
-                                m.IncreaseXP(xp + _state.Random.Next(100, 201));
-                                m.Weapon.IncreaseXP(xp + 200);
-                            });
-                        }
-
-                        _state.Player.Wallet.AddDellenCoin(_state.Random.Next(1000, 2001)*boss);
-
+                        _state.ProcessCompletedTier(battleMembers.Count);
                         _dungeon.CloseGUI();
                     }
                 }
