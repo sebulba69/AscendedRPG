@@ -100,7 +100,7 @@ namespace AscendedRPG
                 {
                     case SkillType.OFFENSIVE:
                         UpdateMLTB(SkillDisplayBox, selected.Name);
-                        UpdateMLTB(SkillDisplayBox, $"{selected.CalculateDamage(selected.Damage, selected.Multiplier)} Damage");
+                        UpdateMLTB(SkillDisplayBox, $"{selected.GetDamage()} Damage");
                         SkillDisplayBox.AppendText($"Element: {_state.SManager.ElementToString(selected.Element)}");
                         break;
                     case SkillType.PASSIVE_BUFF:

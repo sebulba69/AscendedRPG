@@ -11,372 +11,329 @@ namespace AscendedRPG.GUIs
     public class DungeonGUIHelper
     {
         private FormState _state;
-        private ListBox Skills;
-        private TextBox NameBox, CurrentFight, FightsLeft, TurnBox, CombatLog;
-        private Button UseSkillButton;
-        private PictureBox ProfilePic;
-        private ProgressBar PlayerHealth;
-        private List<BattleMember> members;
-        private ActionHandler ah;
-        private LootHandler lh;
-        private int currentFighter, d_tier;
-        private Dungeon d;
-        private bool isPlayerDead;
+        private IDungeon _dungeon;
+        private DGPComponents _dgc;
+        private DungeonHandlers _dh;
+        private int currentFighter, currentEnemy;
+        private List<BattleMember> battleMembers;
 
-        public DungeonGUIHelper(FormState state, ListBox skills, TextBox name, PictureBox prof, ProgressBar ph, TextBox cfight, TextBox rfight, Dungeon dungeon, TextBox turns, Button usb, TextBox cl, int dt)
+        public DungeonGUIHelper(FormState state, IDungeon dungeon)
         {
-            // textboxes
-            NameBox = name;
-            CurrentFight = cfight;
-            FightsLeft = rfight;
-            TurnBox = turns;
-            CombatLog = cl;
-
-            // buttons
-            UseSkillButton = usb;
-
-            // ints
-            currentFighter = 0;
-            d_tier = dt;
-
-            // misc
-            isPlayerDead = false;
-            d = dungeon;
-            ah = new ActionHandler();
-            lh = new LootHandler();
             _state = state;
-            Skills = skills;
-            ProfilePic = prof;
-            PlayerHealth = ph;
-            members = new List<BattleMember>();
+            _state.Player.Stats = new BattleStats();
+            _dungeon = dungeon;
+            currentFighter = 0;
+            currentEnemy = 0;
+            battleMembers = new List<BattleMember>();
+            _dh = new DungeonHandlers(state);
         }
 
-        public void SetUp()
+        public void Start()
         {
-            PopulateBattleMembers();
-            PopulateSkillList(members[currentFighter]);
-            SetUpPlayerHealth();
-            UpdateCurrentFights();
-            RegisterPlayerPassives();
-            ah.SetTurns(_state.Player.GetTurns() + _state.Player.Stats.stats[Stat.TURNS]);
-            TurnBox.Text = ah.GetTurns();
+            PopulateBattleMembers(battleMembers);
+
+            _dgc = _dungeon.GetDGPComponents();
+
+            InitializeHPAndTurns();
+            SetCurrentFighter();
+            UpdateFightCounter();
+
+            _dungeon.SetUpEnemyGUI();
+            _dungeon.StartMusic();
         }
 
-        private void PopulateBattleMembers()
+        private void InitializeHPAndTurns()
         {
-            var bm = new BattleMember()
+            _dgc.InitializePlayerHealth(_state.Player.GetBattleHP());
+            InitializePlayerTurns();
+        }
+
+        private void InitializePlayerTurns()
+        {
+            _dh.SetTurns(_state.Player.GetTurns());
+            _dgc.SetTurnText(_dh.GetTurnString());
+        }
+
+        private void InitializePlayerPassives()
+        {
+            var buffs = _state.Player.Set.GetListOfSkillType(SkillType.PASSIVE_BUFF);
+            var voids = _state.Player.Set.GetListOfSkillType(SkillType.PASSIVE_VOID);
+
+            if (buffs != null)
+                buffs.ForEach(b => _state.Player.Stats.stats[b.Stat] += b.Multiplier);
+
+            if (voids != null)
+                voids.ForEach(v => _state.Player.Stats.elementalRes[v.Stat] += v.Multiplier);
+        }
+
+        private void PopulateBattleMembers(List<BattleMember> bm)
+        {
+            var skills = new List<Skill>();
+            skills.AddRange(_state.Player.Set.GetListOfSkillType(SkillType.OFFENSIVE));
+            skills.AddRange(_state.Player.Set.GetListOfSkillType(SkillType.HEALING));
+            bm.Add(MakeBattleMember(_state.Player.Name, _state.Player.Picture, skills, _state.Player.Weapon));
+            _state.Player.Minions.ForEach(m => 
             {
-                Name = _state.Player.Name,
-                Image = _state.Player.Picture,
-                Skills = _state.Player.Set.GetListOfSkillType(SkillType.OFFENSIVE),
-                Weapon = _state.Player.Weapon
-            };
-
-            members.Add(bm);
-
-            _state.Player.Minions.ForEach(m =>
-            {
-                if (m.IsEquipped)
-                {
-                    var minionMember = new BattleMember()
-                    {
-                        Name = m.NameString(),
-                        Image = m.Image,
-                        Skills = m.Skills,
-                        Weapon = m.Weapon
-                    };
-
-                    members.Add(minionMember);
-                }
-
+                if(m.IsEquipped)
+                    bm.Add(MakeBattleMember(m.NameString(), m.Image, m.Skills, m.Weapon));
             });
         }
 
-        private void PopulateSkillList(BattleMember bm)
+        private void UpdateFightCounter()
         {
-            Skills.Items.Clear();
-            var sorted = bm.Skills.OrderBy(x => x.CalculateDamage(x.Damage, x.Multiplier)).Reverse();
-            Skills.Items.Add("~ Skills ~");
-            Skills.Items.AddRange(sorted.ToArray());
-            Skills.Items.Add(bm.Weapon.DisplayString());
-            NameBox.Text = bm.Name;
-            ProfilePic.ImageLocation = bm.Image;
+            _dgc.SetCurrentFight(_dh.GetCurrentFights());
+            _dgc.SetRemainingFights(_dh.GetRemainingFights());
         }
 
-        private void SetUpPlayerHealth()
+        private BattleMember MakeBattleMember(string name, string image, List<Skill> skills, Weapon weapon) => new BattleMember() { Name = name, Image = image, Skills = skills, Weapon = weapon };
+
+        // move left = -1
+        // move right = +1
+        public void ChangeCurrentBattler(int value)
         {
-            PlayerHealth.Maximum = _state.Player.GetHP() + _state.Player.Set.TotalDef + _state.Player.Stats.stats[Stat.DEFENSE];
-            PlayerHealth.Value = PlayerHealth.Maximum;
+            if (currentFighter + value < 0)
+                currentFighter = 0;
+            else if (currentFighter + value > battleMembers.Count - 1)
+                currentFighter = battleMembers.Count - 1;
+            else
+                currentFighter += value;
+
+            SetCurrentFighter();
         }
 
-        private void RegisterPlayerPassives()
+        private void SetCurrentFighter()
         {
-            _state.Player.Stats = new BattleStats();
-            var buffs = _state.Player.Set.GetListOfSkillType(SkillType.PASSIVE_BUFF);
-            var voids = _state.Player.Set.GetListOfSkillType(SkillType.PASSIVE_VOID);
-            foreach (Skill b in buffs) _state.Player.Stats.stats[b.Stat] += b.Multiplier;
-            foreach (Skill v in voids) _state.Player.Stats.elementalRes[v.Element] += v.Multiplier;
+            var current = battleMembers[currentFighter];
+            _dgc.SetPlayerName(current.Name);
+            _dgc.SetPicture(current.Image);
+            _dgc.UpdateSkillBoxSkills(current);
         }
 
-        public void PartyMemberRight()
-        {
-            currentFighter += (currentFighter + 1 < members.Count) ? 1 : 0;
-            PopulateSkillList(members[currentFighter]);
-        }
+        public int SelectTarget() => _dgc.FindTarget();
 
-        public void PartyMemberLeft()
+        public void UseSelected(Enemy target, int t)
         {
-            currentFighter -= (currentFighter - 1 >= 0) ? 1 : 0;
-            PopulateSkillList(members[currentFighter]);
-        }
-
-        public void UpdateCurrentFights()
-        {
-            CurrentFight.Text = $"Current Fight: {d.GetCurrentFight()}";
-            FightsLeft.Text = $"Remaining Fights: {d.GetFights()}";
-        }
-
-        public void EnemyAttackPlayer(Enemy enemy)
-        {
-            int h = _state.Random.Next(0, 100);
-            if (h < 85)
+            // Are we selecting an item that isn't the "~ Skills ~" header?
+            if(_dgc.IsSelectable())
             {
-                var skill = enemy.Skills[_state.Random.Next(0, enemy.Skills.Count)];
-                int damage = skill.Damage;
-                damage -= _state.Player.Stats.elementalRes[skill.Element];
-
-                if (_state.Player.Stats.isParryState)
-                {
-                    _state.Player.Stats.isParried = true;
-                    _state.Player.Stats.isParryState = false;
-                    damage = damage / 2;
-                    UpdateLog($"{enemy.Name} used {skill.Name} and got parried! It hit for only {damage} dmg!");
-                }
+                var bm = battleMembers[currentFighter];
+                if (_dgc.IsWeapon()) // If it is selectable, then are we selecting a weapon?
+                    UseWeapon(bm, target, t); // Use weapon
                 else
-                {
-                    UpdateLog($"{enemy.Name} used {skill.Name} and hit for {damage} dmg!");
-                }
-
-                IsPlayerDead(damage);
-            }
-            else
-            {
-                UpdateLog($"{enemy} attacked and missed!");
-                ah.Miss();
-            }
-        }
-
-        private void IsPlayerDead(int damage)
-        {
-            if (PlayerHealth.Value - damage <= 0)
-            {
-                PlayerHealth.Value = 0;
-                isPlayerDead = true;
-            }
-            else if (PlayerHealth.Value - damage >= PlayerHealth.Maximum)
-                PlayerHealth.Value = PlayerHealth.Maximum;
-            else
-                PlayerHealth.Value -= damage;
-        }
-
-        public bool GetIsPlayerDead() => isPlayerDead;
-
-        public bool IsTurnEndEnemy()
-        {
-            if (ah.IsTurnEnd())
-            {
-                ah.pt = true;
-                UseSkillButton.Enabled = true;
-                ah.SetTurns(_state.Player.GetTurns() + _state.Player.Stats.stats[Stat.TURNS]);
-                ProcessTurnBox();
-                return true;
-            }
-            else
-            {
-                return false;
+                    UseSkillPlayer(bm, target, t); // Use skill
             }
 
         }
 
-        public void UseSelectedSkill(Enemy enemy)
+        private void UseSkillPlayer(BattleMember bm, Enemy target, int t)
         {
-            var c = members[currentFighter];
-            var skill = Skills.SelectedItem as Skill;
-            if (skill.S_Type == SkillType.OFFENSIVE)
+            var skill = _dgc.GetSelectedSkill();
+            string result = "";
+            if (skill != null)
             {
-                UpdateLog(ah.UseSkillPlayer(c, skill, _state, enemy));
-            }
-            else if (skill.S_Type == SkillType.OFFENSIVE_BUFF)
-            {
-                if (_state.Player.Stats.CanBuff(skill.Stat))
+                switch(skill.S_Type)
                 {
-                    _state.Player.Stats.stats[skill.Stat] += skill.Multiplier;
-                    if (skill.Stat == Stat.DEFENSE)
-                        PlayerHealth.Maximum = _state.Player.GetHP() + _state.Player.Set.TotalDef + _state.Player.Stats.stats[Stat.DEFENSE];
-                    UpdateLog($"{c.Name} buffed everyone!");
-                    ah.FullTurn();
-                }
-                else
-                {
-                    MessageBox.Show("You can't buff that stat any more!");
-                }
-
-            }
-            else // it's a healing spell
-            {
-                PlayerHealth.Value = (PlayerHealth.Value + skill.Multiplier > PlayerHealth.Maximum) ? PlayerHealth.Maximum : PlayerHealth.Value + skill.Multiplier;
-
-                UpdateLog($"{c.Name} healed everyone!");
-
-                ah.FullTurn();
-            }
-            ProcessTurnBox();
-        }
-
-        public void UseWeapon(Enemy target)
-        {
-            try
-            {
-                var c = members[currentFighter];
-                var weapon = c.Weapon;
-                int damage = 0;
-                string log = "";
-                switch (weapon.Style)
-                {
-                    case WeaponStyle.LIFESTEAL:
-                        if (ah.GetIcons() >= 2)
+                    case SkillType.OFFENSIVE_BUFF:
+                        if (_state.Player.Stats.CanBuff(skill.Stat))
                         {
-                            ah.FullTurn(); // costs 2 turns (1 and 1/2 if you crit)
-                            damage = (weapon.Damage + _state.Player.Stats.stats[Stat.ATTACK]) / 2;
-                            log = ah.UseWeaponPlayer(c, damage, _state, target);
-
-                            if (!log.Contains("missed"))
-                            {
-                                PlayerHealth.Value = (PlayerHealth.Value + damage > PlayerHealth.Maximum) ?
-                                                            PlayerHealth.Maximum :
-                                                            PlayerHealth.Value + damage;
-
-                                UpdateLog($"{c.Name} healed everyone for {damage} HP!");
-                            }
-
+                            result = $"{bm.Name} used {skill.Name} and buffed their party.";
+                            _state.Player.Stats.stats[skill.Stat] += skill.Multiplier;
+                            _dh.DecrementTurns(1);
+                            _dgc.SetTurnText(_dh.GetTurnString());
                         }
                         else
                         {
-                            MessageBox.Show("Not enough icons to use this skill.");
+                            MessageBox.Show("You can't buff that stat any further.");
                         }
-
                         break;
-                    case WeaponStyle.PARRY:
-                        if (ah.GetIcons() >= 2 && !_state.Player.Stats.isParryState)
-                        {
-                            _state.Player.Stats.isParryState = true;
-                            for (int i = 0; i < 2; i++)
-                                ah.FullTurn();
-                            UpdateLog($"Player team assumes a parry stance!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("You either don't have enough turns or are already in a parry stance.");
-                        }
+                    case SkillType.HEALING:
+                        _dgc.ReducePlayerHealth(skill.GetDamage() * -1);
+                        _dh.DecrementTurns(1);
+                        _dgc.SetTurnText(_dh.GetTurnString());
+                        result = $"{bm.Name} used {skill.Name} and healed for {skill.GetDamage()} HP";
                         break;
                     default:
-                        log = ah.UseWeaponPlayer(c, weapon.Damage, _state, target);
+                        result = _dh.GetSkillResult(bm.Name, _state, skill, target);
+                        ProcessDamage(target, t);
                         break;
                 }
-
-                if (log != "")
-                    UpdateLog(log);
-
-                ProcessTurnBox();
+                _dgc.UpdateCombatLog(result);
             }
-            catch (NullReferenceException) { }
         }
 
-        private void ProcessTurnBox()
+        private void UseWeapon(BattleMember bm, Enemy target, int t)
         {
-            TurnBox.Text = ah.GetTurns();
-        }
-
-        public void ContinueEnemyTurn()
-        {
-            ah.FullTurn();
-        }
-
-        public bool TurnCheck()
-        {
-            return ah.IsTurnEnd();
-        }
-
-        public void EndPlayerTurn(int turns)
-        {
-            ah.pt = false;
-            UseSkillButton.Enabled = false;
-            ah.SetTurns(turns);
-        }
-
-        public void LoadNextFight()
-        {
-            ah.SetTurns(_state.Player.GetTurns() + _state.Player.Stats.stats[Stat.TURNS]);
-            ah.pt = true;
-            ProcessTurnBox();
-        }
-
-        public bool IsPlayerTurn() => ah.pt;
-
-        public void DistributeLoot(Enemy e)
-        {
-            if (e.Name.Contains("Pot of"))
+            var weapon = bm.Weapon;
+            int damage = 0;
+            string log = "";
+            switch (weapon.Style)
             {
-                lh.GetRecipeDrop(d_tier, _state.DungeonType, _state.Player.Loot.Recipes, _state.Random);
+                case WeaponStyle.LIFESTEAL:
+                    if (_dh.CanUseNIcons(2))
+                    {
+                        _dh.DecrementTurns(2);
+                        damage = (weapon.Damage + _state.Player.Stats.stats[Stat.ATTACK]) / 2;
+                        log = _dh.GetWeaponResult(bm.Name, damage, _state, target);
+
+                        if (!log.Contains("missed"))
+                        {
+                            _dgc.ReducePlayerHealth(damage * -1); // we want to heal, so we make dmg negative
+                            log += $" {bm.Name} healed everyone for {damage} HP!";
+                        }
+
+                        ProcessDamage(target, t);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not enough icons to use this skill.");
+                    }
+
+                    break;
+                case WeaponStyle.PARRY:
+                    if (_dh.CanUseNIcons(2) && !_state.Player.Stats.isParryState)
+                    {
+                        _state.Player.Stats.isParryState = true;
+                        _dh.DecrementTurns(2);
+                        log = $"Player team assumes a parry stance!";
+                    }
+                    else
+                    {
+                        MessageBox.Show("You either don't have enough turns or are already in a parry stance.");
+                    }
+                    break;
+                default:
+                    log = _dh.GetWeaponResult(bm.Name, weapon.Damage, _state, target);
+                    ProcessDamage(target, t);
+                    break;
             }
-            else if (e.Name.Contains("Minion"))
-            {
-                _state.Player.Wallet.MinionShards++;
-            }
-            else
-            {
-                var loot = lh.GetEnemyDrop(e.Name, _state.Random, d_tier);
-                var eLoot = _state.Player.Loot.EnemyLoot; // make pointer to list so we can check it easily
-                var l = eLoot.Find(x => x.GetName().Equals(loot.GetName()));
 
-                if (l == null)
-                    eLoot.Add(loot);
-                else
-                    l.Quantity += loot.Quantity;
+            if (log != "")
+                _dgc.UpdateCombatLog(log);
 
-            }
-            LogEnemyIntoIndex(e);
+            _dgc.SetTurnText(_dh.GetTurnString());
         }
 
-        private void LogEnemyIntoIndex(Enemy enemy)
+        private void ProcessDamage(Enemy target, int t)
         {
-            var e_index = _state.Player.EnemyIndex;
-            if (e_index.ContainsKey(enemy.Name))
+            _dungeon.UpdateEnemyHealth();
+            if (target.HP == 0)
             {
-                var key = e_index[enemy.Name];
-                key.Tier = (key.Tier < d_tier) ? d_tier : key.Tier;
-            }
-            else
-            {
-                var e_index_val = new EIndexEntry()
+                if (!_dungeon.IsTroopDead())
                 {
-                    Name = enemy.Name,
-                    DType = _state.DungeonType,
-                    Image = enemy.Image,
-                    Tier = d_tier,
-                    IsBoss = false
-                };
+                    // disable current checked button and check a new button
+                    SetTargetButtonEnabled(t, false);
+                    ChangeTargetButtonChecked();
+                    CheckTurnEnd();
+                }
+                else
+                {
+                    // distribute loot
+                    _dungeon.DistributeLoot();
 
-                e_index.Add(enemy.Name, e_index_val);
+                    // increment fight counters
+                    _dh.IncrementFightCounter();
+                    if (_dh.GetFightCounter() >= 0)
+                    {
+                        UpdateFightCounter(); // update fight counter
+                        _dungeon.SetUpEnemyGUI(); // load another set of fighters if we still have more fights left
+                        InitializeHPAndTurns(); // reset the HP to max
+                    }
+                    else
+                    {
+                        // end the dungeon
+                        _state.Music.Stop();
+                        MessageBox.Show("Dungeon Complete.");
+                        _dungeon.CloseGUI();
+                    }
+                }
             }
-            _state.Save.SaveGame(_state.Player);
+            else
+            {
+                // the target is not dead, we need to check the turns
+                _dgc.SetTurnText(_dh.GetTurnString());
+                // if we're out of turns, start timer
+                CheckTurnEnd();
+            }
         }
 
-        private void UpdateLog(string log)
+        private void CheckTurnEnd()
         {
-            CombatLog.AppendText(log);
-            CombatLog.AppendText(Environment.NewLine);
-            CombatLog.AppendText(Environment.NewLine);
+            if (_dh.GetIsTurnEnd())
+            {
+                _dh.SetTurns(_dungeon.GetEnemyTurns());
+                _dgc.StartTimer();
+                _dgc.SetUseSkillButtonEnabled(false);
+            }
         }
+
+        public Enemy GetNextEnemy(Enemy[] troop)
+        {
+            Enemy enemy = troop[currentEnemy];
+
+            while (enemy == null || enemy.HP <= 0)
+            {
+                currentEnemy = (currentEnemy + 1 == troop.Length) ? 0 : currentEnemy + 1;
+                enemy = troop[currentEnemy];
+            }
+            
+            return enemy;
+        }
+
+        public void HandleEnemyTurn(Enemy attacker)
+        {
+            if(_state.Random.Next(0, 100) < 85)
+            {
+                var skill = attacker.Skills[_state.Random.Next(0, attacker.Skills.Count)];
+                int damage = skill.GetDamage() - _state.Player.Stats.elementalRes[skill.Element];
+                string parry = "";
+                if(_state.Player.Stats.isParryState)
+                {
+                    _state.Player.Stats.isParryState = false;
+                    _state.Player.Stats.isParried = true;
+                    damage /= 2;
+                    parry = " Player parried the attack!";
+                }
+                _dgc.ReducePlayerHealth(damage);
+                _dgc.UpdateCombatLog($"{attacker.Name} used {skill.Name}. It hit for {damage}" + parry);
+                if (_dgc.IsPlayerDead())
+                {
+                    _dgc.StopTimer();
+                    _state.Music.Stop();
+                    MessageBox.Show("You died.");
+                    _dungeon.CloseGUI();
+                }
+                else
+                {
+                    if(_dh.GetIsTurnEnd())
+                    {
+                        InitializePlayerTurns();
+                        _dgc.StopTimer();
+                        _dgc.SetUseSkillButtonEnabled(true);
+                    }
+                    else
+                    {
+                        _dh.DecrementTurns(1);
+                        _dgc.SetTurnText(_dh.GetTurnString());
+                    }
+                }
+            }
+            else
+            {
+                _dh.DecrementTurns(1);
+                _dgc.UpdateCombatLog($"{attacker.Name} attacked and missed!");
+            }
+        }
+
+        public void SetTargetButtonEnabled(int index, bool value) => _dgc.SetTargetEnabled(index, value);
+
+        public void ChangeTargetButtonChecked() => _dgc.FindNextEnabled();
+
+        public Enemy[] MakeTroop() => _dh.GetTroop();
+
+        public Enemy MakeBoss() => _dh.GetBoss();
+
+        public void DistributeLoot(Enemy e) => _dh.DistributeLoot(e, _state);
+
+        public void LogEnemy(Enemy e, bool isBoss) => _dh.LogEnemyIntoIndex(e, _state, isBoss);
     }
 }

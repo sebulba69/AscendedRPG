@@ -101,6 +101,9 @@
     <Compile Include="Armors\ArmorManager.cs" />
     <Compile Include="Enemies\Dungeon.cs" />
     <Compile Include="Enemies\DungeonType.cs" />
+    <Compile Include="GUIs\DGPComponents.cs" />
+    <Compile Include="GUIs\DungeonHandlers.cs" />
+    <Compile Include="GUIs\IDungeon.cs" />
     <Compile Include="Enemies\Minion.cs" />
     <Compile Include="Files\EncryptionManager.cs" />
     <Compile Include="Files\MinionManager.cs" />

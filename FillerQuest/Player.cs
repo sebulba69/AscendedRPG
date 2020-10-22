@@ -124,6 +124,8 @@ namespace AscendedRPG
 
         public int GetHP() => HP;
 
+        public int GetBattleHP() => HP + Set.TotalDef + Stats.stats[Stat.DEFENSE];
+
         public int GetTurns() => TURNS;
 
     }

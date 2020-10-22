@@ -19,11 +19,11 @@ namespace AscendedRPG
             pt = true;
         }
 
-        public string UseSkillPlayer(BattleMember bm, Skill skill, FormState state, Enemy target)
+        public string UseSkillPlayer(string name, Skill skill, FormState state, Enemy target)
         {
             var stats = state.Player.Stats;
-            int damage = skill.CalculateDamage(skill.Damage, skill.Multiplier) + stats.stats[Stat.ATTACK] + state.Player.ElementalAttack[skill.Element];
-            var result = GetDamage(state, bm, stats, damage, target, skill.Name);
+            int damage = skill.GetDamage() + stats.stats[Stat.ATTACK] + state.Player.ElementalAttack[skill.Element];
+            var result = GetDamage(state, name, stats, damage, target, skill.Name);
 
             if (!result[0].Contains("missed!"))
             {
@@ -48,10 +48,10 @@ namespace AscendedRPG
             return result[0];
         }
 
-        public string UseWeaponPlayer(BattleMember bm, int wepdmg, FormState state, Enemy target)
+        public string UseWeaponPlayer(string name, int dmg, FormState state, Enemy target)
         {
             var stats = state.Player.Stats;
-            var result = GetDamage(state, bm, stats, wepdmg, target, "their weapon");
+            var result = GetDamage(state, name, stats, dmg, target, "their weapon");
             if (!result[0].Contains("missed!"))
             {
                 int damage = Int32.Parse(result[1]);
@@ -61,7 +61,7 @@ namespace AscendedRPG
             return result[0];
         }
 
-        private string[] GetDamage(FormState state, BattleMember bm, BattleStats bstats, int damage, Enemy target, string attackName)
+        private string[] GetDamage(FormState state, string name, BattleStats bstats, int damage, Enemy target, string attackName)
         {
             string[] result = new string[] { "", "" };
             Random r = state.Random; // Random pointer
@@ -78,7 +78,7 @@ namespace AscendedRPG
                     damage *= 2;
                 }
 
-                result[0] = $"{bm.Name} used {attackName}! ";
+                result[0] = $"{name} used {attackName}! ";
                 int crit = GetDamageFromCrit(damage, bstats.stats[Stat.CRITS], r);
 
                 if (crit > damage)
@@ -92,7 +92,7 @@ namespace AscendedRPG
             else
             {
                 tp.Miss();
-                result[0] = $"{bm.Name} used {attackName} and missed!";
+                result[0] = $"{name} used {attackName} and missed!";
                 result[1] = 0.ToString();
             }
             return result;

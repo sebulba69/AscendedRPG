@@ -114,7 +114,6 @@ namespace AscendedRPG
 
         private void Depart(int t)
         {
-
             _state.Music.Stop();
 
             _state.Location = Location;

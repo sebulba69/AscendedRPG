@@ -22,7 +22,9 @@ namespace AscendedRPG
 
         public Skill() { }
 
-        public int CalculateDamage(int d, int m) => (m == 1) ? d : d + (m * 5);
+        public int GetDamage() => CalculateDamage(Damage, Multiplier);
+
+        private int CalculateDamage(int d, int m) => (m == 1) ? d : d + (m * 5);
 
         public override string ToString()
         {
@@ -32,10 +34,8 @@ namespace AscendedRPG
                 case SkillType.PASSIVE_BUFF:
                 case SkillType.PASSIVE_VOID:
                     return $"{Name} +{Multiplier}";
-                case SkillType.HEALING:
-                    return $"{Name} +{CalculateDamage(Damage, Multiplier)}";
                 default:
-                    return $"[{CalculateDamage(Damage, Multiplier)}] {Name} +{Multiplier}";
+                    return $"[{GetDamage()}] {Name} +{Multiplier}";
             }
         }
 

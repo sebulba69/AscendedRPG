@@ -6,35 +6,31 @@ namespace AscendedRPG
 {
     public class Dungeon
     {
-        private int fights, currentFight;
-
+        private int fights, currentFight, dtype, tier;
         private EnemyManager loader;
+        private Random r;
 
-        public Dungeon(int t, int type)
+        public Dungeon(int t, int type, Random random)
         {
-            fights = ((t + 5)/2) * (type + 1);
+            tier = t;
+            dtype = type;
+            r = random;
+
+            fights = (t % 10 == 0) ? 0 : ((t + 5)/2) * (type + 1);
             currentFight = 1;
             loader = new EnemyManager();
         }
 
-        public Dungeon()
-        {
-            fights = 0;
-            currentFight = 1;
-            loader = new EnemyManager();
-        }
 
-        public Enemy[] MakeEnemyTroop(int dtype, int tier, Random r) => loader.MakeTroop(dtype, tier, r);
+        public Enemy[] MakeEnemyTroop() => loader.MakeTroop(dtype, (int)Math.Pow(tier, dtype + 1), r);
 
-        public Enemy MakeBoss(int type, int tier, Random r) => loader.MakeBoss(type, tier, r);
+        public Enemy MakeBoss() => loader.MakeBoss(dtype, (int)Math.Pow(tier, dtype + 1), r);
 
         public void LoadNextFight()
         {
             fights--;
             currentFight++;
         }
-
-        public bool IsDungeonComplete() => (fights <= 0);
 
         public void ForceEnd() => fights = 0;
 
