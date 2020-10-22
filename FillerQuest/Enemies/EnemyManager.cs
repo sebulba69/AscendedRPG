@@ -112,38 +112,40 @@ namespace AscendedRPG.Files
         public Enemy MakeBoss(int dtype, int tier, Random r)
         {
             List<Enemy> b_list;
+            bool invader = (r.Next(0, 100) < 5 && tier >= 50);
             int hp, index;
+            int bountyMultiplier = 5;
             switch (dtype)
             {
                 case DungeonType.EX:
                     hp = EX_CAP;
-                    b_list = LoadEnemyList(ex_bosses);
-                    index = (tier / 10) - 1;
+                    b_list = (invader) ? LoadEnemyList(ex_invaders) : LoadEnemyList(ex_bosses);
+                    index = (invader) ? tier - 1 : (tier / 10) - 1;
                     break;
                 case DungeonType.ASCENDED:
                     hp = ASC_CAP;
-                    b_list = LoadEnemyList(asc_bosses);
-                    index = (tier / 10) - 1;
+                    b_list = (invader) ? LoadEnemyList(asc_invaders) : LoadEnemyList(asc_bosses);
+                    index = (invader) ? tier - 1 : (tier / 10) - 1;
                     break;
                 case DungeonType.BOUNTY:
-                    hp = ENEMY_CAP * 5;
+                    hp = ENEMY_CAP * bountyMultiplier;
                     b_list = LoadEnemyList(bountyBosses);
                     index = tier - 1;
                     break;
                 case DungeonType.EXBOUNTY:
-                    hp = EX_CAP * 5;
+                    hp = EX_CAP * bountyMultiplier;
                     b_list = LoadEnemyList(ex_bountyBosses);
                     index = tier - 1;
                     break;
                 case DungeonType.ASCBOUNTY:
-                    hp = ASC_CAP * 5;
+                    hp = ASC_CAP * bountyMultiplier;
                     b_list = LoadEnemyList(asc_bounty);
                     index = tier - 1;
                     break;
                 default:
                     hp = ENEMY_CAP;
-                    b_list = LoadEnemyList(bosses);
-                    index = (tier / 10) - 1;
+                    b_list = (invader) ? LoadEnemyList(invaders) : LoadEnemyList(bosses);
+                    index = (invader) ? tier - 1 : (tier / 10) - 1;
                     break;
             }
 
