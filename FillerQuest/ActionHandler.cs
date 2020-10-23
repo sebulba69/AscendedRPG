@@ -51,6 +51,7 @@ namespace AscendedRPG
         public string UseWeaponPlayer(string name, int dmg, FormState state, Enemy target)
         {
             var stats = state.Player.Stats;
+            dmg += state.Player.Stats.stats[Stat.ATTACK];
             var result = GetDamage(state, name, stats, dmg, target, "their weapon");
             if (!result[0].Contains("missed!"))
             {
@@ -85,6 +86,10 @@ namespace AscendedRPG
                 {
                     result[0] += "It was a critical hit! ";
                     damage = crit;
+                }
+                else
+                {
+                    tp.FullTurn();
                 }
 
                 result[1] = damage.ToString();

@@ -138,7 +138,8 @@ namespace AscendedRPG
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // to be added
+            MessageBox.Show("Running from dungeon...");
+            CloseGUI();
         }
         #endregion
 

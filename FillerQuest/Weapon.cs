@@ -63,7 +63,7 @@ namespace AscendedRPG
         {
             double x = XP;
             double y = XPtoNext;
-            return $"T.{Level} Weapon - {Damage} - ({Math.Round(((x / y) * 100), 2)}/100%)";
+            return $"T.{Level} Weapon [{Damage}] ({Math.Round(((x / y) * 100), 2)}/100%)";
         }
     }
 }

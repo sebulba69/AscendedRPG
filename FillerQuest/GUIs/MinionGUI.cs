@@ -52,7 +52,7 @@ namespace AscendedRPG.GUIs
                 }
 
                 minionSkills.AppendText(selected.Skills.Last().ToString());
-                equipButton.Text = (selected.IsEquipped)? "Unequip Selected" : "Equip Selected";
+                equipButton.Text = (selected.IsEquipped)? "Unequip" : "Equip";
             }
             catch (NullReferenceException)
             {
@@ -83,6 +83,23 @@ namespace AscendedRPG.GUIs
             else
             {
                 MessageBox.Show("You don't have enough shards to summon this minion.");
+            }
+        }
+
+        private void boostButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            var wallet = _state.Player.Wallet;
+            if (wallet.MinionShards >= 10)
+            {
+                var selected = minionBox.SelectedItem as Enemies.Minion;
+                selected.IncreaseXP(10);
+                wallet.MinionShards -= 10;
+                ResetMBox();
+                _state.Save.SaveGame(_state.Player);
+            }
+            else
+            {
+                MessageBox.Show("You don't have enough shards to boost this minion.");
             }
         }
 

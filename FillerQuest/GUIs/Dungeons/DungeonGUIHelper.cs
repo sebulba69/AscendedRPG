@@ -34,6 +34,7 @@ namespace AscendedRPG.GUIs
 
             _dgc = _dungeon.GetDGPComponents();
 
+            InitializePlayerPassives();
             InitializeHPAndTurns();
             SetCurrentFighter();
             UpdateFightCounter();
@@ -176,7 +177,7 @@ namespace AscendedRPG.GUIs
                 case WeaponStyle.LIFESTEAL:
                     if (_dh.CanUseNIcons(2))
                     {
-                        _dh.DecrementTurns(2);
+                        ReduceTurns(2);
                         damage = (weapon.Damage + _state.Player.Stats.stats[Stat.ATTACK]) / 2;
                         log = _dh.GetWeaponResult(bm.Name, damage, _state, target);
 

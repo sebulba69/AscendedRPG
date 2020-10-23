@@ -24,7 +24,7 @@ namespace AscendedRPG
 
             UpdateAllScreens();
 
-            CoinBox.Text = $"{player.Wallet.Coins} D$ -- {player.Wallet.MinionShards} MS";
+            CoinBox.Text = $"{player.Wallet.Coins} D$ - {player.Wallet.MinionShards} MS";
             WeaponBox.Text = player.Weapon.ToString();
             WeaponStyles.SelectedIndex = player.Weapon.Style;
 

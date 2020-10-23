@@ -149,9 +149,10 @@ namespace AscendedRPG.Files
                     break;
             }
 
+            int t = (int)Math.Pow(tier, dtype + 1);
             Enemy boss = (Enemy)b_list[index % b_list.Count].Clone();
-            boss.HP = BossHPCalc((int)Math.Pow(tier, dtype + 1) * hp);
-            boss.Skills.ForEach(s => SetSkillDamage(dtype+1, s, tier*dtype, r));
+            boss.HP = BossHPCalc(t * hp);
+            boss.Skills.ForEach(s => SetSkillDamage(dtype+1, s, t * (dtype+1), r));
             return boss;
         }
 

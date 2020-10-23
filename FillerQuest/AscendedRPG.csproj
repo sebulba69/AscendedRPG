@@ -97,13 +97,13 @@
     <Compile Include="BattleMember.cs" />
     <Compile Include="BattleStats.cs" />
     <Compile Include="EIndexEntry.cs" />
-    <Compile Include="Enemies\BossCalculator.cs" />
+    <Compile Include="GUIs\Dungeons\BossCalculator.cs" />
     <Compile Include="Armors\ArmorManager.cs" />
-    <Compile Include="Enemies\Dungeon.cs" />
-    <Compile Include="Enemies\DungeonType.cs" />
+    <Compile Include="GUIs\Dungeons\Dungeon.cs" />
+    <Compile Include="GUIs\Dungeons\DungeonType.cs" />
     <Compile Include="GUIs\DGPComponents.cs" />
-    <Compile Include="GUIs\DungeonHandlers.cs" />
-    <Compile Include="GUIs\IDungeon.cs" />
+    <Compile Include="GUIs\Dungeons\DungeonHandlers.cs" />
+    <Compile Include="GUIs\Dungeons\IDungeon.cs" />
     <Compile Include="Enemies\Minion.cs" />
     <Compile Include="Files\EncryptionManager.cs" />
     <Compile Include="Files\MinionManager.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="GUIs\CharacterSelect.Designer.cs">
       <DependentUpon>CharacterSelect.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUIs\DungeonGUIHelper.cs" />
+    <Compile Include="GUIs\Dungeons\DungeonGUIHelper.cs" />
     <Compile Include="GUIs\MatExchangeGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,16 +151,16 @@
     <Compile Include="GUIs\DialogBox.Designer.cs">
       <DependentUpon>DialogBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUIs\DungeonGUIBoss.cs">
+    <Compile Include="GUIs\Dungeons\DungeonGUIBoss.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUIs\DungeonGUIBoss.Designer.cs">
+    <Compile Include="GUIs\Dungeons\DungeonGUIBoss.Designer.cs">
       <DependentUpon>DungeonGUIBoss.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUIs\DungeonGUI.cs">
+    <Compile Include="GUIs\Dungeons\DungeonGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUIs\DungeonGUI.Designer.cs">
+    <Compile Include="GUIs\Dungeons\DungeonGUI.Designer.cs">
       <DependentUpon>DungeonGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Enemies\Enemy.cs" />
@@ -274,10 +274,10 @@
     <EmbeddedResource Include="GUIs\DialogBox.resx">
       <DependentUpon>DialogBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUIs\DungeonGUIBoss.resx">
+    <EmbeddedResource Include="GUIs\Dungeons\DungeonGUIBoss.resx">
       <DependentUpon>DungeonGUIBoss.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUIs\DungeonGUI.resx">
+    <EmbeddedResource Include="GUIs\Dungeons\DungeonGUI.resx">
       <DependentUpon>DungeonGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\EnemyIndexGUI.resx">

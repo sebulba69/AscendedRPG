@@ -205,10 +205,12 @@
             // allButton
             // 
             this.allButton.AutoSize = true;
+            this.allButton.Checked = true;
             this.allButton.Location = new System.Drawing.Point(206, 181);
             this.allButton.Name = "allButton";
             this.allButton.Size = new System.Drawing.Size(36, 17);
             this.allButton.TabIndex = 48;
+            this.allButton.TabStop = true;
             this.allButton.Text = "All";
             this.allButton.UseVisualStyleBackColor = true;
             this.allButton.CheckedChanged += new System.EventHandler(this.allButton_CheckedChanged);

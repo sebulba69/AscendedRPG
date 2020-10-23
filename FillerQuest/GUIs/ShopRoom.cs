@@ -203,7 +203,6 @@ namespace AscendedRPG.GUIs
                         // we're going to use the dungeonType later to access our key index so we have to add by 1
                         int index = wares_keys.IndexOf(selected);
                         _state.Player.Wallet.Keys[index+1]++;
-                        wares_keys.Remove(selected);
                     }
 
                     VendorTextBox.Text = vendorDialog[vendor][1];
