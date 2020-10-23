@@ -53,12 +53,15 @@ namespace AscendedRPG
             var stats = state.Player.Stats;
             dmg += state.Player.Stats.stats[Stat.ATTACK];
             var result = GetDamage(state, name, stats, dmg, target, "their weapon");
+            
             if (!result[0].Contains("missed!"))
             {
                 int damage = Int32.Parse(result[1]);
                 result[0] += $"{damage} damage dealt.";
                 DamageEnemy(target, damage);
             }
+
+            tp.FullTurn();
             return result[0];
         }
 
@@ -86,10 +89,6 @@ namespace AscendedRPG
                 {
                     result[0] += "It was a critical hit! ";
                     damage = crit;
-                }
-                else
-                {
-                    tp.FullTurn();
                 }
 
                 result[1] = damage.ToString();
