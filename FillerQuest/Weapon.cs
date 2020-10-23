@@ -61,9 +61,17 @@ namespace AscendedRPG
 
         public override string ToString()
         {
-            double x = XP;
-            double y = XPtoNext;
-            return $"T.{Level} Weapon [{Damage}] ({Math.Round(((x / y) * 100), 2)}/100%)";
+            if (XP != XPtoNext)
+            {
+                double x = XP;
+                double y = XPtoNext;
+                return $"T.{Level} Weapon [{Damage}] ({Math.Round(((x / y) * 100), 2)}/100%)";
+            }
+            else
+            {
+                return $"T.{Level} Weapon [{Damage}] (MAX)";
+            }
+
         }
     }
 }

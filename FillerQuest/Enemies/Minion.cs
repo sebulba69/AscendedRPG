@@ -38,10 +38,13 @@ namespace AscendedRPG.Enemies
 
         private void LevelUp()
         {
-            Level += (Level + 1 >= int.MaxValue) ? 0 : 1;
-            XP -= XPtoNext;
-            XPtoNext = GetRequiredXP();
-            Skills.ForEach(s => s.Multiplier += 2);
+            if(Level + 1 <= 100)
+            {
+                Level++;
+                XP -= XPtoNext;
+                XPtoNext = GetRequiredXP();
+                Skills.ForEach(s => s.Multiplier += 2);
+            }
         }
 
         // bs formula that scales with level ups
