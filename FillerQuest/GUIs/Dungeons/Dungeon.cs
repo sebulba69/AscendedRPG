@@ -23,7 +23,7 @@ namespace AscendedRPG
         }
 
 
-        public Enemy[] MakeEnemyTroop() => loader.MakeTroop(dtype, (int)Math.Pow(tier, dtype + 1), r);
+        public Enemy[] MakeEnemyTroop() => loader.MakeTroop(dtype, (tier * dtype + 1), r);
 
         public Enemy MakeBoss() => loader.MakeBoss(dtype, tier, r);
 

@@ -9,6 +9,7 @@ namespace AscendedRPG
     public partial class Inventory : Form
     {
         private FormState _state;
+        private RadioButton[] rbs;
 
         public Inventory(FormState state)
         {
@@ -20,7 +21,13 @@ namespace AscendedRPG
         {
             var player = _state.Player;
             PlayerPic.ImageLocation = player.Picture;
-            TierBox.Text = $"Tier {player.Tiers[0]}";
+
+            string[] prefix = { "", "EX ", "ASC "};
+            int type = _state.DungeonType % 3;
+            TierBox.Text = $"{prefix[type]}Tier {player.Tiers[type]}";
+
+            rbs = new RadioButton[] { head, torso, arms, waist, legs, charms };
+
             UpdateAllScreens();
 
             CoinBox.Text = $"{player.Wallet.Coins} D$ - {player.Wallet.MinionShards} MS";
@@ -31,9 +38,11 @@ namespace AscendedRPG
 
             if (!_state.Music.IsPlaying())
             {
-                _state.Music.SetIdleTheme(player.Tiers[0]);
-                _state.Music.PlayIdleSong();
+                _state.Music.SetIdleTheme(player.Tiers[type], type);
+                _state.Music.PlaySong();
             }
+
+            
         }
 
         private void UpdateAllScreens()
@@ -56,6 +65,16 @@ namespace AscendedRPG
             InventoryList.Items.AddRange(_state.Player.Inventory.Inventory.ToArray());
 
             NumActiveElements();
+
+            foreach (RadioButton rb in rbs)
+                if (rb.Checked)
+                    CheckUncheck(rb);
+        }
+
+        private void CheckUncheck(RadioButton rb)
+        {
+            for (int i = 0; i < 2; i++)
+                rb.Checked = !rb.Checked;
         }
 
         private void UpdateInventoryList(Armor[] array)
@@ -216,20 +235,15 @@ namespace AscendedRPG
 
         private void UncheckRadioBoxes()
         {
-            head.Checked = false;
-            torso.Checked = false;
-            arms.Checked = false;
-            waist.Checked = false;
-            legs.Checked = false;
-            charms.Checked = false;
+            foreach (RadioButton rb in rbs)
+                rb.Checked = false;
         }
 
         private void EquipButton_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
-                var inventory = _state.Player.Inventory.Inventory;
-                var armor = inventory[InventoryList.SelectedIndex - 1];
+                var armor = GetArmorFromSelected();
                 _state.Player.Set.ExchangeArmor(_state.Player.Inventory, armor);
                 UpdateAllScreens();
             }
@@ -244,8 +258,7 @@ namespace AscendedRPG
         {
             try
             {
-                var inventory = _state.Player.Inventory.Inventory;
-                var armor = inventory[InventoryList.SelectedIndex - 1];
+                var armor = GetArmorFromSelected();
                 SelectedInventorySkill.Clear();
                 var skills = armor.PrintSkills().Split('|');
                 for(int i = 0; i < skills.Length - 1; i++)
@@ -256,8 +269,15 @@ namespace AscendedRPG
                 SelectedInventorySkill.AppendText(skills.Last());
             }
             catch (NullReferenceException) { }
-            catch (ArgumentOutOfRangeException)
-            { }
+            catch (ArgumentOutOfRangeException) { }
+        }
+
+        private Armor GetArmorFromSelected()
+        {
+            var inventory = _state.Player.Inventory.Inventory;
+            string name = InventoryList.Items[InventoryList.SelectedIndex].ToString();
+            var armor = inventory.Find(a => a.ToString() == name);
+            return armor;
         }
 
         private void DeleteSelectedInventory_MouseClick(object sender, MouseEventArgs e)

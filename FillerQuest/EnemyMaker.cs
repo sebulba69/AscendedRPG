@@ -17,7 +17,6 @@ namespace AscendedRPG.GUIs
 {
     public partial class EnemyMaker : Form
     {
-        private readonly string PATH = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Ascended/enemies/bountyBoss.bin");
         public EnemyMaker()
         {
             InitializeComponent();
@@ -25,13 +24,26 @@ namespace AscendedRPG.GUIs
 
         private void EnemyMaker_Load(object sender, EventArgs e)
         {
-            var ff = EncryptionManager.DeCrypt<List<Enemy>>(PATH);
-            listBox1.DataSource = ff;
+            int[] dtypes = { 0, 1, 2 };
+            string[] typeNames = { "~ NORMAL ~", "~ EX ~", "~ ASC ~" };
+            int[] caps = { 60, 1000, 5000 };
+            int bounty = 20;
+
+            foreach(int dtype in dtypes)
+            {
+                listBox1.Items.Add(typeNames[dtype]);
+                int t = dtype + 1;
+                for(int tier = 1; tier <= 21; tier++)
+                {
+                    long hp = tier * (dtype+1);
+                    hp *= (caps[dtype] * bounty);
+                    hp = BossHPCalc(hp);
+                    listBox1.Items.Add($"[T{tier}] {hp} HP -- ({hp <= Int32.MaxValue})");
+                }
+                listBox1.Items.Add("");
+            }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        private long BossHPCalc(long hp) => (long)((Math.Log(hp) * hp) + hp);
     }
 }

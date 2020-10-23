@@ -61,7 +61,7 @@ namespace AscendedRPG
 
         public override string ToString()
         {
-            if (XP != XPtoNext)
+            if (XP > -1 && XPtoNext > -1)
             {
                 double x = XP;
                 double y = XPtoNext;

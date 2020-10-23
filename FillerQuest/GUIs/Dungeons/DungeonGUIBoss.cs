@@ -87,6 +87,33 @@ namespace AscendedRPG
 
             dgh.LogEnemy(boss, true);
         }
+
+        public void StartMusic()
+        {
+            int tier = _state.dungeonTiers[_state.DungeonType];
+            switch (_state.DungeonType)
+            {
+                case DungeonType.EX:
+                    _state.Music.SetEXSong(tier);
+                    break;
+                case DungeonType.ASCENDED:
+                    _state.Music.SetASCSong(tier);
+                    break;
+                case DungeonType.BOUNTY:
+                case DungeonType.EXBOUNTY:
+                case DungeonType.ASCBOUNTY:
+                    _state.Music.SetBountySong(tier);
+                    break;
+                default:
+                    _state.Music.SetBossSong(tier);
+                    break;
+            }
+
+            if (boss.Name.Contains("Deviljho") || boss.Name.Contains("Rajang") || boss.Name.Contains("Seregios"))
+                _state.Music.SetInvaderSong(tier);
+
+            _state.Music.PlaySong();
+        }
         #endregion
 
         #region toolStripMenuItems
@@ -159,12 +186,6 @@ namespace AscendedRPG
             return new DGPComponents(ProfilePic, CurrentFight, FightsLeft, NameBox, TurnBox,
                 CombatLog, new RadioButton[] { Target1, Target2, Target3 }, PlayerHealth,
                 Skills, UseSkillButton, leftButton, rightButton, timer);
-        }
-
-        public void StartMusic()
-        {
-            _state.Music.SetBossSong(_state.dungeonTiers[_state.DungeonType]);
-            _state.Music.PlayBossSong();
         }
     }
 }

@@ -34,10 +34,10 @@ namespace AscendedRPG.GUIs
         public void ProcessCompletedTier(int memberCount)
         {
             int d_tier = dungeonTiers[DungeonType];
-            int boss = (d_tier % 10 == 0) ? 2 : 0;
+            int boss = (d_tier % 10 == 0) ? 2 : 1;
             HandleTierLevel(d_tier);
             HandleXPDistribution(d_tier, boss, memberCount);
-            Random.Next(Random.Next(1000, 2001) * boss);
+            Player.Wallet.AddDellenCoin(Random.Next(Random.Next(1000, 2001) * boss * (DungeonType + 1)));
         }
 
         private void HandleTierLevel(int d_tier)
@@ -55,7 +55,7 @@ namespace AscendedRPG.GUIs
           
             for (int i = 0; i < quantity; i++)
             {
-                int xp = Random.Next(d_tier, d_tier * 2) + d_tier;
+                int xp = Random.Next(d_tier, d_tier * 2) + (d_tier * (DungeonType + 1));
                 Player.Weapon.IncreaseXP(xp);
                 Player.Minions.ForEach(m =>
                 {
@@ -67,8 +67,8 @@ namespace AscendedRPG.GUIs
                     } 
                     else
                     {
-                        m.Weapon.XP = 0;
-                        m.Weapon.XPtoNext = 0;
+                        m.Weapon.XP = -1;
+                        m.Weapon.XPtoNext = -1;
                     }
                         
                 });

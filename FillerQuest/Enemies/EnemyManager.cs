@@ -84,7 +84,7 @@ namespace AscendedRPG.Files
                         GetEnemyClone(list, dtype) :
                         GetEnemyClone(list, r.Next(0, list.Count));
 
-            int t = (int)Math.Pow(tier, dtype + 1);
+            int t = tier * (dtype + 1);
             enemy.HP = GetEnemyHP(dtype, t, r);
 
             enemy.Skills.ForEach(s => SetSkillDamage(dtype+1, s, t, r));
@@ -115,7 +115,7 @@ namespace AscendedRPG.Files
             List<Enemy> b_list;
             bool invader = (r.Next(0, 100) < 5 && tier >= 50);
             int hp, index;
-            int bountyMultiplier = 5;
+            int bountyMultiplier = 10;
             switch (dtype)
             {
                 case DungeonType.EX:
@@ -143,6 +143,11 @@ namespace AscendedRPG.Files
                     b_list = LoadEnemyList(asc_bounty);
                     index = tier - 1;
                     break;
+                case DungeonType.ELDER:
+                    hp = ASC_CAP * (bountyMultiplier * 2);
+                    b_list = LoadEnemyList(elders);
+                    index = tier - 1;
+                    break;
                 default:
                     hp = ENEMY_CAP;
                     b_list = (invader) ? LoadEnemyList(invaders) : LoadEnemyList(bosses);
@@ -150,7 +155,7 @@ namespace AscendedRPG.Files
                     break;
             }
 
-            int t = (int)Math.Pow(tier, dtype + 1);
+            int t = tier * (dtype + 1);
             Enemy boss = (Enemy)b_list[index % b_list.Count].Clone();
             boss.HP = BossHPCalc(t * hp);
             boss.Skills.ForEach(s => SetSkillDamage(dtype+1, s, t * (dtype+1), r));

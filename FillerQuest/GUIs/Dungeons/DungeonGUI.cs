@@ -125,6 +125,13 @@ namespace AscendedRPG
                     dgh.LogEnemy(e, false);
                 }   
         }
+
+
+        public void StartMusic()
+        {
+            _state.Music.SetFloorSong(_state.dungeonTiers[_state.DungeonType], _state.DungeonType);
+            _state.Music.PlaySong();
+        }
         #endregion
 
         #region toolStripMenuItems
@@ -183,12 +190,6 @@ namespace AscendedRPG
             return new DGPComponents(ProfilePic, CurrentFight, FightsLeft, NameBox, TurnBox,
                 CombatLog, new RadioButton[] { Target1, Target2, Target3 }, PlayerHealth,
                 Skills, UseSkillButton, leftButton, rightButton, timer);
-        }
-
-        public void StartMusic()
-        {
-            _state.Music.SetFloorSong( _state.dungeonTiers[_state.DungeonType]);
-            _state.Music.PlayFloorSong();
         }
 
         private void DungeonGUI_KeyDown(object sender, KeyEventArgs e)

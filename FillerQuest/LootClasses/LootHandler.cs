@@ -10,8 +10,6 @@ namespace AscendedRPG.LootClasses
 {
     public class LootHandler
     {
-
-        
         private readonly string[] enemyLoot = { "Energy", "Shard", "Scale", "Mantle", "Crystal" };
 
         private readonly string[] tierLoot = { "Essence", "Plate", "Orb", "Relic", "Jewel" };
@@ -28,7 +26,7 @@ namespace AscendedRPG.LootClasses
 
             Ingredient ingredient = new Ingredient()
             {
-                Tier = (int)Math.Pow(tier+dtype, dtype+1),
+                Tier = (tier + dtype) * (dtype + 1),
                 Name = name,
                 Suffix = enemyLoot[GetDropIndex(r)],
                 Quantity = r.Next(tier + 5, tier + 16)

@@ -115,7 +115,7 @@
             this.textBox2.Size = new System.Drawing.Size(280, 50);
             this.textBox2.TabIndex = 5;
             this.textBox2.TabStop = false;
-            this.textBox2.Text = "ASCENDED";
+            this.textBox2.Text = "ASCENDED: ROYAL";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox2.UseWaitCursor = true;
             // 
