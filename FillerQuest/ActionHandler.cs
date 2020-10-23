@@ -59,9 +59,11 @@ namespace AscendedRPG
                 int damage = Int32.Parse(result[1]);
                 result[0] += $"{damage} damage dealt.";
                 DamageEnemy(target, damage);
+
+                if (!result[0].Contains("critical hit"))
+                    tp.FullTurn();
             }
 
-            tp.FullTurn();
             return result[0];
         }
 
