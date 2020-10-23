@@ -35,7 +35,7 @@ namespace AscendedRPG
             Level += (Level + 1 >= int.MaxValue) ? 0 : 1;
             XP -= XPtoNext;
             XPtoNext = GetRequiredXP();
-            Damage += (Level * 5) - (Level * 2);
+            Damage += 50;
         }
 
         // bs formula that scales with level ups
