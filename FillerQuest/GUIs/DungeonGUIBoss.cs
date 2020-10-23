@@ -12,15 +12,13 @@ namespace AscendedRPG
         private BossCalculator bc;
         private Enemy boss;
         private FormState _state;
-        private List<BattleMember> members;
         private DungeonGUIHelper dgh;
 
         public DungeonGUIBoss(FormState state)
         {
             _state = state;
-            bc = new BossCalculator();
+            
             subbars = new List<ProgressBar>();
-            members = new List<BattleMember>();
             
             InitializeComponent();
         }
@@ -35,6 +33,8 @@ namespace AscendedRPG
             subbars.AddRange(new ProgressBar[] {subbar,subbar2,subbar3,subbar4,subbar5,subbar6,subbar7,subbar8,subbar9,
             subbar10,subbar11,subbar12,subbar13,subbar14,subbar15,subbar16,subbar17,subbar18,subbar19,subbar20,subbar21});
 
+            bc = new BossCalculator(subbars.Count);
+
             dgh.Start();
         }
 
@@ -42,6 +42,7 @@ namespace AscendedRPG
         public void SetUpEnemyGUI()
         {
             boss = dgh.MakeBoss();
+            bc.CheckDefault(boss.HP);
             bc.SetSubBars(boss.HP);
             bossBar.Maximum = bc.hp_default;
             bossBar.Value = bc.baseBar;
@@ -53,8 +54,11 @@ namespace AscendedRPG
 
         public void UpdateEnemyHealth()
         {
+            bossName.Text = boss.Name + $" [{_state.Player.GetWeaknessString(boss, _state.SManager)}]";
+
             // set the values for the subbars again
             bc.SetSubBars(boss.HP);
+
             int s = 0;
             // for all subbars greater than what's supposed to be visible, reduce their value to 0
             foreach (ProgressBar sub in subbars)

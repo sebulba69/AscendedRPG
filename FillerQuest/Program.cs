@@ -1,5 +1,4 @@
 ﻿using AscendedRPG.GUIs;
-using AscendedRPG.GUIs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

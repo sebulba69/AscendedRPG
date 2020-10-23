@@ -10,13 +10,14 @@ namespace AscendedRPG.Enemies
     {
         public int hp_default = 5000;
 
-        private int sub_default = 21;
+        private int sub_default;
 
-        public int baseBar;
-
-        public int subbars;
+        public int baseBar, subbars;
         
-        public BossCalculator() { }
+        public BossCalculator(int sub_def)
+        {
+            sub_default = sub_def;
+        }
 
         public void CheckDefault(int hp)
         {

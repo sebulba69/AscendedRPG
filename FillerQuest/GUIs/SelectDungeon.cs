@@ -101,13 +101,6 @@ namespace AscendedRPG
             }
             else
             {
-                // your normal tier caps at this point
-                if (t == 500 && _state.Player.HasSeenNotCutscene)
-                {
-                    _state.Player.HasSeenNotCutscene = false;
-                    MessageBox.Show("Before you enter the dungeon, you see a message inscribed on the wall nearby. " +
-                    "\"Beyond this door awaits your final challenge. Once you conquer this, you will truly ascend. Good luck.\"");
-                }
                 Depart(t);
             }
         }

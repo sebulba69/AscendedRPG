@@ -138,8 +138,7 @@ namespace AscendedRPG.GUIs
                         {
                             result = $"{bm.Name} used {skill.Name} and buffed their party.";
                             _state.Player.Stats.stats[skill.Stat] += skill.Multiplier;
-                            _dh.DecrementTurns(1);
-                            _dgc.SetTurnText(_dh.GetTurnString());
+                            ReduceTurns(1);
                         }
                         else
                         {
@@ -148,8 +147,7 @@ namespace AscendedRPG.GUIs
                         break;
                     case SkillType.HEALING:
                         _dgc.ReducePlayerHealth(skill.GetDamage() * -1);
-                        _dh.DecrementTurns(1);
-                        _dgc.SetTurnText(_dh.GetTurnString());
+                        ReduceTurns(1);
                         result = $"{bm.Name} used {skill.Name} and healed for {skill.GetDamage()} HP";
                         break;
                     default:
@@ -159,6 +157,13 @@ namespace AscendedRPG.GUIs
                 }
                 _dgc.UpdateCombatLog(result);
             }
+        }
+
+        private void ReduceTurns(int amount)
+        {
+            _dh.DecrementTurns(amount);
+            _dgc.SetTurnText(_dh.GetTurnString());
+            CheckTurnEnd();
         }
 
         private void UseWeapon(BattleMember bm, Enemy target, int t)
@@ -193,8 +198,9 @@ namespace AscendedRPG.GUIs
                     if (_dh.CanUseNIcons(2) && !_state.Player.Stats.isParryState)
                     {
                         _state.Player.Stats.isParryState = true;
-                        _dh.DecrementTurns(2);
                         log = $"Player team assumes a parry stance!";
+                        ReduceTurns(2);
+
                     }
                     else
                     {
@@ -286,8 +292,11 @@ namespace AscendedRPG.GUIs
             if(_state.Random.Next(0, 100) < 85)
             {
                 var skill = attacker.Skills[_state.Random.Next(0, attacker.Skills.Count)];
+
                 int damage = skill.GetDamage() - _state.Player.Stats.elementalRes[skill.Element];
+
                 string parry = "";
+
                 if(_state.Player.Stats.isParryState)
                 {
                     _state.Player.Stats.isParryState = false;
@@ -295,8 +304,11 @@ namespace AscendedRPG.GUIs
                     damage /= 2;
                     parry = " Player parried the attack!";
                 }
+
                 _dgc.ReducePlayerHealth(damage);
+
                 _dgc.UpdateCombatLog($"{attacker.Name} used {skill.Name}. It hit for {damage}." + parry);
+
                 if (_dgc.IsPlayerDead())
                 {
                     _dgc.StopTimer();
@@ -327,15 +339,10 @@ namespace AscendedRPG.GUIs
         }
 
         public void SetTargetButtonEnabled(int index, bool value) => _dgc.SetTargetEnabled(index, value);
-
         public void ChangeTargetButtonChecked() => _dgc.FindNextEnabled();
-
         public Enemy[] MakeTroop() => _dh.GetTroop();
-
         public Enemy MakeBoss() => _dh.GetBoss();
-
         public void DistributeLoot(Enemy e) => _dh.DistributeLoot(e, _state);
-
         public void LogEnemy(Enemy e, bool isBoss) => _dh.LogEnemyIntoIndex(e, _state, isBoss);
     }
 }

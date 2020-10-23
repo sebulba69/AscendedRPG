@@ -16,7 +16,8 @@ namespace AscendedRPG
             dtype = type;
             r = random;
 
-            fights = (t % 10 == 0) ? 0 : ((t + 5)/2) * (type + 1);
+            // if type % 10 == 0 OR we're in a bounty dungeon or above
+            fights = (t % 10 == 0 || type >= Enemies.DungeonType.BOUNTY) ? 0 : ((t + 5)/2) * (type + 1);
             currentFight = 1;
             loader = new EnemyManager();
         }
@@ -24,7 +25,7 @@ namespace AscendedRPG
 
         public Enemy[] MakeEnemyTroop() => loader.MakeTroop(dtype, (int)Math.Pow(tier, dtype + 1), r);
 
-        public Enemy MakeBoss() => loader.MakeBoss(dtype, (int)Math.Pow(tier, dtype + 1), r);
+        public Enemy MakeBoss() => loader.MakeBoss(dtype, tier, r);
 
         public void LoadNextFight()
         {
