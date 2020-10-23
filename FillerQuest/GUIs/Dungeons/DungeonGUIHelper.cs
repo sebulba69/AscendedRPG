@@ -16,7 +16,8 @@ namespace AscendedRPG.GUIs
         private DungeonHandlers _dh;
         private int currentFighter, currentEnemy;
         private List<BattleMember> battleMembers;
-
+        private const int FULL = 2;
+        private const int HALF = 1;
         public DungeonGUIHelper(FormState state, IDungeon dungeon)
         {
             _state = state;
@@ -139,7 +140,7 @@ namespace AscendedRPG.GUIs
                         {
                             result = $"{bm.Name} used {skill.Name} and buffed their party.";
                             _state.Player.Stats.stats[skill.Stat] += skill.Multiplier;
-                            ReduceTurns(1);
+                            ReduceTurns(FULL);
                         }
                         else
                         {
@@ -148,23 +149,20 @@ namespace AscendedRPG.GUIs
                         break;
                     case SkillType.HEALING:
                         _dgc.ReducePlayerHealth(skill.GetDamage() * -1);
-                        ReduceTurns(1);
+                        ReduceTurns(FULL);
                         result = $"{bm.Name} used {skill.Name} and healed for {skill.GetDamage()} HP";
                         break;
                     default:
                         result = _dh.GetSkillResult(bm.Name, _state, skill, target);
                         ProcessDamage(target, t);
+                        if (result.Contains("critical") || result.Contains("weakness"))
+                            ReduceTurns(HALF);
+                        else
+                            ReduceTurns(FULL);
                         break;
                 }
                 _dgc.UpdateCombatLog(result);
             }
-        }
-
-        private void ReduceTurns(int amount)
-        {
-            _dh.DecrementTurns(amount);
-            _dgc.SetTurnText(_dh.GetTurnString());
-            CheckTurnEnd();
         }
 
         private void UseWeapon(BattleMember bm, Enemy target, int t)
@@ -177,7 +175,7 @@ namespace AscendedRPG.GUIs
                 case WeaponStyle.LIFESTEAL:
                     if (_dh.CanUseNIcons(2))
                     {
-                        ReduceTurns(2);
+                        ReduceTurns(FULL*2);
                         damage = (weapon.Damage + _state.Player.Stats.stats[Stat.ATTACK]) / 2;
                         log = _dh.GetWeaponResult(bm.Name, damage, _state, target);
 
@@ -200,8 +198,7 @@ namespace AscendedRPG.GUIs
                     {
                         _state.Player.Stats.isParryState = true;
                         log = $"Player team assumes a parry stance!";
-                        ReduceTurns(2);
-
+                        ReduceTurns(FULL*2);
                     }
                     else
                     {
@@ -211,6 +208,7 @@ namespace AscendedRPG.GUIs
                 default:
                     log = _dh.GetWeaponResult(bm.Name, weapon.Damage, _state, target);
                     ProcessDamage(target, t);
+                    ReduceTurns(FULL);
                     break;
             }
 
@@ -218,6 +216,13 @@ namespace AscendedRPG.GUIs
                 _dgc.UpdateCombatLog(log);
 
             _dgc.SetTurnText(_dh.GetTurnString());
+        }
+
+        private void ReduceTurns(int amount)
+        {
+            _dh.DecrementTurns(amount);
+            _dgc.SetTurnText(_dh.GetTurnString());
+            CheckTurnEnd();
         }
 
         private void ProcessDamage(Enemy target, int t)

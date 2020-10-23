@@ -128,5 +128,12 @@ namespace AscendedRPG
 
         public int GetTurns() => TURNS + Stats.stats[Stat.TURNS];
 
+        public int GetLevel()
+        {
+            int level = 0;
+            Tiers.ForEach(t => level += t);
+            return level;
+        }
+
     }
 }

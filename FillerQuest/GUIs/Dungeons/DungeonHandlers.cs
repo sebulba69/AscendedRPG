@@ -76,7 +76,7 @@ namespace AscendedRPG.GUIs
         public void DecrementTurns(int value)
         {
             for(int i = 0; i < value; i++)
-                _ah.FullTurn();
+                _ah.HalfTurn();
         } 
 
         public int GetFightCounter() => _d.GetFights();

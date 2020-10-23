@@ -21,10 +21,9 @@ namespace AscendedRPG
         {
             var player = _state.Player;
             PlayerPic.ImageLocation = player.Picture;
-
-            string[] prefix = { "", "EX ", "ASC "};
             int type = _state.DungeonType % 3;
-            TierBox.Text = $"{prefix[type]}Tier {player.Tiers[type]}";
+
+            TierBox.Text = $"Level {player.GetLevel()}";
 
             rbs = new RadioButton[] { head, torso, arms, waist, legs, charms };
 

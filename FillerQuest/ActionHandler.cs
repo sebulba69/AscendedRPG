@@ -28,18 +28,13 @@ namespace AscendedRPG
             if (!result[0].Contains("missed!"))
             {
                 damage = Int32.Parse(result[1]);
-                
+
                 if (target.Weakness.Contains(skill.Element))
                 {
                     state.Player.ProcessWeakness(target, skill.Element);
                     result[0] += $"The enemy's weakness was struck! ";
                     damage *= 2;
-                    if (!result[0].Contains("critical hit!"))
-                        tp.HalfTurn();
                 }
-
-                if (!result[0].Contains("critical hit!") && !result[0].Contains("weakness was"))
-                    tp.FullTurn();
 
                 result[0] += $"{damage} damage dealt.";
                 DamageEnemy(target, damage);
@@ -59,9 +54,6 @@ namespace AscendedRPG
                 int damage = Int32.Parse(result[1]);
                 result[0] += $"{damage} damage dealt.";
                 DamageEnemy(target, damage);
-
-                if (!result[0].Contains("critical hit"))
-                    tp.FullTurn();
             }
 
             return result[0];
@@ -116,7 +108,6 @@ namespace AscendedRPG
             {
                 damage *= 2;
                 damage += critStat;
-                tp.HalfTurn();
             }
 
             return damage;
@@ -132,6 +123,8 @@ namespace AscendedRPG
         public int GetIcons() => tp.GetIcons();
 
         public void FullTurn() => tp.FullTurn();
+
+        public void HalfTurn() => tp.HalfTurn();
 
         public void Miss() => tp.Miss();
 
