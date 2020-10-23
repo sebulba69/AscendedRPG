@@ -21,7 +21,6 @@ namespace AscendedRPG
             var player = _state.Player;
             PlayerPic.ImageLocation = player.Picture;
             TierBox.Text = $"Tier {player.Tiers[0]}";
-
             UpdateAllScreens();
 
             CoinBox.Text = $"{player.Wallet.Coins} D$ - {player.Wallet.MinionShards} MS";

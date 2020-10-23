@@ -84,9 +84,10 @@ namespace AscendedRPG.Files
                         GetEnemyClone(list, dtype) :
                         GetEnemyClone(list, r.Next(0, list.Count));
 
-            enemy.HP = GetEnemyHP(dtype, tier, r);
+            int t = (int)Math.Pow(tier, dtype + 1);
+            enemy.HP = GetEnemyHP(dtype, t, r);
 
-            enemy.Skills.ForEach(s => SetSkillDamage(dtype+1, s, tier, r));
+            enemy.Skills.ForEach(s => SetSkillDamage(dtype+1, s, t, r));
 
             return enemy;
         }

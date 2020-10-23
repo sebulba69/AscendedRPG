@@ -41,7 +41,11 @@ namespace AscendedRPG
             Defense += 20;
             foreach(ArmorSkill s in Skills)
             {
-                s.Skill.Multiplier += 1;
+                if (s.Skill.Stat == Stat.TURNS)
+                    s.Skill.Multiplier += (s.Skill.Multiplier >= 5) ? 0 : 1;
+                else
+                    s.Skill.Multiplier++;
+
             }
             UpgradeLevel++;
         }
