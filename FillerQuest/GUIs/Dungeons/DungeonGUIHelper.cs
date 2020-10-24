@@ -257,8 +257,31 @@ namespace AscendedRPG.GUIs
                     {
                         // end the dungeon
                         _state.Music.Stop();
-                        MessageBox.Show("Dungeon Complete.");
-                        _state.ProcessCompletedTier(battleMembers.Count);
+                        if(_state.DungeonType == Enemies.DungeonType.FINAL)
+                        {
+                            string[] d = {
+                                "The time has come.",
+                                "You have slain the Ascended God, Rickeus Martineus.",
+                                "You truly are a gamer.",
+                                $"Now, the world will fear the wrath of {_state.Player.Name}",
+                                "If you take a screencap of this dialog box, you may even end up in the RPGMaker game!!!!",
+                                "Anyway, that's all the content I have for you.",
+                                "You will not get anything new beyond this point so that's about it.",
+                                "This is the end.",
+                                "Goodbye."
+                            };
+
+                            DialogBox db = new DialogBox(d);
+                            db.StartPosition = FormStartPosition.Manual;
+                            db.Location = _state.Location;
+                            db.ShowDialog();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Dungeon Complete.");
+                            _state.ProcessCompletedTier(battleMembers.Count);
+                        }
+
                         _dungeon.CloseGUI();
                     }
                 }
