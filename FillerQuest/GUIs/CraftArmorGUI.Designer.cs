@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CraftArmorGUI));
             this.recipeList = new System.Windows.Forms.ListBox();
             this.recipeIngredients = new System.Windows.Forms.ListBox();
             this.resultBox = new System.Windows.Forms.TextBox();
@@ -238,6 +239,7 @@
             this.Controls.Add(this.recipeList);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "CraftArmorGUI";

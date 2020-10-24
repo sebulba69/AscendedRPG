@@ -217,7 +217,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MeldGUI";
-            this.Text = "Inventory";
+            this.Text = "Meld Armor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Inventory_FormClosing);
             this.Load += new System.EventHandler(this.Inventory_Load);
             this.menuStrip1.ResumeLayout(false);

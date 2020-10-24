@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MinionGUI));
             this.minionBox = new System.Windows.Forms.ListBox();
             this.mpicBox = new System.Windows.Forms.PictureBox();
             this.minionName = new System.Windows.Forms.TextBox();
@@ -176,6 +177,7 @@
             this.Controls.Add(this.minionBox);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MinionGUI";
