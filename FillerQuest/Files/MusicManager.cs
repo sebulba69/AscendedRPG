@@ -19,7 +19,6 @@ namespace AscendedRPG.Files
 
         private bool isPlaying;
 
-        private readonly string[] imusic = { "didle", "didleEX", "didleASC" };
         private readonly string[] dmusic = { "dmusic", "dmusicEX", "dmusicASC" };
 
         public MusicManager()
@@ -29,10 +28,9 @@ namespace AscendedRPG.Files
             wplayer.settings.volume = 20;
         }
 
-        public void SetIdleTheme(int tier, int type)
+        public void SetIdleTheme(int tier)
         {
-            type %= 3;
-            string idlePath = Path.Combine(path, imusic[type]);
+            string idlePath = Path.Combine(path, "didle");
             var files = Directory.GetFiles(Path.Combine(idlePath), "*.mp3");
             songPath = files[(tier - 1) % files.Length];
         }

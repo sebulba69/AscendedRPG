@@ -102,7 +102,7 @@ namespace AscendedRPG.GUIs
                         Level = 1,
                         XP = 0,
                         XPtoNext = 500,
-                        Damage = 23,
+                        Damage = 20,
                         Style = WeaponStyle.ATTACK
                     };
 

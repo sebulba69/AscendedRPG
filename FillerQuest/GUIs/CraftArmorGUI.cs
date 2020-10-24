@@ -45,13 +45,13 @@ namespace AscendedRPG.GUIs
 
                     if (x.Ingredients.Find(i => i.Name.Contains("EX")) != null)
                     {
-                        tier *= 15;
+                        tier *= 10;
                         namePrefix = "EX ";
                     }
 
                     if (x.Ingredients.Find(i => i.Name.Contains("ASC")) != null)
                     {
-                        tier *= 25;
+                        tier *= 20;
                         namePrefix = "ASC ";
                     }
 

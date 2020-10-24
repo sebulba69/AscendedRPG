@@ -144,7 +144,8 @@ namespace AscendedRPG.GUIs
                         }
                         else
                         {
-                            MessageBox.Show("You can't buff that stat any further.");
+                            result = "You can't buff that stat any further.";
+                            MessageBox.Show(result);
                         }
                         break;
                     case SkillType.HEALING:
@@ -189,7 +190,8 @@ namespace AscendedRPG.GUIs
                     }
                     else
                     {
-                        MessageBox.Show("Not enough icons to use this skill.");
+                        log = "Not enough icons to use this skill.";
+                        MessageBox.Show(log);
                     }
 
                     break;
@@ -247,7 +249,7 @@ namespace AscendedRPG.GUIs
                     if (_dh.GetFightCounter() >= 0)
                     {
                         UpdateFightCounter(); // update fight counter
-                        _state.Player.Wallet.AddDellenCoin(_state.Random.Next(100, 201) * _dh.GetFightCounter()); // get paid for last fight
+                        _state.Player.Wallet.AddDellenCoin(_state.Random.Next(100, 201) * _dh.GetFightCounter() * (_state.DungeonType+1) * _state.Player.Minions.Count); // get paid for last fight
                         _dungeon.SetUpEnemyGUI(); // load another set of fighters if we still have more fights left
                         InitializeHPAndTurns(); // reset the HP to max
                     }
