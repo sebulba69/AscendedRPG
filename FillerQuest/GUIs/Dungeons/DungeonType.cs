@@ -17,5 +17,7 @@ namespace AscendedRPG.Enemies
         public const int ASCBOUNTY = 5;
 
         public const int ELDER = 6;
+
+        public const int FINAL = 7;
     }
 }

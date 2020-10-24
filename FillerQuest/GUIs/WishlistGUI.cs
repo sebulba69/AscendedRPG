@@ -76,14 +76,6 @@ namespace AscendedRPG.GUIs
             }
         }
 
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HelpGUI help = new HelpGUI();
-            help.StartPosition = FormStartPosition.Manual;
-            help.Location = Location;
-            help.ShowDialog();
-        }
-
         private void enemyIndexToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EnemyIndexGUI eigui = new EnemyIndexGUI(_state.Player.EnemyIndex);

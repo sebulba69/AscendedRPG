@@ -25,7 +25,7 @@ namespace AscendedRPG
 
         private void DungeonGUI_Load(object sender, EventArgs e)
         {
-            Text = $"Tier {_state.dungeonTiers[_state.DungeonType]} Boss Dungeon";
+            Text = (_state.DungeonType == DungeonType.FINAL) ? "God's Domain" : $"Tier {_state.dungeonTiers[_state.DungeonType]} Boss Dungeon";
 
             dgh = new DungeonGUIHelper(_state, this);
 
@@ -90,7 +90,7 @@ namespace AscendedRPG
 
         public void StartMusic()
         {
-            int tier = _state.dungeonTiers[_state.DungeonType];
+            int tier = (_state.DungeonType == DungeonType.FINAL) ? _state.Player.GetLevel() : _state.dungeonTiers[_state.DungeonType];
             switch (_state.DungeonType)
             {
                 case DungeonType.EX:
@@ -103,6 +103,9 @@ namespace AscendedRPG
                 case DungeonType.EXBOUNTY:
                 case DungeonType.ASCBOUNTY:
                     _state.Music.SetBountySong(tier);
+                    break;
+                case DungeonType.FINAL:
+                    _state.Music.SetFinalBossSong();
                     break;
                 default:
                     _state.Music.SetBossSong(tier);

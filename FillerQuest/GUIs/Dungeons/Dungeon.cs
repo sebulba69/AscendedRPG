@@ -25,7 +25,9 @@ namespace AscendedRPG
 
         public Enemy[] MakeEnemyTroop() => loader.MakeTroop(dtype, (tier * dtype + 1), r);
 
-        public Enemy MakeBoss() => loader.MakeBoss(dtype, tier, r);
+        public Enemy MakeBoss() => (dtype == Enemies.DungeonType.FINAL) ? 
+            loader.MakeFinalBoss(dtype, tier, r) :
+            loader.MakeBoss(dtype, tier, r);
 
         public void LoadNextFight()
         {

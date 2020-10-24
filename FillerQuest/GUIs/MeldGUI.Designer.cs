@@ -33,7 +33,6 @@
             this.SelectedInventorySkill = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.craftArmorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.head = new System.Windows.Forms.RadioButton();
             this.torso = new System.Windows.Forms.RadioButton();
             this.arms = new System.Windows.Forms.RadioButton();
@@ -42,8 +41,8 @@
             this.charms = new System.Windows.Forms.RadioButton();
             this.UnfilterButton = new System.Windows.Forms.Button();
             this.InventoryGroup = new System.Windows.Forms.GroupBox();
-            this.MeldButton = new System.Windows.Forms.Button();
             this.skillDisplay = new System.Windows.Forms.TextBox();
+            this.MeldButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.InventoryGroup.SuspendLayout();
             this.SuspendLayout();
@@ -70,8 +69,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.craftArmorToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.craftArmorToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(414, 24);
@@ -84,13 +82,6 @@
             this.craftArmorToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.craftArmorToolStripMenuItem.Text = "Move";
             this.craftArmorToolStripMenuItem.Click += new System.EventHandler(this.moveToolStripItem);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // head
             // 
@@ -193,16 +184,6 @@
             this.InventoryGroup.TabIndex = 26;
             this.InventoryGroup.TabStop = false;
             // 
-            // MeldButton
-            // 
-            this.MeldButton.Location = new System.Drawing.Point(264, 215);
-            this.MeldButton.Name = "MeldButton";
-            this.MeldButton.Size = new System.Drawing.Size(122, 25);
-            this.MeldButton.TabIndex = 21;
-            this.MeldButton.Text = "Meld Selected";
-            this.MeldButton.UseVisualStyleBackColor = true;
-            this.MeldButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MeldButton_MouseClick);
-            // 
             // skillDisplay
             // 
             this.skillDisplay.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -212,6 +193,16 @@
             this.skillDisplay.ReadOnly = true;
             this.skillDisplay.Size = new System.Drawing.Size(120, 144);
             this.skillDisplay.TabIndex = 22;
+            // 
+            // MeldButton
+            // 
+            this.MeldButton.Location = new System.Drawing.Point(264, 215);
+            this.MeldButton.Name = "MeldButton";
+            this.MeldButton.Size = new System.Drawing.Size(122, 25);
+            this.MeldButton.TabIndex = 21;
+            this.MeldButton.Text = "Meld Selected";
+            this.MeldButton.UseVisualStyleBackColor = true;
+            this.MeldButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MeldButton_MouseClick);
             // 
             // MeldGUI
             // 
@@ -251,7 +242,6 @@
         private System.Windows.Forms.Button UnfilterButton;
         private System.Windows.Forms.GroupBox InventoryGroup;
         private System.Windows.Forms.ToolStripMenuItem craftArmorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.Button MeldButton;
         private System.Windows.Forms.TextBox skillDisplay;
     }

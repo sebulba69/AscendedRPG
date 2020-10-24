@@ -42,6 +42,7 @@ namespace AscendedRPG
             this.bountyCheckbox = new System.Windows.Forms.CheckBox();
             this.elderButton = new System.Windows.Forms.RadioButton();
             this.keyBox = new System.Windows.Forms.TextBox();
+            this.finalAscentButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TierBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,11 +164,23 @@ namespace AscendedRPG
             this.keyBox.TabIndex = 12;
             this.keyBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // finalAscentButton
+            // 
+            this.finalAscentButton.Enabled = false;
+            this.finalAscentButton.Location = new System.Drawing.Point(8, 90);
+            this.finalAscentButton.Name = "finalAscentButton";
+            this.finalAscentButton.Size = new System.Drawing.Size(230, 23);
+            this.finalAscentButton.TabIndex = 13;
+            this.finalAscentButton.Text = "Kill God and Ascend";
+            this.finalAscentButton.UseVisualStyleBackColor = true;
+            this.finalAscentButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.finalAscentButton_MouseClick);
+            // 
             // SelectDungeon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(246, 93);
+            this.ClientSize = new System.Drawing.Size(246, 121);
+            this.Controls.Add(this.finalAscentButton);
             this.Controls.Add(this.keyBox);
             this.Controls.Add(this.elderButton);
             this.Controls.Add(this.bountyCheckbox);
@@ -206,5 +219,6 @@ namespace AscendedRPG
         private System.Windows.Forms.CheckBox bountyCheckbox;
         private System.Windows.Forms.RadioButton elderButton;
         private System.Windows.Forms.TextBox keyBox;
+        private System.Windows.Forms.Button finalAscentButton;
     }
 }

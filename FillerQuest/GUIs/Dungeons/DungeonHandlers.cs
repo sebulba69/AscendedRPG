@@ -17,7 +17,9 @@ namespace AscendedRPG.GUIs
         {
             _ah = new ActionHandler();
             _lh = new LootHandler();
-            _d = new Dungeon(state.dungeonTiers[state.DungeonType], state.DungeonType, state.Random);
+            _d = (state.DungeonType == Enemies.DungeonType.FINAL) ?
+                new Dungeon(state.Player.GetLevel(), state.DungeonType, state.Random) :
+                new Dungeon(state.dungeonTiers[state.DungeonType], state.DungeonType, state.Random);
         }
 
         public void DistributeLoot(Enemy e, FormState state)

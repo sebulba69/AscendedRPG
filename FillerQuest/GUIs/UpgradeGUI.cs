@@ -93,14 +93,6 @@ namespace AscendedRPG.GUIs
             return (x * (int)Math.Log(x)) + x + (level + 5);
         }
 
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HelpGUI help = new HelpGUI();
-            help.StartPosition = FormStartPosition.Manual;
-            help.Location = Location;
-            help.ShowDialog();
-        }
-
         private void UpgradeGUI_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_state.Type == FTypes.UPGRADE_SKILLS)

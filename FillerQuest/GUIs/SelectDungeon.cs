@@ -30,6 +30,9 @@ namespace AscendedRPG
         private void SelectDungeon_Load(object sender, EventArgs e)
         {
             normalButton.Checked = true;
+            int level = _state.Player.GetLevel();
+            if(level == _state.GetCap())
+                finalAscentButton.Enabled = true;
         }
 
         private void TierBox_ValueChanged(object sender, EventArgs e)
@@ -192,6 +195,15 @@ namespace AscendedRPG
             // refresh the display
             for (int i = 0; i < 2; i++)
                 check.Checked = !check.Checked;
+        }
+
+        private void finalAscentButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            _state.DungeonType = DungeonType.FINAL;
+            _state.Type = FTypes.DUNGEON_BOSS;
+            _state.Location = Location;
+            _isDungeonClose = true;
+            Close();
         }
     }
 }

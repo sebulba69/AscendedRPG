@@ -263,13 +263,5 @@ namespace AscendedRPG.GUIs
             if (_state.Type == FTypes.SHOP_ROOM)
                 _state.Type = FTypes.CLOSE;
         }
-
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HelpGUI help = new HelpGUI();
-            help.StartPosition = FormStartPosition.Manual;
-            help.Location = Location;
-            help.ShowDialog();
-        }
     }
 }

@@ -31,7 +31,6 @@
             this.lootList = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.equipBox = new System.Windows.Forms.ListBox();
             this.skillDisplay = new System.Windows.Forms.ListBox();
             this.boostButton = new System.Windows.Forms.Button();
@@ -57,8 +56,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.inventoryToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.inventoryToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(360, 24);
@@ -71,13 +69,6 @@
             this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.inventoryToolStripMenuItem.Text = "Move";
             this.inventoryToolStripMenuItem.Click += new System.EventHandler(this.inventoryToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // equipBox
             // 
@@ -206,7 +197,6 @@
         private System.Windows.Forms.ProgressBar xpBar;
         private System.Windows.Forms.TextBox reqXP;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.TextBox totalValue;
     }
 }

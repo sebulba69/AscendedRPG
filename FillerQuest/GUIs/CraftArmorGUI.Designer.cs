@@ -36,7 +36,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enemyIndexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.skillBox = new System.Windows.Forms.ListBox();
             this.saveRecipe = new System.Windows.Forms.Button();
             this.headButton = new System.Windows.Forms.RadioButton();
@@ -100,8 +99,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inventoryToolStripMenuItem,
-            this.enemyIndexToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.enemyIndexToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(494, 24);
@@ -121,13 +119,6 @@
             this.enemyIndexToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.enemyIndexToolStripMenuItem.Text = "Enemy Index";
             this.enemyIndexToolStripMenuItem.Click += new System.EventHandler(this.enemyIndexToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // skillBox
             // 
@@ -269,7 +260,6 @@
         private System.Windows.Forms.Button deleteRecipe;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem inventoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ListBox skillBox;
         private System.Windows.Forms.ToolStripMenuItem enemyIndexToolStripMenuItem;
         private System.Windows.Forms.Button saveRecipe;

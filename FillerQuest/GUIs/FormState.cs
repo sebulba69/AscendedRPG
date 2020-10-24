@@ -74,5 +74,13 @@ namespace AscendedRPG.GUIs
                 });
             }
         }
+
+        public int GetCap()
+        {
+            int total = 0;
+            foreach (int c in CAPS)
+                total += c;
+            return total;
+        }
     }
 }

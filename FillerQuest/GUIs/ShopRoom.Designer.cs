@@ -38,7 +38,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reRollWaresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.charmRadio = new System.Windows.Forms.RadioButton();
             this.keyRadio = new System.Windows.Forms.RadioButton();
             this.allRadio = new System.Windows.Forms.RadioButton();
@@ -112,8 +111,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inventoryToolStripMenuItem,
-            this.reRollWaresToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.reRollWaresToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(594, 24);
@@ -133,13 +131,6 @@
             this.reRollWaresToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.reRollWaresToolStripMenuItem.Text = "Re-Roll Wares";
             this.reRollWaresToolStripMenuItem.Click += new System.EventHandler(this.reRollWaresToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // charmRadio
             // 
@@ -233,6 +224,5 @@
         private System.Windows.Forms.RadioButton allRadio;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripMenuItem reRollWaresToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
     }
 }

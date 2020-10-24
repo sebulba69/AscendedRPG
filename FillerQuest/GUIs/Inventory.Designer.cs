@@ -39,7 +39,6 @@
             this.craftArmorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkWishlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enemyIndexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EquipmentBox = new System.Windows.Forms.ListBox();
             this.ActiveSkillBox = new System.Windows.Forms.ListBox();
             this.SkillDisplayBox = new System.Windows.Forms.TextBox();
@@ -54,13 +53,13 @@
             this.CoinBox = new System.Windows.Forms.TextBox();
             this.TierBox = new System.Windows.Forms.TextBox();
             this.EquipmentGroup = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.WeaponStyles = new System.Windows.Forms.ComboBox();
             this.WeaponBox = new System.Windows.Forms.TextBox();
             this.activeElements = new System.Windows.Forms.TextBox();
             this.PlayerPic = new System.Windows.Forms.PictureBox();
             this.InventoryGroup = new System.Windows.Forms.GroupBox();
             this.EquipButton = new System.Windows.Forms.Button();
-            this.WeaponStyles = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.EquipmentGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerPic)).BeginInit();
@@ -113,8 +112,7 @@
             this.EmbarkMenuItem,
             this.craftArmorToolStripMenuItem,
             this.checkWishlistToolStripMenuItem,
-            this.enemyIndexToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.enemyIndexToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(701, 24);
@@ -155,13 +153,6 @@
             this.enemyIndexToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.enemyIndexToolStripMenuItem.Text = "Enemy Index";
             this.enemyIndexToolStripMenuItem.Click += new System.EventHandler(this.enemyIndexToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // EquipmentBox
             // 
@@ -323,6 +314,30 @@
             this.EquipmentGroup.TabIndex = 25;
             this.EquipmentGroup.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(204, 113);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 31;
+            this.label1.Text = "Weapon Style:";
+            // 
+            // WeaponStyles
+            // 
+            this.WeaponStyles.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.WeaponStyles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.WeaponStyles.FormattingEnabled = true;
+            this.WeaponStyles.Items.AddRange(new object[] {
+            "Attack",
+            "Parry",
+            "Lifesteal"});
+            this.WeaponStyles.Location = new System.Drawing.Point(284, 110);
+            this.WeaponStyles.Name = "WeaponStyles";
+            this.WeaponStyles.Size = new System.Drawing.Size(117, 21);
+            this.WeaponStyles.TabIndex = 30;
+            this.WeaponStyles.SelectedIndexChanged += new System.EventHandler(this.WeaponStyles_SelectedIndexChanged);
+            // 
             // WeaponBox
             // 
             this.WeaponBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -383,30 +398,6 @@
             this.EquipButton.UseVisualStyleBackColor = true;
             this.EquipButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EquipButton_MouseClick);
             // 
-            // WeaponStyles
-            // 
-            this.WeaponStyles.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.WeaponStyles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.WeaponStyles.FormattingEnabled = true;
-            this.WeaponStyles.Items.AddRange(new object[] {
-            "Attack",
-            "Parry",
-            "Lifesteal"});
-            this.WeaponStyles.Location = new System.Drawing.Point(284, 110);
-            this.WeaponStyles.Name = "WeaponStyles";
-            this.WeaponStyles.Size = new System.Drawing.Size(117, 21);
-            this.WeaponStyles.TabIndex = 30;
-            this.WeaponStyles.SelectedIndexChanged += new System.EventHandler(this.WeaponStyles_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(204, 113);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 13);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "Weapon Style:";
-            // 
             // Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,7 +450,6 @@
         private System.Windows.Forms.TextBox TierBox;
         private System.Windows.Forms.GroupBox EquipmentGroup;
         private System.Windows.Forms.GroupBox InventoryGroup;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.PictureBox PlayerPic;
         private System.Windows.Forms.ToolStripMenuItem craftArmorToolStripMenuItem;
         private System.Windows.Forms.TextBox activeElements;

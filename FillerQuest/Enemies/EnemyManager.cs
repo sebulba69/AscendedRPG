@@ -112,6 +112,7 @@ namespace AscendedRPG.Files
 
         public Enemy MakeBoss(int dtype, int tier, Random r)
         {
+            
             List<Enemy> b_list;
             bool invader = (r.Next(0, 100) < 5 && tier >= 50);
             int hp, index;
@@ -154,11 +155,25 @@ namespace AscendedRPG.Files
                     index = (invader) ? tier - 1 : (tier / 10) - 1;
                     break;
             }
-
-            int t = tier * (dtype + 1);
             Enemy boss = (Enemy)b_list[index % b_list.Count].Clone();
+            int t = tier * (dtype + 1);
             boss.HP = BossHPCalc(t * hp);
-            boss.Skills.ForEach(s => SetSkillDamage(dtype+1, s, t * (dtype+1), r));
+            boss.Skills.ForEach(s => SetSkillDamage(dtype + 1, s, t * (dtype + 1), r));
+            return boss;
+        }
+
+        public Enemy MakeFinalBoss(int dtype, int tier, Random r)
+        {
+            Enemy boss = new Enemy();
+            boss.Name = "Rickeus Martineus";
+            boss.Image = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Ascended/finalBoss/final boss.png");
+            boss.HP = 1224197100;
+            var sm = new SkillManager();
+            boss.Skills = sm.GetRandomArmorSkills(tier, r);
+            boss.Skills.ForEach(s => SetSkillDamage(dtype + 1, s, tier * (dtype + 1), r));
+            boss.Weakness = new HashSet<int>();
+            boss.Weakness.Add(6);
+            boss.Weakness.Add(7);
             return boss;
         }
 

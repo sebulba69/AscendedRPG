@@ -18,7 +18,6 @@ namespace AscendedRPG
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MasterForm());
-            //Application.Run(new EnemyMaker());
         }
     }
 }

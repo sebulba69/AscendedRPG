@@ -316,14 +316,6 @@ namespace AscendedRPG
 
         #endregion
 
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HelpGUI help = new HelpGUI();
-            help.StartPosition = FormStartPosition.Manual;
-            help.Location = Location;
-            help.ShowDialog();
-        }
-
         private void craftArmorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _state.Type = FTypes.MOVE;

@@ -181,12 +181,6 @@
     </Compile>
     <Compile Include="GUIs\FormState.cs" />
     <Compile Include="GUIs\FTypes.cs" />
-    <Compile Include="GUIs\HelpGUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUIs\HelpGUI.Designer.cs">
-      <DependentUpon>HelpGUI.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUIs\Inventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -285,9 +279,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EnemyMaker.resx">
       <DependentUpon>EnemyMaker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUIs\HelpGUI.resx">
-      <DependentUpon>HelpGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Inventory.resx">
       <DependentUpon>Inventory.cs</DependentUpon>
