@@ -42,7 +42,7 @@ namespace AscendedRPG
             Text = $"Tier {_state.dungeonTiers[_state.DungeonType]} Dungeon";
 
             // set up the lists here since we need to reuse "SetUpEnemyGUI" later
-            enemyBoxes.AddRange(new PictureBox[]{EnemyPic1, EnemyPic2, EnemyPic3});
+            enemyBoxes.AddRange(new PictureBox[]{ EnemyPic1, EnemyPic2, EnemyPic3 });
             enemyBars.AddRange(new ProgressBar[] { EnemyBar1, EnemyBar2, EnemyBar3 });
             enemyNames.AddRange(new TextBox[] { EnemyBox1, EnemyBox2, EnemyBox3 });
 
@@ -110,6 +110,7 @@ namespace AscendedRPG
 
         public void CloseGUI()
         {
+            UseSkillButton.Enabled = false;
             _state.Music.Stop();
             _state.Type = FTypes.INVENTORY;
             _state.Save.SaveGame(_state.Player);
