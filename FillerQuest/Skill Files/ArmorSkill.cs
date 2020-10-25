@@ -13,7 +13,7 @@ namespace AscendedRPG.Skill_Files
     {
         [ProtoMember(1)]
         public int Slot { get; set; }
-        [ProtoMember(2, AsReference = true)]
+        [ProtoMember(2)]
         public Skill Skill { get; set; }
         public ArmorSkill() { }
 

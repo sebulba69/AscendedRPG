@@ -13,7 +13,7 @@ namespace AscendedRPG.Armors
     {
         private const int CAP = 100;
 
-        [ProtoMember(3, AsReference = true)]
+        [ProtoMember(3)]
         public List<Armor> Inventory { get; set; }
 
         public ArmorInventory()

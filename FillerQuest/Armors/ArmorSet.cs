@@ -11,10 +11,10 @@ namespace AscendedRPG
     [ProtoContract]
     public class ArmorSet
     {
-        [ProtoMember(1, AsReference = true)]
+        [ProtoMember(1)]
         public List<Armor> Armor { get; set; }
 
-        [ProtoMember(2, AsReference = true)]
+        [ProtoMember(2)]
         public List<ArmorSkill> Skills{ get; set; }
 
         [ProtoMember(4)]

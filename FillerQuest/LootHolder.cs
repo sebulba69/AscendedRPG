@@ -12,11 +12,11 @@ namespace AscendedRPG
     [ProtoContract]
     public class LootHolder
     {
-        [ProtoMember(1, AsReference = true)]
+        [ProtoMember(1)]
         public List<Loot> EnemyLoot { get; set; }
-        [ProtoMember(2, AsReference = true)]
+        [ProtoMember(2)]
         public List<Recipe> Recipes { get; set; }
-        [ProtoMember(3, AsReference =true)]
+        [ProtoMember(3)]
         public List<Recipe> Wishlist { get; set; }
 
         public LootHolder()

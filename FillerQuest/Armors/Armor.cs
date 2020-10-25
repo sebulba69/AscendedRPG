@@ -15,7 +15,7 @@ namespace AscendedRPG
         public string Name { get; set; }
         [ProtoMember(3)]
         public int Defense { get; set; }
-        [ProtoMember(4, AsReference = true)]
+        [ProtoMember(4)]
         public List<ArmorSkill> Skills { get; set; }
         [ProtoMember(5)]
         public int UpgradeLevel { get; set; }

@@ -10,7 +10,7 @@ namespace AscendedRPG.Recipes
     [ProtoContract]
     public class Recipe
     {
-        [ProtoMember(1, AsReference = true)]
+        [ProtoMember(1)]
         public List<Ingredient> Ingredients { get; set; }
         [ProtoMember(3)]
         public AscendedRPG.Armor Result { get; set; }
