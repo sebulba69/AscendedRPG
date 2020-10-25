@@ -1,5 +1,4 @@
 C:\Users\Cole\source\repos\FillerQuest\FillerQuest\bin\Debug\Google.Protobuf.xml
-C:\Users\Cole\source\repos\FillerQuest\FillerQuest\bin\Debug\protobuf-net.xml
 C:\Users\Cole\source\repos\FillerQuest\FillerQuest\bin\Debug\Renci.SshNet.xml
 C:\Users\Cole\source\repos\FillerQuest\FillerQuest\bin\Debug\System.Buffers.xml
 C:\Users\Cole\source\repos\FillerQuest\FillerQuest\bin\Debug\System.Memory.xml
@@ -34,6 +33,7 @@ C:\Users\Cole\source\repos\FillerQuest\FillerQuest\obj\Debug\AscendedRPG.exe
 C:\Users\Cole\source\repos\FillerQuest\FillerQuest\obj\Debug\AscendedRPG.pdb
 C:\Users\Cole\source\repos\FillerQuest\FillerQuest\obj\Debug\AscendedRPG.GUIs.MinionGUI.resources
 C:\Users\Cole\source\repos\FillerQuest\FillerQuest\obj\Debug\AscendedRPG.csprojAssemblyReference.cache
-C:\Users\Cole\source\repos\FillerQuest\FillerQuest\bin\Debug\protobuf-net.Core.xml
 C:\Users\Cole\source\repos\FillerQuest\FillerQuest\bin\Debug\System.Collections.Immutable.xml
 C:\Users\Cole\source\repos\FillerQuest\FillerQuest\obj\Debug\AscendedRPG.csproj.Fody.CopyLocal.cache
+C:\Users\Cole\source\repos\FillerQuest\FillerQuest\bin\Debug\protobuf-net.xml
+C:\Users\Cole\source\repos\FillerQuest\FillerQuest\bin\Debug\protobuf-net.Core.xml
