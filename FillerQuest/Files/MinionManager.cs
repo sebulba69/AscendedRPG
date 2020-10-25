@@ -10,7 +10,7 @@ namespace AscendedRPG.Files
 {
     public class MinionManager
     {
-        private readonly string PIC_PATH = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Ascended", "enemies", "minion");
+        private readonly string PIC_PATH = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Ascended", "enemies", "minions");
 
         private string[] _images;
         private Random _rand;

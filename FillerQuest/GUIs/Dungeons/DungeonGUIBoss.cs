@@ -177,17 +177,11 @@ namespace AscendedRPG
 
         private void DungeonGUI_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!InvokeRequired)
+            if (_state.Type == FTypes.DUNGEON_BOSS)
             {
-                if (_state.Type == FTypes.DUNGEON_BOSS)
-                {
-                    _state.Type = FTypes.CLOSE;
-                    _state.Save.SaveGame(_state.Player);
-                }
-            }
-            else
-            {
-                Close();
+                timer.Stop();
+                _state.Type = FTypes.CLOSE;
+                _state.Save.SaveGame(_state.Player);
             }
         }
 

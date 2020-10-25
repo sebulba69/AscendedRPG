@@ -87,7 +87,7 @@ namespace AscendedRPG.GUIs
 
         private void DisplaySelectedEnemyIndex()
         {
-            try
+            if(sel_e != null)
             {
                 int m = (sel_e.IsBoss) ? 10 : 5; // multiplier to required mats
 
@@ -104,7 +104,6 @@ namespace AscendedRPG.GUIs
                 reqInfo.Text = $"COST: {sel_l.GetName()} x{required}";
                 resultBox.Text = $"RESULT: {sel_e.Name} {matType.SelectedItem} x{(int)quantity.Value}";
             }
-            catch (NullReferenceException) { }
         }
 
         private int IsSpecialMob(string name, string condition, int value) => (name.Contains(condition)) ? value : 1;

@@ -22,14 +22,14 @@ namespace AscendedRPG
 
         private Enemy[] troop;
 
-        private bool loading;
+        private bool loading, activeTimer;
 
         public DungeonGUI(FormState state)
         {
             _state = state;
 
             loading = true;
-
+            activeTimer = false;
             enemyBoxes = new List<PictureBox>();
             enemyBars = new List<ProgressBar>();
             enemyNames = new List<TextBox>();
@@ -179,17 +179,11 @@ namespace AscendedRPG
 
         private void DungeonGUI_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(!InvokeRequired)
+            if (_state.Type == FTypes.DUNGEON_GUI)
             {
-                if (_state.Type == FTypes.DUNGEON_GUI)
-                {
-                    _state.Type = FTypes.CLOSE;
-                    _state.Save.SaveGame(_state.Player);
-                }
-            }
-            else
-            {
-                Close();
+                timer.Stop();
+                _state.Type = FTypes.CLOSE;
+                _state.Save.SaveGame(_state.Player);
             }
         }
 
