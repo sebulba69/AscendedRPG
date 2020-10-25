@@ -94,10 +94,10 @@ namespace AscendedRPG
             switch (_state.DungeonType)
             {
                 case DungeonType.EX:
-                    _state.Music.SetEXSong(tier);
+                    _state.Music.SetEXSong(tier/10);
                     break;
                 case DungeonType.ASCENDED:
-                    _state.Music.SetASCSong(tier);
+                    _state.Music.SetASCSong(tier/10);
                     break;
                 case DungeonType.BOUNTY:
                 case DungeonType.EXBOUNTY:
@@ -108,7 +108,7 @@ namespace AscendedRPG
                     _state.Music.SetFinalBossSong();
                     break;
                 default:
-                    _state.Music.SetBossSong(tier);
+                    _state.Music.SetBossSong(tier/10);
                     break;
             }
 
