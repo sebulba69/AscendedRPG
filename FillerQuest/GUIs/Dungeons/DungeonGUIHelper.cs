@@ -249,7 +249,7 @@ namespace AscendedRPG.GUIs
                     if (_dh.GetFightCounter() >= 0)
                     {
                         UpdateFightCounter(); // update fight counter
-                        _state.Player.Wallet.AddDellenCoin(_state.Random.Next(100, 201) * _dh.GetFightCounter() * (_state.DungeonType+1) * _state.Player.Minions.Count); // get paid for last fight
+                        _state.Player.Wallet.AddDellenCoin(_state.Random.Next(100, 201) * _dh.GetFightCounter() * (_state.DungeonType+1) * (_state.Player.Minions.Count+1)); // get paid for last fight
                         _dungeon.SetUpEnemyGUI(); // load another set of fighters if we still have more fights left
                         InitializeHPAndTurns(); // reset the HP to max
                     }

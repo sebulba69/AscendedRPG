@@ -37,7 +37,7 @@ namespace AscendedRPG.GUIs
             int boss = (d_tier % 10 == 0) ? 2 : 1;
             HandleTierLevel(d_tier);
             HandleXPDistribution(d_tier, boss, memberCount);
-            Player.Wallet.AddDellenCoin(Random.Next(Random.Next(1000, 2001) * boss * (DungeonType + 1) * Player.Minions.Count));
+            Player.Wallet.AddDellenCoin(Random.Next(Random.Next(1000, 2001) * boss * (DungeonType + 1) * (Player.Minions.Count+1)));
         }
 
         private void HandleTierLevel(int d_tier)

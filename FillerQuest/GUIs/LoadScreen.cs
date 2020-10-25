@@ -21,16 +21,16 @@ namespace AscendedRPG.GUIs
 
         private void LoadScreen_Load(object sender, EventArgs e)
         {
-            try
-            {
-                var names = _state.Save.GetFileNames();
-                loadPaths.DataSource = names;
-            }
-            catch (System.IO.IOException)
+            var names = _state.Save.GetFileNames();
+            if (names.Count <= 0)
             {
                 MessageBox.Show("Unable to detect files. Returning to Welcome Screen.");
                 _state.Type = FTypes.WELCOME_SCREEN;
                 Close();
+            }
+            else
+            {
+                loadPaths.DataSource = names;
             }
         }
 

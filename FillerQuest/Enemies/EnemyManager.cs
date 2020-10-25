@@ -78,15 +78,17 @@ namespace AscendedRPG.Files
                                 (isMinion) ? minions :
                                     GetEnemyPath(dtype, tier);
 
+            path = Path.Combine(PATH, path);
+
             var list = LoadEnemyList(path);
 
-            enemy = (isRecipe) ?
-                        GetEnemyClone(list, dtype) :
-                        GetEnemyClone(list, r.Next(0, list.Count));
+            int index = (isRecipe) ? dtype : r.Next(0, list.Count);
+
+            enemy = GetEnemyClone(list, index);
 
             int t = tier * (dtype + 1);
             enemy.HP = GetEnemyHP(dtype, t, r);
-
+            enemy.Image = LoadEnemyImage(path, index);
             enemy.Skills.ForEach(s => SetSkillDamage(dtype+1, s, t, r));
 
             return enemy;
@@ -113,52 +115,58 @@ namespace AscendedRPG.Files
         public Enemy MakeBoss(int dtype, int tier, Random r)
         {
             
-            List<Enemy> b_list;
             bool invader = (r.Next(0, 100) < 5 && tier >= 50);
             int hp, index;
             int bountyMultiplier = 10;
+            string bossPath;
             switch (dtype)
             {
                 case DungeonType.EX:
                     hp = EX_CAP;
-                    b_list = (invader) ? LoadEnemyList(ex_invaders) : LoadEnemyList(ex_bosses);
+                    bossPath = (invader) ? ex_invaders : ex_bosses;
                     index = (invader) ? tier - 1 : (tier / 10) - 1;
                     break;
                 case DungeonType.ASCENDED:
                     hp = ASC_CAP;
-                    b_list = (invader) ? LoadEnemyList(asc_invaders) : LoadEnemyList(asc_bosses);
+                    bossPath = (invader) ? asc_invaders : asc_bosses;
                     index = (invader) ? tier - 1 : (tier / 10) - 1;
                     break;
                 case DungeonType.BOUNTY:
                     hp = ENEMY_CAP * bountyMultiplier;
-                    b_list = LoadEnemyList(bountyBosses);
+                    bossPath = bountyBosses;
                     index = tier - 1;
                     break;
                 case DungeonType.EXBOUNTY:
                     hp = EX_CAP * bountyMultiplier;
-                    b_list = LoadEnemyList(ex_bountyBosses);
+                    bossPath = ex_bountyBosses;
                     index = tier - 1;
                     break;
                 case DungeonType.ASCBOUNTY:
                     hp = ASC_CAP * bountyMultiplier;
-                    b_list = LoadEnemyList(asc_bounty);
+                    bossPath = asc_bounty;
                     index = tier - 1;
                     break;
                 case DungeonType.ELDER:
                     hp = ASC_CAP * (bountyMultiplier * 2);
-                    b_list = LoadEnemyList(elders);
+                    bossPath = elders;
                     index = tier - 1;
                     break;
                 default:
                     hp = ENEMY_CAP;
-                    b_list = (invader) ? LoadEnemyList(invaders) : LoadEnemyList(bosses);
+                    bossPath = (invader) ? invaders : bosses;
                     index = (invader) ? tier - 1 : (tier / 10) - 1;
                     break;
             }
-            Enemy boss = (Enemy)b_list[index % b_list.Count].Clone();
+            List<Enemy> b_list = LoadEnemyList(bossPath);
+            
+            index = index % b_list.Count;
+            
+            Enemy boss = (Enemy)b_list[index].Clone();
             int t = tier * (dtype + 1);
+
             boss.HP = BossHPCalc(t * hp);
             boss.Skills.ForEach(s => SetSkillDamage(dtype + 1, s, t * (dtype + 1), r));
+            boss.Image = LoadEnemyImage(Path.Combine(PATH,bossPath), index);
             return boss;
         }
 
@@ -175,6 +183,12 @@ namespace AscendedRPG.Files
             boss.Weakness.Add(6);
             boss.Weakness.Add(7);
             return boss;
+        }
+
+        private string LoadEnemyImage(string folder, int index)
+        {
+            var images = Directory.GetFiles(folder);
+            return images[index];
         }
 
         private List<Enemy> LoadEnemyList(string file) => EncryptionManager.DeCrypt<List<Enemy>>(Path.Combine(PATH, file + ".bin"));
