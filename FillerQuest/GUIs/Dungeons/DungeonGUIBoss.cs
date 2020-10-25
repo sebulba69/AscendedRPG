@@ -179,7 +179,6 @@ namespace AscendedRPG
         {
             if (_state.Type == FTypes.DUNGEON_BOSS)
             {
-                timer.Stop();
                 _state.Type = FTypes.CLOSE;
                 _state.Save.SaveGame(_state.Player);
             }

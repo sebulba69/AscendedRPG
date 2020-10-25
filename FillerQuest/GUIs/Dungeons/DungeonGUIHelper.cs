@@ -147,22 +147,31 @@ namespace AscendedRPG.GUIs
                             result = "You can't buff that stat any further.";
                             MessageBox.Show(result);
                         }
+                        _dgc.UpdateCombatLog(result);
+                        CheckTurnEnd();
                         break;
                     case SkillType.HEALING:
                         _dgc.ReducePlayerHealth(skill.GetDamage() * -1);
                         ReduceTurns(FULL);
                         result = $"{bm.Name} used {skill.Name} and healed for {skill.GetDamage()} HP";
+                        _dgc.UpdateCombatLog(result);
+                        CheckTurnEnd();
                         break;
                     default:
                         result = _dh.GetSkillResult(bm.Name, _state, skill, target);
-                        ProcessDamage(target, t);
+                        
                         if (result.Contains("critical") || result.Contains("weakness"))
                             ReduceTurns(HALF);
                         else
                             ReduceTurns(FULL);
+
+                        _dgc.UpdateCombatLog(result);
+
+                        ProcessDamage(target, t);
+
                         break;
                 }
-                _dgc.UpdateCombatLog(result);
+                
             }
         }
 
@@ -176,7 +185,7 @@ namespace AscendedRPG.GUIs
                 case WeaponStyle.LIFESTEAL:
                     if (_dh.CanUseNIcons(2))
                     {
-                        ReduceTurns(FULL*2);
+                        ReduceTurns(FULL * 2);
                         damage = (weapon.Damage + _state.Player.Stats.stats[Stat.ATTACK]) / 2;
                         log = _dh.GetWeaponResult(bm.Name, damage, _state, target);
 
@@ -201,6 +210,7 @@ namespace AscendedRPG.GUIs
                         _state.Player.Stats.isParryState = true;
                         log = $"Player team assumes a parry stance!";
                         ReduceTurns(FULL*2);
+                        CheckTurnEnd();
                     }
                     else
                     {
@@ -209,22 +219,18 @@ namespace AscendedRPG.GUIs
                     break;
                 default:
                     log = _dh.GetWeaponResult(bm.Name, weapon.Damage, _state, target);
-                    ProcessDamage(target, t);
                     ReduceTurns(FULL);
+                    _dgc.UpdateCombatLog(log);
+                    ProcessDamage(target, t);
                     break;
             }
 
-            if (log != "")
-                _dgc.UpdateCombatLog(log);
-
-            _dgc.SetTurnText(_dh.GetTurnString());
         }
 
         private void ReduceTurns(int amount)
         {
             _dh.DecrementTurns(amount);
             _dgc.SetTurnText(_dh.GetTurnString());
-            CheckTurnEnd();
         }
 
         private void ProcessDamage(Enemy target, int t)
@@ -251,7 +257,7 @@ namespace AscendedRPG.GUIs
                         UpdateFightCounter(); // update fight counter
                         _state.Player.Wallet.AddDellenCoin(_state.Random.Next(100, 201) * _dh.GetFightCounter() * (_state.DungeonType+1) * (_state.Player.Minions.Count+1)); // get paid for last fight
                         _dungeon.SetUpEnemyGUI(); // load another set of fighters if we still have more fights left
-                        InitializeHPAndTurns(); // reset the HP to max
+                        InitializeHPAndTurns(); // reset the HP to maxg
                     }
                     else
                     {
@@ -351,8 +357,8 @@ namespace AscendedRPG.GUIs
                 {
                     if(_dh.GetIsTurnEnd())
                     {
-                        InitializePlayerTurns();
                         _dgc.StopTimer();
+                        InitializePlayerTurns();
                         _dgc.SetUseSkillButtonEnabled(true);
                     }
                     else

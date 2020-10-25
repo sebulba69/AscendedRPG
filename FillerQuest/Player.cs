@@ -130,8 +130,13 @@ namespace AscendedRPG
 
         public int GetLevel()
         {
-            int level = 0;
-            Tiers.ForEach(t => level += t);
+            int level = Tiers[0];
+
+            // only add up levels higher than 1 so not to confuse the player
+            for (int i = 1; i < Tiers.Count; i++)
+                if (Tiers[i] > 1)
+                    level += Tiers[i];
+
             return level;
         }
 

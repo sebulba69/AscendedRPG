@@ -137,7 +137,7 @@
     <Compile Include="Armors\ArmorManager.cs" />
     <Compile Include="GUIs\Dungeons\Dungeon.cs" />
     <Compile Include="GUIs\Dungeons\DungeonType.cs" />
-    <Compile Include="GUIs\DGPComponents.cs" />
+    <Compile Include="GUIs\Dungeons\DGPComponents.cs" />
     <Compile Include="GUIs\Dungeons\DungeonHandlers.cs" />
     <Compile Include="GUIs\Dungeons\IDungeon.cs" />
     <Compile Include="Enemies\Minion.cs" />

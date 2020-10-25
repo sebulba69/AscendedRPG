@@ -22,14 +22,13 @@ namespace AscendedRPG
 
         private Enemy[] troop;
 
-        private bool loading, activeTimer;
+        private bool loading;
 
         public DungeonGUI(FormState state)
         {
             _state = state;
 
             loading = true;
-            activeTimer = false;
             enemyBoxes = new List<PictureBox>();
             enemyBars = new List<ProgressBar>();
             enemyNames = new List<TextBox>();
@@ -181,7 +180,6 @@ namespace AscendedRPG
         {
             if (_state.Type == FTypes.DUNGEON_GUI)
             {
-                timer.Stop();
                 _state.Type = FTypes.CLOSE;
                 _state.Save.SaveGame(_state.Player);
             }
