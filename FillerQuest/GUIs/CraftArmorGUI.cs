@@ -152,9 +152,17 @@ namespace AscendedRPG.GUIs
         private void saveRecipe_MouseClick(object sender, MouseEventArgs e)
         {
             var selected = recipeList.SelectedItem as Recipes.Recipe;
-            _state.Player.Loot.Wishlist.Add(selected);
-            MessageBox.Show("Recipe saved.");
-            _state.Save.SaveGame(_state.Player);
+            if(!_state.Player.Loot.Wishlist.Contains(selected))
+            {
+                _state.Player.Loot.Wishlist.Add(selected);
+                MessageBox.Show("Recipe saved.");
+                _state.Save.SaveGame(_state.Player);
+            }
+            else
+            {
+                MessageBox.Show("You already saved this recipe.");
+            }
+
         }
 
         private void RemoveRecipeFromList(Recipes.Recipe selected)
