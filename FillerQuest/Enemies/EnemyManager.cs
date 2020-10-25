@@ -73,10 +73,14 @@ namespace AscendedRPG.Files
             // if isRecipe, make recipe enemy,
             // else if isMinion, make minion,
             // else make an enemy
-            string path = (isRecipe) ? 
-                                recipe_enemies :
-                                (isMinion) ? minions :
-                                    GetEnemyPath(dtype, tier);
+            string path;
+
+            if (isRecipe)
+                path = recipe_enemies;
+            else if (isMinion)
+                path = minions;
+            else
+                path = GetEnemyPath(dtype, tier);
 
             path = Path.Combine(PATH, path);
 
