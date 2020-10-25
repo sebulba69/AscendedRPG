@@ -88,7 +88,8 @@ namespace AscendedRPG.GUIs
                                                 s.S_Type == SkillType.HEALING || 
                                                 s.S_Type == SkillType.OFFENSIVE_BUFF);
 
-            skills.OrderByDescending(k => k.GetDamage());
+            skills.Sort((a,b) => a.GetDamage().CompareTo(b.GetDamage()));
+            skills.Reverse();
             skillBox.Items.Clear();
             skillBox.Items.Add("~ Skills ~");
             skills.ForEach(s => skillBox.Items.Add(s));

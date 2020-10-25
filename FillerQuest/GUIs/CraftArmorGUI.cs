@@ -148,7 +148,6 @@ namespace AscendedRPG.GUIs
             }
         }
 
-
         private void saveRecipe_MouseClick(object sender, MouseEventArgs e)
         {
             var selected = recipeList.SelectedItem as Recipes.Recipe;

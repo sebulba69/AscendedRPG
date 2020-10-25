@@ -40,8 +40,6 @@ namespace AscendedRPG
                 _state.Music.SetIdleTheme(player.Tiers[type]);
                 _state.Music.PlaySong();
             }
-
-            
         }
 
         private void UpdateAllScreens()
@@ -51,7 +49,7 @@ namespace AscendedRPG
             ActiveSkillBox.Items.Clear();
             ActiveSkillBox.Items.Add("~ Active Skills ~");
             var skills = _state.Player.Set.Skills;
-            skills.Sort((a, b) => a.Skill.Damage.CompareTo(b.Skill.Damage));
+            skills.Sort((a, b) => a.Skill.GetDamage().CompareTo(b.Skill.GetDamage()));
             skills.Reverse();
             ActiveSkillBox.Items.AddRange(skills.ToArray());
 
