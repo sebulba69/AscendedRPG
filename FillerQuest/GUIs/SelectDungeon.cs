@@ -78,7 +78,7 @@ namespace AscendedRPG
             string text = recentTier.Text.Split(' ')[1];
             int d = Int32.Parse(text);
 
-            _state.Type = (bountyCheckbox.Checked) ?
+            _state.Type = (bountyCheckbox.Checked || _state.DungeonType == DungeonType.ELDER) ?
                 FTypes.DUNGEON_BOSS :
                     (d % 10 == 0) ?
                         FTypes.DUNGEON_BOSS :
@@ -170,13 +170,6 @@ namespace AscendedRPG
             recentTier.Text = $"Re-embark: {d_tier}";
             string keys = (count == 1) ? "key" : "keys";
             keyBox.Text = $"{count} {keys}";
-        }
-
-        private void ResetBountyBox()
-        {
-            MessageBox.Show("You don't have any keys to embark into this dungeon!");
-            bountyCheckbox.Checked = false;
-            normalButton.Checked = true;
         }
 
         private void bountyCheckbox_CheckedChanged(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using ProtoBuf;
+﻿using AscendedRPG.Enemies;
+using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,8 @@ namespace AscendedRPG
             string[] dungeonTypes = { "Normal", "EX", "Ascended" };
             string tiers = (Name.Contains("Pot of")) ? $"Any {dungeonTypes[DType]} floor" : $"Tier {Tier}";
             string boss = (IsBoss) ? "Boss" : "Enemy";
-            return $"Name: {Name}*Type: {boss}*Last seen: {tiers}*Found in {dungeonTypes[DType]} dungeons.";
+            string dtype = (DType == DungeonType.ELDER) ? "Elder" : $"{dungeonTypes[DType % 3]}";
+            return $"Name: {Name}*Type: {boss}*Last seen: {tiers}*Found in {dtype} dungeons.";
         }
 
         public override string ToString()
