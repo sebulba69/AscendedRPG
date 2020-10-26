@@ -38,23 +38,23 @@ namespace AscendedRPG.GUIs
 
         private void minionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            var selected = minionBox.SelectedItem as Enemies.Minion;
+            if (selected != null)
             {
-                var selected = minionBox.SelectedItem as Enemies.Minion;
                 mpicBox.ImageLocation = selected.Image;
                 minionName.Text = selected.NameString();
                 minionWeapon.Text = selected.Weapon.ToString();
                 minionSkills.Clear();
-                for(int i = 0; i < selected.Skills.Count-1;i++)
+                for (int i = 0; i < selected.Skills.Count - 1; i++)
                 {
                     minionSkills.AppendText(selected.Skills[i].ToString());
                     minionSkills.AppendText(Environment.NewLine);
                 }
 
                 minionSkills.AppendText(selected.Skills.Last().ToString());
-                equipButton.Text = (selected.IsEquipped)? "Unequip" : "Equip";
+                equipButton.Text = (selected.IsEquipped) ? "Unequip" : "Equip";
             }
-            catch (NullReferenceException)
+            else
             {
                 mpicBox.ImageLocation = null;
                 minionName.Clear();
