@@ -64,7 +64,7 @@ namespace AscendedRPG
             int d = (int)TierBox.Value;
 
             // if bcheck is checked --> state = dungeon boss, else if d % 10 == 0, then dungeon boss, else dungoen gui
-            _state.Type = (bountyCheckbox.Checked) ?
+            _state.Type = (bountyCheckbox.Checked || _state.DungeonType == DungeonType.ELDER) ?
                 FTypes.DUNGEON_BOSS :
                     (d % 10 == 0) ?
                         FTypes.DUNGEON_BOSS : 

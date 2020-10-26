@@ -104,6 +104,9 @@ namespace AscendedRPG
                 case DungeonType.ASCBOUNTY:
                     _state.Music.SetBountySong(tier);
                     break;
+                case DungeonType.ELDER:
+                    _state.Music.SetElderSong(tier);
+                    break;
                 case DungeonType.FINAL:
                     _state.Music.SetFinalBossSong();
                     break;
