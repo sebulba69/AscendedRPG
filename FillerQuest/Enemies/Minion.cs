@@ -36,12 +36,6 @@ namespace AscendedRPG.Enemies
                 LevelUp();
         }
 
-        public void ForcedLevelUp()
-        {
-            XP = XPtoNext;
-            LevelUp();
-        }
-
         public void LevelUp()
         {
             if(Level + 1 <= 100)

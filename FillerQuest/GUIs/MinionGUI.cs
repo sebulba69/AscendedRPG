@@ -98,7 +98,8 @@ namespace AscendedRPG.GUIs
                 }
                 else
                 {
-                    selected.ForcedLevelUp();
+                    selected.LevelUp();
+                    selected.XP = 0;
                     wallet.MinionShards -= 100;
                     ResetMBox();
                     _state.Save.SaveGame(_state.Player);
