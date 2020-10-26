@@ -100,10 +100,12 @@
             // 
             // Skills
             // 
+            this.Skills.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Skills.FormattingEnabled = true;
+            this.Skills.ItemHeight = 12;
             this.Skills.Location = new System.Drawing.Point(187, 368);
             this.Skills.Name = "Skills";
-            this.Skills.Size = new System.Drawing.Size(180, 134);
+            this.Skills.Size = new System.Drawing.Size(180, 124);
             this.Skills.TabIndex = 5;
             // 
             // menuStrip1
