@@ -31,9 +31,16 @@ namespace AscendedRPG.Enemies
 
         public void IncreaseXP(long xp)
         {
-            XP += xp;
-            if (XP >= XPtoNext)
-                LevelUp();
+            if(Level < 100)
+            {
+                XP += xp;
+                if (XP >= XPtoNext)
+                    LevelUp();
+            }
+            else
+            {
+                XP = 0;
+            }
         }
 
         public void LevelUp()

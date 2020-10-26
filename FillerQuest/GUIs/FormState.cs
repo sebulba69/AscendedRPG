@@ -60,17 +60,7 @@ namespace AscendedRPG.GUIs
                 Player.Minions.ForEach(m =>
                 {
                     m.IncreaseXP(xp + Random.Next(100, 201));
-
-                    if (m.Weapon.Level < 100)
-                    {
-                        m.Weapon.IncreaseXP(xp + 200);
-                    } 
-                    else
-                    {
-                        m.Weapon.XP = -1;
-                        m.Weapon.XPtoNext = -1;
-                    }
-                        
+                    m.Weapon.IncreaseXP(xp + 200);
                 });
             }
         }
