@@ -36,7 +36,13 @@ namespace AscendedRPG.Enemies
                 LevelUp();
         }
 
-        private void LevelUp()
+        public void ForcedLevelUp()
+        {
+            XP = XPtoNext;
+            LevelUp();
+        }
+
+        public void LevelUp()
         {
             if(Level + 1 <= 100)
             {
@@ -45,6 +51,14 @@ namespace AscendedRPG.Enemies
                 XPtoNext = GetRequiredXP();
                 Skills.ForEach(s => s.Multiplier += 2);
             }
+        }
+
+        public void GodForm()
+        {
+            Level = 1;
+            XP = 0;
+            XPtoNext = GetRequiredXP();
+            Skills.ForEach(s => s.Multiplier += 50);
         }
 
         // bs formula that scales with level ups

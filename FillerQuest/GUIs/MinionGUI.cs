@@ -89,13 +89,46 @@ namespace AscendedRPG.GUIs
         private void boostButton_MouseClick(object sender, MouseEventArgs e)
         {
             var wallet = _state.Player.Wallet;
-            if (wallet.MinionShards >= 10)
+            if (wallet.MinionShards >= 100)
             {
                 var selected = minionBox.SelectedItem as Enemies.Minion;
-                selected.IncreaseXP(10);
-                wallet.MinionShards -= 10;
-                ResetMBox();
-                _state.Save.SaveGame(_state.Player);
+                if(selected.Level + 1 > 100)
+                {
+                    MessageBox.Show("Your minion is currently max level. You'll need to ascend your minion using the Ascended Bucey God Form button to reset it.");
+                }
+                else
+                {
+                    selected.ForcedLevelUp();
+                    wallet.MinionShards -= 100;
+                    ResetMBox();
+                    _state.Save.SaveGame(_state.Player);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("You don't have enough shards to boost this minion.");
+            }
+        }
+
+        private void godFormButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            var wallet = _state.Player.Wallet;
+            if (wallet.MinionShards >= 1000)
+            {
+                var selected = minionBox.SelectedItem as Enemies.Minion;
+                if (selected.Level < 100)
+                {
+                    MessageBox.Show("Your minion must be max level to properly Ascended Bucey Godform it.");
+                }
+                else
+                {
+                    selected.GodForm();
+                    wallet.MinionShards -= 1000;
+                    ResetMBox();
+                    _state.Save.SaveGame(_state.Player);
+                }
+
             }
             else
             {

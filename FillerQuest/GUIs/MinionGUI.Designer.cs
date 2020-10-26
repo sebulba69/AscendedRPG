@@ -41,6 +41,7 @@
             this.msCount = new System.Windows.Forms.TextBox();
             this.create = new System.Windows.Forms.Button();
             this.boostButton = new System.Windows.Forms.Button();
+            this.godFormButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mpicBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -152,19 +153,32 @@
             // 
             // boostButton
             // 
+            this.boostButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.boostButton.Location = new System.Drawing.Point(12, 269);
             this.boostButton.Name = "boostButton";
-            this.boostButton.Size = new System.Drawing.Size(179, 23);
+            this.boostButton.Size = new System.Drawing.Size(88, 23);
             this.boostButton.TabIndex = 38;
-            this.boostButton.Text = "Bucest Minion (10 MS)";
+            this.boostButton.Text = "Bucest (100 MS)";
             this.boostButton.UseVisualStyleBackColor = true;
             this.boostButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boostButton_MouseClick);
+            // 
+            // godFormButton
+            // 
+            this.godFormButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.godFormButton.Location = new System.Drawing.Point(103, 269);
+            this.godFormButton.Name = "godFormButton";
+            this.godFormButton.Size = new System.Drawing.Size(88, 23);
+            this.godFormButton.TabIndex = 39;
+            this.godFormButton.Text = "ABGF (1000 MS)";
+            this.godFormButton.UseVisualStyleBackColor = true;
+            this.godFormButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.godFormButton_MouseClick);
             // 
             // MinionGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(381, 300);
+            this.Controls.Add(this.godFormButton);
             this.Controls.Add(this.boostButton);
             this.Controls.Add(this.msCount);
             this.Controls.Add(this.equipButton);
@@ -206,5 +220,6 @@
         private System.Windows.Forms.TextBox msCount;
         private System.Windows.Forms.Button create;
         private System.Windows.Forms.Button boostButton;
+        private System.Windows.Forms.Button godFormButton;
     }
 }
