@@ -247,7 +247,8 @@ namespace AscendedRPG
             catch (NullReferenceException) { }
             catch (ArgumentOutOfRangeException)
             {
-                InventoryList.SelectedIndex = 1;
+                if(InventoryList.Items.Count > 1)
+                    InventoryList.SelectedIndex = 1;
             }
         }
 
