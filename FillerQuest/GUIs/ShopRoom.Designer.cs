@@ -42,6 +42,7 @@
             this.keyRadio = new System.Windows.Forms.RadioButton();
             this.allRadio = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.upgradeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.VendorPicture)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -103,7 +104,7 @@
             this.InformationBox.Multiline = true;
             this.InformationBox.Name = "InformationBox";
             this.InformationBox.ReadOnly = true;
-            this.InformationBox.Size = new System.Drawing.Size(359, 255);
+            this.InformationBox.Size = new System.Drawing.Size(359, 288);
             this.InformationBox.TabIndex = 9;
             this.InformationBox.TabStop = false;
             // 
@@ -172,17 +173,28 @@
             this.groupBox1.Controls.Add(this.charmRadio);
             this.groupBox1.Controls.Add(this.allRadio);
             this.groupBox1.Controls.Add(this.keyRadio);
-            this.groupBox1.Location = new System.Drawing.Point(3, 395);
+            this.groupBox1.Location = new System.Drawing.Point(3, 399);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(219, 50);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             // 
+            // upgradeButton
+            // 
+            this.upgradeButton.Location = new System.Drawing.Point(3, 455);
+            this.upgradeButton.Name = "upgradeButton";
+            this.upgradeButton.Size = new System.Drawing.Size(219, 23);
+            this.upgradeButton.TabIndex = 16;
+            this.upgradeButton.Text = "Upgrade";
+            this.upgradeButton.UseVisualStyleBackColor = true;
+            this.upgradeButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.upgradeButton_MouseClick);
+            // 
             // ShopRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(594, 454);
+            this.ClientSize = new System.Drawing.Size(594, 491);
+            this.Controls.Add(this.upgradeButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.InformationBox);
             this.Controls.Add(this.PlayerCoins);
@@ -224,5 +236,6 @@
         private System.Windows.Forms.RadioButton allRadio;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripMenuItem reRollWaresToolStripMenuItem;
+        private System.Windows.Forms.Button upgradeButton;
     }
 }

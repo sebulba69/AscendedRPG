@@ -105,6 +105,7 @@ namespace AscendedRPG.GUIs
                         Damage = 20,
                         Style = WeaponStyle.ATTACK
                     };
+                    _state.Player.VendorCap = 250;
 
                     for (int i = 0; i < ArmorPiece.TOTAL; i++)
                         _state.Player.Set.AddArmor(_state.AManager.GetRandomArmorPiece(_state, _state.Player.Tiers[0], i));

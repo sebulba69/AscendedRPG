@@ -40,7 +40,7 @@ namespace AscendedRPG.GUIs
         private void ShopRoom_Load(object sender, EventArgs e)
         {
             var files = Directory.GetFiles(PATH, "*.png");
-            vendor = (_state.Player.Tiers[0] - 1) % files.Length;
+            vendor = (_state.Player.GetVendorCap() - 1) % files.Length;
             VendorPicture.Image = Image.FromFile(Path.Combine(PATH, files[vendor]));
 
             vendorDialog.Add(vendor1);
@@ -68,12 +68,14 @@ namespace AscendedRPG.GUIs
 
             for (int i = 0; i < 10; i++)
             {
-                Armor charm = _state.AManager.GetRandomArmorPiece(_state, _state.Player.Tiers[0], ArmorPiece.CHARM);
+                Armor charm = _state.AManager.GetRandomArmorPiece(_state, _state.Player.GetVendorCap(), ArmorPiece.CHARM);
 
                 wares_charms.Add(charm.ToString());
                 charms.Add(charm);
-                AddCost(charm.ToString(), r.Next(_state.Player.Tiers[0] * 8000, _state.Player.Tiers[0] * 9000));
+                AddCost(charm.ToString(), GetCost(r, 8000, 9000));
             }
+
+            AddCost("Upgrade", GetCost(r, 8000,9000));
 
             AddKeysToShopList(r);
 
@@ -82,17 +84,36 @@ namespace AscendedRPG.GUIs
 
         private void AddKeysToShopList(Random r)
         {
-           int d_cost = r.Next(_state.Player.Tiers[0] * 4000, _state.Player.Tiers[0] * 5000);
+           int d_cost = GetCost(r, 4000, 5000);
            string[] names = { "EX Dungeon Key", "ASC Dungeon Key", "Bounty Key", "EX Bounty Key", "ASC Bounty Key", "Elder Key" };
            for(int i = 0; i < names.Length; i++)
             {
                 wares_keys.Add(names[i]);
-                AddCost(names[i], d_cost * (i + 3));
+
+                if (d_cost != int.MaxValue)
+                    d_cost = d_cost * (i + 3);
+
+                AddCost(names[i], d_cost);
             }
+        }
+
+        private int GetCost(Random r, int lower, int upper)
+        {
+            try
+            {
+                return checked(r.Next(_state.Player.GetVendorCap() * lower, _state.Player.GetVendorCap() * upper));
+            }
+            catch(OverflowException)
+            {
+                return int.MaxValue;
+            }
+            
         }
 
         private void UpdateVendorDisplay()
         {
+            Text = $"Shop Room Level {_state.Player.GetVendorCap()}";
+
             if (charmRadio.Checked)
             {
                 current = wares_charms;
@@ -110,6 +131,15 @@ namespace AscendedRPG.GUIs
 
             UpdateVendorWares();
         }
+
+
+        private void UpdateVendorWares()
+        {
+            VendorWares.Items.Clear();
+            VendorWares.Items.AddRange(current.ToArray());
+            upgradeButton.Text = $"Upgrade Vendor: {costs["Upgrade"]}";
+        }
+
 
         private void AddCost(string k, int v)
         {
@@ -158,12 +188,6 @@ namespace AscendedRPG.GUIs
             AppendToBox(description);
         }
 
-        private void UpdateVendorWares()
-        {
-            VendorWares.DataSource = null;
-            VendorWares.DataSource = current;
-        }
-
         private void UpdatePlayerCoins(long amount)
         {
             PlayerCoins.Text = $"D.Coin: {amount}";
@@ -189,7 +213,6 @@ namespace AscendedRPG.GUIs
                 else
                 {
                     _state.Player.Wallet.Coins -= cost;
-
                     if (selected.Contains("Charm"))
                     {
                         var charm = charms.Find(c => c.ToString().Equals(selected));
@@ -203,6 +226,7 @@ namespace AscendedRPG.GUIs
                         // we're going to use the dungeonType later to access our key index so we have to add by 1
                         int index = wares_keys.IndexOf(selected);
                         _state.Player.Wallet.Keys[index+1]++;
+                        
                     }
 
                     VendorTextBox.Text = vendorDialog[vendor][1];
@@ -215,6 +239,31 @@ namespace AscendedRPG.GUIs
             {
                 allRadio.Checked = true;
             }
+        }
+
+        private void upgradeButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            long cost = costs["Upgrade"];
+
+            if (_state.Player.Wallet.Coins - cost < 0)
+            {
+                VendorTextBox.Text = vendorDialog[vendor][2];
+            }
+            else
+            {
+                if (_state.Player.Tiers[0] < 250)
+                    MessageBox.Show("You have to max out your Normal Tier before being able to uncap the vendor.");
+                else
+                {
+                    _state.Player.Wallet.Coins -= cost;
+                    _state.Player.VendorCap++;
+                    VendorTextBox.Text = vendorDialog[vendor][1];
+                    UpdatePlayerCoins(_state.Player.Wallet.Coins);
+                    RollWares();
+                    _state.Save.SaveGame(_state.Player);
+                }
+            }
+
         }
 
         private void charmRadio_CheckedChanged(object sender, EventArgs e)

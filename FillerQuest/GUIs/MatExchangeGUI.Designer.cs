@@ -56,10 +56,12 @@
             // 
             // allMats
             // 
+            this.allMats.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.allMats.FormattingEnabled = true;
+            this.allMats.ItemHeight = 12;
             this.allMats.Location = new System.Drawing.Point(4, 27);
             this.allMats.Name = "allMats";
-            this.allMats.Size = new System.Drawing.Size(204, 212);
+            this.allMats.Size = new System.Drawing.Size(204, 208);
             this.allMats.TabIndex = 0;
             this.allMats.SelectedIndexChanged += new System.EventHandler(this.allMats_SelectedIndexChanged);
             // 
@@ -126,10 +128,11 @@
             // reqInfo
             // 
             this.reqInfo.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.reqInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reqInfo.Location = new System.Drawing.Point(214, 192);
             this.reqInfo.Name = "reqInfo";
             this.reqInfo.ReadOnly = true;
-            this.reqInfo.Size = new System.Drawing.Size(174, 20);
+            this.reqInfo.Size = new System.Drawing.Size(174, 18);
             this.reqInfo.TabIndex = 6;
             // 
             // quantity
@@ -177,10 +180,11 @@
             // resultBox
             // 
             this.resultBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.resultBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resultBox.Location = new System.Drawing.Point(214, 249);
             this.resultBox.Name = "resultBox";
             this.resultBox.ReadOnly = true;
-            this.resultBox.Size = new System.Drawing.Size(174, 20);
+            this.resultBox.Size = new System.Drawing.Size(174, 18);
             this.resultBox.TabIndex = 10;
             // 
             // energyButton

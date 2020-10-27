@@ -46,6 +46,9 @@ namespace AscendedRPG
         [ProtoMember(11)]
         public Weapon Weapon { get; set; }
 
+        [ProtoMember(12)]
+        public int VendorCap { get; set; }
+
         // 0 -> 6
         // normal, ex, asc, bounty, exbounty, ascbounty, elder
         [ProtoMember(20)]
@@ -75,6 +78,9 @@ namespace AscendedRPG
 
             if (Minions == null)
                 Minions = new List<Enemies.Minion>();
+
+            if (VendorCap < 250)
+                VendorCap = 250;
         }
 
         public void ProcessWeakness(Enemy e, int element)
@@ -139,6 +145,8 @@ namespace AscendedRPG
 
             return level;
         }
+
+        public int GetVendorCap() => (Tiers[0] < 250) ? Tiers[0] : VendorCap;
 
     }
 }
