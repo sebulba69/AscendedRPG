@@ -12,8 +12,6 @@ namespace AscendedRPG.LootClasses
     {
         private readonly string[] enemyLoot = { "Energy", "Shard", "Scale", "Mantle", "Crystal" };
 
-        private readonly string[] tierLoot = { "Essence", "Plate", "Orb", "Relic", "Jewel" };
-
         private readonly string[] recipeLootNames = { "normal.bin", "ex.bin", "ascended.bin" };
 
         public LootHandler() { }

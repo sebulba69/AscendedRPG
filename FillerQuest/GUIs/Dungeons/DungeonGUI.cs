@@ -110,6 +110,7 @@ namespace AscendedRPG
         public void CloseGUI()
         {
             loading = true;
+            timer.Stop();
             _state.Music.Stop();
             _state.Type = FTypes.INVENTORY;
             _state.Save.SaveGame(_state.Player);
