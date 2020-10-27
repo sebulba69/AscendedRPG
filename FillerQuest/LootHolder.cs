@@ -16,6 +16,7 @@ namespace AscendedRPG
         public List<Loot> EnemyLoot { get; set; }
         [ProtoMember(2)]
         public List<Recipe> Recipes { get; set; }
+        
         [ProtoMember(3)]
         public List<Recipe> Wishlist { get; set; }
 

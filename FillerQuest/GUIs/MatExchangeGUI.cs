@@ -31,10 +31,8 @@ namespace AscendedRPG.GUIs
 
         private void MatExchangeGUI_Load(object sender, EventArgs e)
         {
-            var loot = _state.Player.Loot.EnemyLoot;
-            loot.Sort((a, b) => a.Name.CompareTo(b.Name));
+            SortLoot(_state.Player.Loot.EnemyLoot);
 
-            allMats.DataSource = _state.Player.Loot.EnemyLoot;
             enemyList.DataSource = index;
             matType.SelectedIndex = 0;
 
@@ -66,28 +64,24 @@ namespace AscendedRPG.GUIs
 
         private void allMats_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                sel_l = allMats.SelectedItem as Loot;
+            sel_l = allMats.SelectedItem as Loot;
+            if(sel_l != null)
                 DisplaySelectedEnemyIndex();
-            }
-            catch (NullReferenceException) { }
         }
 
         private void enemyList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            sel_e = enemyList.SelectedItem as EIndexEntry;
+            if (sel_e != null)
             {
-                sel_e = enemyList.SelectedItem as EIndexEntry;
                 pic.ImageLocation = sel_e.Image;
                 DisplaySelectedEnemyIndex();
             }
-            catch (NullReferenceException) { }
         }
 
         private void DisplaySelectedEnemyIndex()
         {
-            if(sel_e != null)
+            if(sel_e != null && sel_l != null)
             {
                 int m = (sel_e.IsBoss) ? 10 : 5; // multiplier to required mats
 
@@ -147,110 +141,126 @@ namespace AscendedRPG.GUIs
 
         private void convertButton_MouseClick(object sender, MouseEventArgs e)
         {
-            if (required <= sel_l.Quantity)
+            if(sel_l != null)
             {
-                var loot = _state.Player.Loot.EnemyLoot;
-
-                var mat = loot.Find(l => l.GetName().Equals(sel_l.GetName()));
-
-                mat.Quantity -= required;
-
-                if (mat.Quantity <= 0)
-                    loot.Remove(mat);
-
-                string suffix = matType.SelectedItem.ToString();
-                string query = $"{sel_e.Name} {suffix}";
-                var duplicate = loot.Find(l => l.GetName().Equals(query));
-
-                if(duplicate == null)
+                if (required <= sel_l.Quantity)
                 {
-                    var n = new Loot()
+                    var loot = _state.Player.Loot.EnemyLoot;
+
+                    var mat = loot.Find(l => l.GetName().Equals(sel_l.GetName()));
+
+                    mat.Quantity -= required;
+
+                    if (mat.Quantity <= 0)
+                        loot.Remove(mat);
+
+                    string suffix = matType.SelectedItem.ToString();
+                    string query = $"{sel_e.Name} {suffix}";
+                    var duplicate = loot.Find(l => l.GetName().Equals(query));
+
+                    if (duplicate == null)
                     {
-                        Name = sel_e.Name,
-                        Suffix = suffix,
-                        LType = LootType.ENEMY_DROP,
-                        Quantity = (int)quantity.Value,
-                        Rarity = matType.SelectedIndex + 1,
-                        Tier = 1
-                    };
-                    loot.Add(n);
+                        var n = new Loot()
+                        {
+                            Name = sel_e.Name,
+                            Suffix = suffix,
+                            LType = LootType.ENEMY_DROP,
+                            Quantity = (int)quantity.Value,
+                            Rarity = matType.SelectedIndex + 1,
+                            Tier = 1
+                        };
+                        loot.Add(n);
+                    }
+                    else
+                    {
+                        duplicate.Quantity += (int)quantity.Value;
+                    }
+
+                    RefreshLists();
+
+                    if (wgui != null && wgui.Visible)
+                        wgui.RefreshList();
+
+                    DisplaySelectedEnemyIndex();
                 }
                 else
                 {
-                    duplicate.Quantity += (int)quantity.Value;
+                    MessageBox.Show("Not enough mats for this conversion.");
                 }
-
-                RefreshLists();
-
-                if (wgui != null && wgui.Visible)
-                    wgui.RefreshList();
-
-                DisplaySelectedEnemyIndex();
             }
-            else
-            {
-                MessageBox.Show("Not enough mats for this conversion.");
-            }
+
         }
 
         private void RefreshLists()
         {
             string old_enemy = enemySearch.Text;
 
-            int old_index = allMats.SelectedIndex;
+            int old_index_a = allMats.SelectedIndex;
             int old_index_e = enemyList.SelectedIndex;
 
             allMats.DataSource = null;
 
             for(int i = 0; i < rbuttons.Count; i++)
                 if(rbuttons[i].Checked)
-                    allMats.DataSource = _state.Player.Loot.FilterLoot(i+1);
+                {
+                    SortLoot(_state.Player.Loot.FilterLoot(i + 1));
+                    break;
+                }
 
-            if(allButton.Checked)
-                allMats.DataSource = _state.Player.Loot.EnemyLoot;
+            // this is separate because we can't filter "all loot"
+            if (allButton.Checked)
+                SortLoot(_state.Player.Loot.EnemyLoot);
 
             enemyList.DataSource = null;
             enemyList.DataSource = index;
             enemySearch.Clear();
             enemySearch.Text = old_enemy;
             enemyList.SelectedIndex = old_index_e;
-  
+
+            _state.HandleSelectedIndex(allMats, old_index_a);
         }
 
         private void energyButton_CheckedChanged(object sender, EventArgs e)
         {
             if (energyButton.Checked)
-                allMats.DataSource = _state.Player.Loot.FilterLoot(1);
+                SortLoot(_state.Player.Loot.FilterLoot(1));
         }
 
         private void shardButton_CheckedChanged(object sender, EventArgs e)
         {
             if (shardButton.Checked)
-                allMats.DataSource = _state.Player.Loot.FilterLoot(2);
+                SortLoot(_state.Player.Loot.FilterLoot(2));
         }
 
         private void scaleButton_CheckedChanged(object sender, EventArgs e)
         {
             if (scaleButton.Checked)
-                allMats.DataSource = _state.Player.Loot.FilterLoot(3);
+                SortLoot(_state.Player.Loot.FilterLoot(3));
         }
 
         private void mantleButton_CheckedChanged(object sender, EventArgs e)
         {
             if (mantleButton.Checked)
-                allMats.DataSource = _state.Player.Loot.FilterLoot(4);
+                SortLoot(_state.Player.Loot.FilterLoot(4));
         }
 
         private void crystalButton_CheckedChanged(object sender, EventArgs e)
         {
             if (crystalButton.Checked)
-                allMats.DataSource = _state.Player.Loot.FilterLoot(5);
+                SortLoot(_state.Player.Loot.FilterLoot(5));
         }
 
         private void allButton_CheckedChanged(object sender, EventArgs e)
         {
-            if(allButton.Checked)
-                allMats.DataSource = _state.Player.Loot.EnemyLoot;
+            if (allButton.Checked)
+                SortLoot(_state.Player.Loot.EnemyLoot);
+        }
+
+        private void SortLoot(List<Loot> loot)
+        {
+            loot.Sort((a, b) => a.Quantity.CompareTo(b.Quantity));
+            loot.Reverse();
+            allMats.DataSource = loot;
         }
     }
 }

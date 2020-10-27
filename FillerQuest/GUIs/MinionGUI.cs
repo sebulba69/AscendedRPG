@@ -92,19 +92,21 @@ namespace AscendedRPG.GUIs
             if (wallet.MinionShards >= 100)
             {
                 var selected = minionBox.SelectedItem as Enemies.Minion;
-                if(selected.Level + 1 > 100)
+                if(selected != null)
                 {
-                    MessageBox.Show("Your minion is currently max level. You'll need to ascend your minion using the Ascended Bucey God Form button to reset it.");
+                    if (selected.Level + 1 > 100)
+                    {
+                        MessageBox.Show("Your minion is currently max level. You'll need to ascend your minion using the Ascended Bucey God Form button to reset it.");
+                    }
+                    else
+                    {
+                        selected.LevelUp();
+                        selected.XP = 0;
+                        wallet.MinionShards -= 100;
+                        ResetMBox();
+                        _state.Save.SaveGame(_state.Player);
+                    }
                 }
-                else
-                {
-                    selected.LevelUp();
-                    selected.XP = 0;
-                    wallet.MinionShards -= 100;
-                    ResetMBox();
-                    _state.Save.SaveGame(_state.Player);
-                }
-
             }
             else
             {
@@ -118,18 +120,20 @@ namespace AscendedRPG.GUIs
             if (wallet.MinionShards >= 1000)
             {
                 var selected = minionBox.SelectedItem as Enemies.Minion;
-                if (selected.Level < 100)
+                if(selected != null)
                 {
-                    MessageBox.Show("Your minion must be max level to properly Ascended Bucey Godform it.");
+                    if (selected.Level < 100)
+                    {
+                        MessageBox.Show("Your minion must be max level to properly Ascended Bucey Godform it.");
+                    }
+                    else
+                    {
+                        selected.GodForm();
+                        wallet.MinionShards -= 1000;
+                        ResetMBox();
+                        _state.Save.SaveGame(_state.Player);
+                    }
                 }
-                else
-                {
-                    selected.GodForm();
-                    wallet.MinionShards -= 1000;
-                    ResetMBox();
-                    _state.Save.SaveGame(_state.Player);
-                }
-
             }
             else
             {
@@ -142,9 +146,13 @@ namespace AscendedRPG.GUIs
             if(_state.Player.Minions.Count >= 0)
             {
                 var selected = minionBox.SelectedItem as Enemies.Minion;
-                _state.Player.Minions.Remove(selected);
-                ResetMBox();
-                _state.Save.SaveGame(_state.Player);
+                if(selected != null)
+                {
+                    _state.Player.Minions.Remove(selected);
+                    ResetMBox();
+                    _state.Save.SaveGame(_state.Player);
+                }
+
             }
         }
 
@@ -152,20 +160,24 @@ namespace AscendedRPG.GUIs
         {
             if (_state.Player.Minions.Count >= 0)
             {
+                
                 var selected = minionBox.SelectedItem as Enemies.Minion;
-
-                var all = _state.Player.Minions.FindAll(m => m.IsEquipped);
-
-                if (all != null && all.Count == 2 && equipButton.Text.Contains("Equip"))
+                if(selected != null)
                 {
-                    MessageBox.Show("You can only equip 2 minions at a time.");
+                    var all = _state.Player.Minions.FindAll(m => m.IsEquipped);
+
+                    if (all != null && all.Count == 2 && equipButton.Text.Contains("Equip"))
+                    {
+                        MessageBox.Show("You can only equip 2 minions at a time.");
+                    }
+                    else
+                    {
+                        selected.IsEquipped = equipButton.Text.Contains("Equip");
+                        ResetMBox();
+                        _state.Save.SaveGame(_state.Player);
+                    }
                 }
-                else
-                {
-                    selected.IsEquipped = equipButton.Text.Contains("Equip");
-                    ResetMBox();
-                    _state.Save.SaveGame(_state.Player);
-                }
+
             }
         }
 

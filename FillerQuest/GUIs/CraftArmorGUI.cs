@@ -51,17 +51,8 @@ namespace AscendedRPG.GUIs
 
                     if (ex != null) // there is an ex ingredient
                     {
-                        // there is an ascended ingredient
-                        if(asc != null)
-                        {
-                            tier *= asc_boost;
-                            namePrefix = "ASC ";
-                        }
-                        else
-                        {
-                            tier *= ex_boost;
-                            namePrefix = "EX ";
-                        }
+                        tier *= ex_boost;
+                        namePrefix = "EX ";
                     }
                     else // there is no ex ingredient
                     {
@@ -80,7 +71,10 @@ namespace AscendedRPG.GUIs
 
             recipeList.DataSource = display;
             if (recipeList.Items.Count > 0)
+            {
                 recipeList.SelectedIndex = 0;
+            }
+                
         }
 
         private void recipeList_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,9 +104,8 @@ namespace AscendedRPG.GUIs
 
         private void craftButton_MouseClick(object sender, MouseEventArgs e)
         {
-
             var selected = recipeList.SelectedItem as Recipes.Recipe;
-
+            
             if(selected != null)
             {
                 // do we have enough materials to craft this item?
@@ -137,7 +130,9 @@ namespace AscendedRPG.GUIs
 
                         _state.Player.Loot.EnemyLoot.RemoveAll(l => l.Quantity <= 0);
 
-                        RemoveRecipeFromList(selected);
+                        ClearDisplayBox();
+
+                        RemoveRecipeFromList(selected, recipeList.SelectedIndex);
 
                         _state.Save.SaveGame(_state.Player);
                     }
@@ -155,6 +150,7 @@ namespace AscendedRPG.GUIs
             {
                 MessageBox.Show("You do not have enough materials to craft this item.");
             }
+            
 
         }
 
@@ -163,7 +159,7 @@ namespace AscendedRPG.GUIs
             try
             {
                 var selected = recipeList.SelectedItem as Recipes.Recipe;
-                RemoveRecipeFromList(selected);
+                RemoveRecipeFromList(selected, recipeList.SelectedIndex);
                 _state.Save.SaveGame(_state.Player);
 
             }
@@ -176,20 +172,22 @@ namespace AscendedRPG.GUIs
         private void saveRecipe_MouseClick(object sender, MouseEventArgs e)
         {
             var selected = recipeList.SelectedItem as Recipes.Recipe;
-            if(!_state.Player.Loot.Wishlist.Contains(selected))
+            if(selected != null && recipeList.Items.Count > 0)
             {
-                _state.Player.Loot.Wishlist.Add(selected);
-                MessageBox.Show("Recipe saved.");
-                _state.Save.SaveGame(_state.Player);
+                if (!_state.Player.Loot.Wishlist.Contains(selected))
+                {
+                    _state.Player.Loot.Wishlist.Add(selected);
+                    MessageBox.Show("Recipe saved.");
+                    _state.Save.SaveGame(_state.Player);
+                }
+                else
+                {
+                    MessageBox.Show("You already saved this recipe.");
+                }
             }
-            else
-            {
-                MessageBox.Show("You already saved this recipe.");
-            }
-
         }
 
-        private void RemoveRecipeFromList(Recipes.Recipe selected)
+        private void RemoveRecipeFromList(Recipes.Recipe selected, int s_index)
         {
             _state.Player.Loot.Recipes.Remove(selected);
 
@@ -211,13 +209,23 @@ namespace AscendedRPG.GUIs
 
                 if (wlistButton.Checked)
                     recipeList.DataSource = _state.Player.Loot.Wishlist;
+
+                if (recipeList.Items.Count > 0)
+                    _state.HandleSelectedIndex(recipeList, s_index);
+                else
+                    ClearDisplayBox();
             }
             else
             {
-                skillBox.DataSource = null;
-                recipeIngredients.Items.Clear();
-                resultBox.Clear();
+                ClearDisplayBox();
             }
+        }
+
+        private void ClearDisplayBox()
+        {
+            skillBox.DataSource = null;
+            recipeIngredients.Items.Clear();
+            resultBox.Clear();
         }
 
         private void inventoryToolStripMenuItem_Click(object sender, EventArgs e)

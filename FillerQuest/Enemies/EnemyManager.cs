@@ -93,6 +93,10 @@ namespace AscendedRPG.Files
             int t = tier * (dtype + 1);
             enemy.HP = GetEnemyHP(dtype, t, r);
             enemy.Image = LoadEnemyImage(path, index);
+
+            int multiplier = ((int)Math.Pow((dtype + 1), (dtype + 1))) * dtype;
+            t = tier * multiplier;
+
             enemy.Skills.ForEach(s => SetSkillDamage(dtype+1, s, t, r));
 
             return enemy;
@@ -131,31 +135,37 @@ namespace AscendedRPG.Files
                     index = (invader) ? tier - 1 : (tier / 10) - 1;
                     break;
                 case DungeonType.ASCENDED:
+
                     hp = ASC_CAP;
                     bossPath = (invader) ? asc_invaders : asc_bosses;
                     index = (invader) ? tier - 1 : (tier / 10) - 1;
                     break;
                 case DungeonType.BOUNTY:
+         
                     hp = ENEMY_CAP * bountyMultiplier;
                     bossPath = bountyBosses;
                     index = tier - 1;
                     break;
                 case DungeonType.EXBOUNTY:
+                    
                     hp = EX_CAP * bountyMultiplier;
                     bossPath = ex_bountyBosses;
                     index = tier - 1;
                     break;
                 case DungeonType.ASCBOUNTY:
+                    
                     hp = ASC_CAP * bountyMultiplier;
                     bossPath = asc_bounty;
                     index = tier - 1;
                     break;
                 case DungeonType.ELDER:
+                   
                     hp = ASC_CAP * (bountyMultiplier * 2);
                     bossPath = elders;
                     index = tier - 1;
                     break;
                 default:
+                    
                     hp = ENEMY_CAP;
                     bossPath = (invader) ? invaders : bosses;
                     index = (invader) ? tier - 1 : (tier / 10) - 1;
@@ -166,9 +176,14 @@ namespace AscendedRPG.Files
             index = index % b_list.Count;
             
             Enemy boss = (Enemy)b_list[index].Clone();
-            int t = tier * (dtype + 1);
+            
+            int t = (tier * (dtype + 1));
 
             boss.HP = BossHPCalc(t * hp);
+
+            int multiplier = ((int)Math.Pow((dtype + 1), 3));
+            t += multiplier;
+
             boss.Skills.ForEach(s => SetSkillDamage(dtype + 1, s, t * (dtype + 1), r));
             boss.Image = LoadEnemyImage(Path.Combine(PATH,bossPath), index);
             return boss;

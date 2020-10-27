@@ -212,6 +212,7 @@ namespace AscendedRPG.GUIs
                 }
                 else
                 {
+                    int s_index = VendorWares.SelectedIndex;
                     _state.Player.Wallet.Coins -= cost;
                     if (selected.Contains("Charm"))
                     {
@@ -232,6 +233,8 @@ namespace AscendedRPG.GUIs
                     VendorTextBox.Text = vendorDialog[vendor][1];
                     UpdatePlayerCoins(_state.Player.Wallet.Coins);
                     UpdateVendorDisplay();
+
+                    _state.HandleSelectedIndex(VendorWares, s_index);
                     _state.Save.SaveGame(_state.Player);
                 }
             }
@@ -272,6 +275,8 @@ namespace AscendedRPG.GUIs
             {
                 current = wares_charms;
                 UpdateVendorWares();
+                if (VendorWares.Items.Count > 0)
+                    VendorWares.SelectedIndex = 0;
             }
         }
 
@@ -281,6 +286,8 @@ namespace AscendedRPG.GUIs
             {
                 current = wares_keys;
                 UpdateVendorWares();
+                if (VendorWares.Items.Count > 0)
+                    VendorWares.SelectedIndex = 0;
             }
         }
 
@@ -292,6 +299,8 @@ namespace AscendedRPG.GUIs
                 current.AddRange(wares_charms);
                 current.AddRange(wares_keys);
                 UpdateVendorWares();
+                if (VendorWares.Items.Count > 0)
+                    VendorWares.SelectedIndex = 0;
             }
         }
 

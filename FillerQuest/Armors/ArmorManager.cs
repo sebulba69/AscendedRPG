@@ -29,7 +29,7 @@ namespace AscendedRPG.Files
             int i = state.Random.Next(0, armorNames.Length);
             armor.Name = $"{armorNames[i]} {pieces[piece]}";
             armor.Piece = piece;
-            armor.Defense = state.Random.Next(tier * 10, (tier + 10) * 10);
+            armor.Defense = state.Random.Next(tier * 3, (tier + 5) * 4);
             armor.Skills = new List<ArmorSkill>();
             armor.UpgradeLevel = 1;
             armor.UpXP = 0;

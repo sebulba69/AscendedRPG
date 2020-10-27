@@ -2,6 +2,7 @@
 using AscendedRPG.Files;
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace AscendedRPG.GUIs
 {
@@ -71,6 +72,18 @@ namespace AscendedRPG.GUIs
             foreach (int c in CAPS)
                 total += c;
             return total;
+        }
+
+        public void HandleSelectedIndex(ListBox listBox, int s_index)
+        {
+            if (listBox.Items.Count > 0)
+                if (s_index < listBox.Items.Count)
+                    listBox.SelectedIndex = s_index;
+                else
+                    if (s_index - 1 >= 0)
+                        listBox.SelectedIndex = s_index - 1;
+                    else
+                        listBox.SelectedIndex = 0;
         }
     }
 }

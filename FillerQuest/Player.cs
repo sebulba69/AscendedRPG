@@ -1,5 +1,6 @@
 ﻿using AscendedRPG;
 using AscendedRPG.Armors;
+using AscendedRPG.GUIs;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
