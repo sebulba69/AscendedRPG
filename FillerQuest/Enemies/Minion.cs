@@ -27,6 +27,9 @@ namespace AscendedRPG.Enemies
         [ProtoMember(8)]
         public bool IsEquipped { get; set; }
 
+        [ProtoMember(9)]
+        public int Prestige { get; set; }
+
         public Minion() { }
 
         public void IncreaseXP(long xp)
@@ -50,7 +53,7 @@ namespace AscendedRPG.Enemies
                 Level++;
                 XP -= XPtoNext;
                 XPtoNext = GetRequiredXP();
-                Skills.ForEach(s => s.Multiplier += 2);
+                Skills.ForEach(s => s.Multiplier += (3 + Prestige));
             }
         }
 
@@ -60,6 +63,7 @@ namespace AscendedRPG.Enemies
             XP = 0;
             XPtoNext = GetRequiredXP();
             Skills.ForEach(s => s.Multiplier += 50);
+            Prestige++;
         }
 
         // bs formula that scales with level ups

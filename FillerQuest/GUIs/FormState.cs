@@ -55,7 +55,7 @@ namespace AscendedRPG.GUIs
           
             for (int i = 0; i < quantity; i++)
             {
-                int xp = Random.Next(d_tier, d_tier * 2) + (d_tier * (DungeonType + 1));
+                int xp = Random.Next(d_tier, d_tier * 2) + (Player.GetLevel() +(DungeonType + 1));
                 Player.Weapon.IncreaseXP(xp);
                 Player.Minions.ForEach(m =>
                 {

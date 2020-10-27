@@ -33,7 +33,7 @@ namespace AscendedRPG.GUIs
             }
             else if (e.Name.Contains("Minion"))
             {
-                state.Player.Wallet.MinionShards++;
+                state.Player.Wallet.MinionShards += (5 * state.DungeonType + 1);
             }
             else
             {
