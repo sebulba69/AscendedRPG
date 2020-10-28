@@ -31,23 +31,21 @@ namespace AscendedRPG.GUIs
 
         private void lootList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            var selected = lootList.SelectedItem as Loot;
+            if(selected != null)
             {
-                var selected = lootList.SelectedItem as Loot;
                 materialBox.Text = selected.ToString();
                 lootQuantity.Maximum = selected.Quantity;
                 lootQuantity.Value = selected.Quantity;
                 SetTotalValue(selected);
             }
-            catch (NullReferenceException) { }
-
         }
 
         private void equipBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            var armor = equipBox.SelectedItem as AscendedRPG.Armor;
+            if (armor != null)
             {
-                var armor = equipBox.SelectedItem as AscendedRPG.Armor;
                 skillDisplay.DataSource = null;
                 skillDisplay.DataSource = armor.Skills;
 
@@ -56,7 +54,6 @@ namespace AscendedRPG.GUIs
                 xpBar.Value = armor.UpXP;
                 reqXP.Text = $"{armor.UpXP}/{req} XP";
             }
-            catch (NullReferenceException) { }
 
         }
 
@@ -70,6 +67,7 @@ namespace AscendedRPG.GUIs
                 armor.UpXP -= r;
                 armor.LevelUp();
                 LevelArmor(armor);
+                _state.Player.Set.CalculateTotalDef();
             }
             else
             {
@@ -110,13 +108,11 @@ namespace AscendedRPG.GUIs
 
         private void lootQuantity_ValueChanged(object sender, EventArgs e)
         {
-            try
-            {
-                var material = lootList.SelectedItem as Loot;
 
+            var material = lootList.SelectedItem as Loot;
+
+            if(material != null)
                 SetTotalValue(material);
-            }
-            catch (NullReferenceException) { }
         }
 
         private void SetTotalValue(Loot material)
@@ -134,20 +130,7 @@ namespace AscendedRPG.GUIs
 
         private void boostButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                BoostArmor();
-            }
-            catch (NullReferenceException)
-            {
-                if(lootList.Items.Count == 0)
-                {
-                    lootQuantity.Value = 0;
-                    lootQuantity.Maximum = 0;
-                    materialBox.Clear();
-                    totalValue.Clear();
-                }
-            }
+            BoostArmor();
         }
 
         private void boostButton_MouseClick(object sender, MouseEventArgs e)
@@ -164,25 +147,40 @@ namespace AscendedRPG.GUIs
             int quantity = (int)lootQuantity.Value;
 
             var material = lootList.SelectedItem as Loot;
-
             var armor = equipBox.SelectedItem as AscendedRPG.Armor;
 
-            material.Quantity -= quantity;
+            if (material != null && armor != null)
+            {
+                material.Quantity -= quantity;
 
-            if (material.Quantity <= 0)
-                _state.Player.Loot.EnemyLoot.Remove(material);
+                if (material.Quantity <= 0)
+                    _state.Player.Loot.EnemyLoot.Remove(material);
 
-            int initXPAmount = ((material.Rarity * 2) + 5);
+                int initXPAmount = ((material.Rarity * 2) + 5);
 
-            if (material.Name.Contains("EX"))
-                initXPAmount *= 2;
+                if (material.Name.Contains("EX"))
+                    initXPAmount *= 2;
 
-            if (material.Name.Contains("ASC"))
-                initXPAmount *= 3;
+                if (material.Name.Contains("ASC"))
+                    initXPAmount *= 3;
 
-            armor.UpXP += (initXPAmount * quantity);
+                armor.UpXP += (initXPAmount * quantity);
 
-            LevelArmor(armor);
+                LevelArmor(armor);
+            }
+            else
+            {
+                ResetAll();
+            }
+                
+        }
+
+        private void ResetAll()
+        {
+            lootQuantity.Value = 0;
+            lootQuantity.Maximum = 0;
+            materialBox.Clear();
+            totalValue.Clear();
         }
     }
 }

@@ -26,6 +26,12 @@ namespace AscendedRPG
             Armor = (Armor == null) ? new List<Armor>(ArmorPiece.TOTAL) : Armor;
         }
 
+        public void CalculateTotalDef()
+        {
+            TotalDef = 0;
+            Armor.ForEach(a => TotalDef += a.Defense);
+        }
+
         public void AddArmor(Armor a)
         {
             Armor.Add(a);
