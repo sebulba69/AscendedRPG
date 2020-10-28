@@ -42,8 +42,8 @@ namespace AscendedRPG.GUIs
         {
             try
             {
-                string s_string = searchBox.Text[0].ToString().ToUpper() + searchBox.Text.Substring(1);
-                var search = index.FindAll(q => q.Name.StartsWith(s_string));
+                string s_string = searchBox.Text.ToLower();
+                var search = index.FindAll(q => q.Name.ToLower().StartsWith(s_string));
                 enemyList.DataSource = search;
             }
             catch (IndexOutOfRangeException)
