@@ -370,7 +370,7 @@ namespace AscendedRPG.GUIs
             }
             else
             {
-                _dh.DecrementTurns(1);
+                _dh.DecrementTurns(FULL);
                 _dgc.UpdateCombatLog($"{attacker.Name} attacked and missed!");
             }
         }
