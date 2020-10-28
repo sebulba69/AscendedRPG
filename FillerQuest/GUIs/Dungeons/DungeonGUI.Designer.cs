@@ -251,6 +251,7 @@
             this.leftButton.TabIndex = 47;
             this.leftButton.Text = "<";
             this.leftButton.UseVisualStyleBackColor = true;
+            this.leftButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leftButton_MouseClick);
             // 
             // rightButton
             // 
@@ -260,6 +261,7 @@
             this.rightButton.TabIndex = 46;
             this.rightButton.Text = ">";
             this.rightButton.UseVisualStyleBackColor = true;
+            this.rightButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rightButton_MouseClick);
             // 
             // TargetGroup
             // 

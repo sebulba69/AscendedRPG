@@ -167,16 +167,6 @@ namespace AscendedRPG
             dgh.HandleEnemyTurn(dgh.GetNextEnemy(troop));
         }
 
-        private void rightButton_MouseClick(object sender, MouseEventArgs e)
-        {
-            dgh.ChangeCurrentBattler(1);
-        }
-
-        private void leftButton_MouseClick(object sender, MouseEventArgs e)
-        {
-            dgh.ChangeCurrentBattler(-1);
-        }
-
         private void DungeonGUI_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_state.Type == FTypes.DUNGEON_GUI)
@@ -204,6 +194,16 @@ namespace AscendedRPG
                         break;
                 }
             }
+        }
+
+        private void rightButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            dgh.ChangeCurrentBattler(1);
+        }
+
+        private void leftButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            dgh.ChangeCurrentBattler(-1);
         }
     }
 }
