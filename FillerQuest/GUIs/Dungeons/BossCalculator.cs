@@ -8,62 +8,72 @@ namespace AscendedRPG.Enemies
 {
     public class BossCalculator
     {
-        public int hp_default = 5000;
+        private int hpDefault = 5000;
 
-        private int sub_default;
+        // baseBar is a percentage of hp_default
+        private int subDefault, baseBar, subBars;
 
-        public int baseBar, subbars;
-        
         public BossCalculator(int sub_def)
         {
-            sub_default = sub_def;
+            subDefault = sub_def;
         }
 
-        public void CheckDefault(int hp)
+        public void SetupBars(int hp)
         {
-            int max = hp_default * sub_default;
+            CheckDefault(hp);
+            SetSubBars(hp);
+        }
+
+        private void CheckDefault(int hp)
+        {
+            int max = hpDefault * subDefault;
             if(hp >= max)
             {
-                hp_default = hp / sub_default;
+                hpDefault = hp / subDefault;
                 while(hp >= max)
                 {
-                    hp_default += 5000;
-                    max = hp_default * sub_default;
+                    hpDefault += 5000;
+                    max = hpDefault * subDefault;
                 }
             }
         }
 
         public void SetSubBars(int hp)
         {
-            baseBar = 0;
-            if(hp <= hp_default)
+            int health = hp;
+            int subs = 0;
+
+            if(health > hpDefault)
             {
-                baseBar = hp;
-                subbars = 0;
-            }
-            else
-            {
-                if(hp % hp_default != 0)
+                if(health % hpDefault != 0)
                 {
-                    int h = hp;
-                    while(h % hp_default != 0)
-                    {
-                        h--;
-                        baseBar++;
-                    }
-                    subbars = h / hp_default;
+                    health = health % hpDefault;
+                    subs = (hp - health) / hpDefault;
                 }
                 else
                 {
-                    baseBar = hp_default;
-                    subbars = hp / hp_default;
+                    health = hpDefault;
+                    subs = (hp / hpDefault) - 1; // subtract 1 for last healthbar
                 }
             }
+
+            baseBar = health;
+            subBars = subs;
         }
+
+        // get base bar percentage
+        public int GetBBPercent()
+        {
+            double top = baseBar;
+            double bottom = hpDefault;
+            return (int)(100 * (top / bottom));
+        }
+
+        public int GetSubbars() => subBars;
 
         public void ResetBars()
         {
-            hp_default = 5000;
+            hpDefault = 5000;
         }
     }
 }

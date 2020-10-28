@@ -71,18 +71,18 @@
             this.InventoryList.FormattingEnabled = true;
             this.InventoryList.Location = new System.Drawing.Point(11, 82);
             this.InventoryList.Name = "InventoryList";
-            this.InventoryList.Size = new System.Drawing.Size(248, 225);
+            this.InventoryList.Size = new System.Drawing.Size(248, 251);
             this.InventoryList.TabIndex = 1;
             this.InventoryList.SelectedIndexChanged += new System.EventHandler(this.InventoryList_SelectedIndexChanged);
             // 
             // SelectedArmorSkill
             // 
             this.SelectedArmorSkill.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.SelectedArmorSkill.Location = new System.Drawing.Point(204, 238);
+            this.SelectedArmorSkill.Location = new System.Drawing.Point(239, 263);
             this.SelectedArmorSkill.Multiline = true;
             this.SelectedArmorSkill.Name = "SelectedArmorSkill";
             this.SelectedArmorSkill.ReadOnly = true;
-            this.SelectedArmorSkill.Size = new System.Drawing.Size(197, 52);
+            this.SelectedArmorSkill.Size = new System.Drawing.Size(203, 52);
             this.SelectedArmorSkill.TabIndex = 4;
             // 
             // SelectedInventorySkill
@@ -97,7 +97,7 @@
             // 
             // DeleteSelectedInventory
             // 
-            this.DeleteSelectedInventory.Location = new System.Drawing.Point(94, 334);
+            this.DeleteSelectedInventory.Location = new System.Drawing.Point(94, 359);
             this.DeleteSelectedInventory.Name = "DeleteSelectedInventory";
             this.DeleteSelectedInventory.Size = new System.Drawing.Size(82, 25);
             this.DeleteSelectedInventory.TabIndex = 7;
@@ -115,7 +115,7 @@
             this.enemyIndexToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(701, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(742, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -157,35 +157,35 @@
             // EquipmentBox
             // 
             this.EquipmentBox.FormattingEnabled = true;
-            this.EquipmentBox.Location = new System.Drawing.Point(204, 137);
+            this.EquipmentBox.Location = new System.Drawing.Point(239, 138);
             this.EquipmentBox.Name = "EquipmentBox";
-            this.EquipmentBox.Size = new System.Drawing.Size(197, 95);
+            this.EquipmentBox.Size = new System.Drawing.Size(203, 121);
             this.EquipmentBox.TabIndex = 11;
             this.EquipmentBox.SelectedIndexChanged += new System.EventHandler(this.EquipmentBox_SelectedIndexChanged);
             // 
             // ActiveSkillBox
             // 
             this.ActiveSkillBox.FormattingEnabled = true;
-            this.ActiveSkillBox.Location = new System.Drawing.Point(6, 197);
+            this.ActiveSkillBox.Location = new System.Drawing.Point(6, 224);
             this.ActiveSkillBox.Name = "ActiveSkillBox";
-            this.ActiveSkillBox.Size = new System.Drawing.Size(192, 134);
+            this.ActiveSkillBox.Size = new System.Drawing.Size(227, 134);
             this.ActiveSkillBox.TabIndex = 12;
             this.ActiveSkillBox.SelectedIndexChanged += new System.EventHandler(this.ActiveSkillBox_SelectedIndexChanged);
             // 
             // SkillDisplayBox
             // 
             this.SkillDisplayBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.SkillDisplayBox.Location = new System.Drawing.Point(204, 296);
+            this.SkillDisplayBox.Location = new System.Drawing.Point(239, 320);
             this.SkillDisplayBox.Multiline = true;
             this.SkillDisplayBox.Name = "SkillDisplayBox";
             this.SkillDisplayBox.ReadOnly = true;
-            this.SkillDisplayBox.Size = new System.Drawing.Size(197, 61);
+            this.SkillDisplayBox.Size = new System.Drawing.Size(203, 65);
             this.SkillDisplayBox.TabIndex = 0;
             // 
             // head
             // 
             this.head.AutoSize = true;
-            this.head.Location = new System.Drawing.Point(25, 312);
+            this.head.Location = new System.Drawing.Point(25, 337);
             this.head.Name = "head";
             this.head.Size = new System.Drawing.Size(33, 17);
             this.head.TabIndex = 14;
@@ -197,7 +197,7 @@
             // torso
             // 
             this.torso.AutoSize = true;
-            this.torso.Location = new System.Drawing.Point(64, 312);
+            this.torso.Location = new System.Drawing.Point(64, 337);
             this.torso.Name = "torso";
             this.torso.Size = new System.Drawing.Size(32, 17);
             this.torso.TabIndex = 15;
@@ -209,7 +209,7 @@
             // arms
             // 
             this.arms.AutoSize = true;
-            this.arms.Location = new System.Drawing.Point(102, 312);
+            this.arms.Location = new System.Drawing.Point(102, 337);
             this.arms.Name = "arms";
             this.arms.Size = new System.Drawing.Size(32, 17);
             this.arms.TabIndex = 16;
@@ -221,7 +221,7 @@
             // waist
             // 
             this.waist.AutoSize = true;
-            this.waist.Location = new System.Drawing.Point(140, 312);
+            this.waist.Location = new System.Drawing.Point(140, 337);
             this.waist.Name = "waist";
             this.waist.Size = new System.Drawing.Size(36, 17);
             this.waist.TabIndex = 17;
@@ -233,7 +233,7 @@
             // legs
             // 
             this.legs.AutoSize = true;
-            this.legs.Location = new System.Drawing.Point(182, 312);
+            this.legs.Location = new System.Drawing.Point(182, 337);
             this.legs.Name = "legs";
             this.legs.Size = new System.Drawing.Size(31, 17);
             this.legs.TabIndex = 18;
@@ -245,7 +245,7 @@
             // charms
             // 
             this.charms.AutoSize = true;
-            this.charms.Location = new System.Drawing.Point(219, 312);
+            this.charms.Location = new System.Drawing.Point(219, 337);
             this.charms.Name = "charms";
             this.charms.Size = new System.Drawing.Size(32, 17);
             this.charms.TabIndex = 19;
@@ -256,7 +256,7 @@
             // 
             // UnfilterButton
             // 
-            this.UnfilterButton.Location = new System.Drawing.Point(184, 334);
+            this.UnfilterButton.Location = new System.Drawing.Point(184, 359);
             this.UnfilterButton.Name = "UnfilterButton";
             this.UnfilterButton.Size = new System.Drawing.Size(75, 25);
             this.UnfilterButton.TabIndex = 20;
@@ -267,30 +267,30 @@
             // DefenseBox
             // 
             this.DefenseBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.DefenseBox.Location = new System.Drawing.Point(204, 36);
+            this.DefenseBox.Location = new System.Drawing.Point(239, 37);
             this.DefenseBox.Name = "DefenseBox";
             this.DefenseBox.ReadOnly = true;
-            this.DefenseBox.Size = new System.Drawing.Size(197, 20);
+            this.DefenseBox.Size = new System.Drawing.Size(203, 20);
             this.DefenseBox.TabIndex = 21;
             this.DefenseBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // CoinBox
             // 
             this.CoinBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.CoinBox.Location = new System.Drawing.Point(204, 60);
+            this.CoinBox.Location = new System.Drawing.Point(239, 61);
             this.CoinBox.Name = "CoinBox";
             this.CoinBox.ReadOnly = true;
-            this.CoinBox.Size = new System.Drawing.Size(197, 20);
+            this.CoinBox.Size = new System.Drawing.Size(203, 20);
             this.CoinBox.TabIndex = 22;
             this.CoinBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TierBox
             // 
             this.TierBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.TierBox.Location = new System.Drawing.Point(204, 12);
+            this.TierBox.Location = new System.Drawing.Point(239, 13);
             this.TierBox.Name = "TierBox";
             this.TierBox.ReadOnly = true;
-            this.TierBox.Size = new System.Drawing.Size(197, 20);
+            this.TierBox.Size = new System.Drawing.Size(203, 20);
             this.TierBox.TabIndex = 23;
             this.TierBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -310,14 +310,14 @@
             this.EquipmentGroup.Controls.Add(this.EquipmentBox);
             this.EquipmentGroup.Location = new System.Drawing.Point(9, 27);
             this.EquipmentGroup.Name = "EquipmentGroup";
-            this.EquipmentGroup.Size = new System.Drawing.Size(407, 367);
+            this.EquipmentGroup.Size = new System.Drawing.Size(448, 395);
             this.EquipmentGroup.TabIndex = 25;
             this.EquipmentGroup.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(204, 113);
+            this.label1.Location = new System.Drawing.Point(236, 114);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 31;
@@ -332,29 +332,29 @@
             "Attack",
             "Parry",
             "Lifesteal"});
-            this.WeaponStyles.Location = new System.Drawing.Point(284, 110);
+            this.WeaponStyles.Location = new System.Drawing.Point(319, 111);
             this.WeaponStyles.Name = "WeaponStyles";
-            this.WeaponStyles.Size = new System.Drawing.Size(117, 21);
+            this.WeaponStyles.Size = new System.Drawing.Size(123, 21);
             this.WeaponStyles.TabIndex = 30;
             this.WeaponStyles.SelectedIndexChanged += new System.EventHandler(this.WeaponStyles_SelectedIndexChanged);
             // 
             // WeaponBox
             // 
             this.WeaponBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.WeaponBox.Location = new System.Drawing.Point(204, 85);
+            this.WeaponBox.Location = new System.Drawing.Point(239, 86);
             this.WeaponBox.Name = "WeaponBox";
             this.WeaponBox.ReadOnly = true;
-            this.WeaponBox.Size = new System.Drawing.Size(197, 20);
+            this.WeaponBox.Size = new System.Drawing.Size(203, 20);
             this.WeaponBox.TabIndex = 29;
             this.WeaponBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // activeElements
             // 
             this.activeElements.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.activeElements.Location = new System.Drawing.Point(6, 337);
+            this.activeElements.Location = new System.Drawing.Point(6, 364);
             this.activeElements.Name = "activeElements";
             this.activeElements.ReadOnly = true;
-            this.activeElements.Size = new System.Drawing.Size(192, 20);
+            this.activeElements.Size = new System.Drawing.Size(227, 20);
             this.activeElements.TabIndex = 28;
             this.activeElements.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -364,7 +364,7 @@
             this.PlayerPic.InitialImage = null;
             this.PlayerPic.Location = new System.Drawing.Point(6, 12);
             this.PlayerPic.Name = "PlayerPic";
-            this.PlayerPic.Size = new System.Drawing.Size(192, 179);
+            this.PlayerPic.Size = new System.Drawing.Size(224, 206);
             this.PlayerPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PlayerPic.TabIndex = 27;
             this.PlayerPic.TabStop = false;
@@ -382,15 +382,15 @@
             this.InventoryGroup.Controls.Add(this.torso);
             this.InventoryGroup.Controls.Add(this.waist);
             this.InventoryGroup.Controls.Add(this.arms);
-            this.InventoryGroup.Location = new System.Drawing.Point(422, 27);
+            this.InventoryGroup.Location = new System.Drawing.Point(463, 27);
             this.InventoryGroup.Name = "InventoryGroup";
-            this.InventoryGroup.Size = new System.Drawing.Size(267, 367);
+            this.InventoryGroup.Size = new System.Drawing.Size(267, 395);
             this.InventoryGroup.TabIndex = 26;
             this.InventoryGroup.TabStop = false;
             // 
             // EquipButton
             // 
-            this.EquipButton.Location = new System.Drawing.Point(6, 334);
+            this.EquipButton.Location = new System.Drawing.Point(6, 359);
             this.EquipButton.Name = "EquipButton";
             this.EquipButton.Size = new System.Drawing.Size(81, 25);
             this.EquipButton.TabIndex = 21;
@@ -402,7 +402,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(701, 402);
+            this.ClientSize = new System.Drawing.Size(742, 430);
             this.Controls.Add(this.InventoryGroup);
             this.Controls.Add(this.EquipmentGroup);
             this.Controls.Add(this.menuStrip1);

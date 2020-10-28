@@ -56,12 +56,11 @@
             // 
             // allMats
             // 
-            this.allMats.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allMats.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.allMats.FormattingEnabled = true;
-            this.allMats.ItemHeight = 12;
             this.allMats.Location = new System.Drawing.Point(4, 27);
             this.allMats.Name = "allMats";
-            this.allMats.Size = new System.Drawing.Size(204, 208);
+            this.allMats.Size = new System.Drawing.Size(244, 238);
             this.allMats.TabIndex = 0;
             this.allMats.SelectedIndexChanged += new System.EventHandler(this.allMats_SelectedIndexChanged);
             // 
@@ -72,7 +71,7 @@
             this.wishlistToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(574, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(713, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -101,9 +100,9 @@
             "Scale",
             "Mantle",
             "Crystal"});
-            this.matType.Location = new System.Drawing.Point(214, 219);
+            this.matType.Location = new System.Drawing.Point(254, 272);
             this.matType.Name = "matType";
-            this.matType.Size = new System.Drawing.Size(117, 21);
+            this.matType.Size = new System.Drawing.Size(104, 21);
             this.matType.TabIndex = 1;
             this.matType.TabStop = false;
             this.matType.SelectedIndexChanged += new System.EventHandler(this.matType_SelectedIndexChanged);
@@ -111,34 +110,34 @@
             // enemyList
             // 
             this.enemyList.FormattingEnabled = true;
-            this.enemyList.Location = new System.Drawing.Point(394, 26);
+            this.enemyList.Location = new System.Drawing.Point(497, 25);
             this.enemyList.Name = "enemyList";
-            this.enemyList.Size = new System.Drawing.Size(176, 238);
+            this.enemyList.Size = new System.Drawing.Size(204, 264);
             this.enemyList.TabIndex = 4;
             this.enemyList.SelectedIndexChanged += new System.EventHandler(this.enemyList_SelectedIndexChanged);
             // 
             // enemySearch
             // 
-            this.enemySearch.Location = new System.Drawing.Point(394, 278);
+            this.enemySearch.Location = new System.Drawing.Point(497, 302);
             this.enemySearch.Name = "enemySearch";
-            this.enemySearch.Size = new System.Drawing.Size(176, 20);
+            this.enemySearch.Size = new System.Drawing.Size(204, 20);
             this.enemySearch.TabIndex = 5;
             this.enemySearch.TextChanged += new System.EventHandler(this.enemySearch_TextChanged);
             // 
             // reqInfo
             // 
             this.reqInfo.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.reqInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reqInfo.Location = new System.Drawing.Point(214, 192);
+            this.reqInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reqInfo.Location = new System.Drawing.Point(254, 247);
             this.reqInfo.Name = "reqInfo";
             this.reqInfo.ReadOnly = true;
-            this.reqInfo.Size = new System.Drawing.Size(174, 18);
+            this.reqInfo.Size = new System.Drawing.Size(238, 20);
             this.reqInfo.TabIndex = 6;
             // 
             // quantity
             // 
             this.quantity.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.quantity.Location = new System.Drawing.Point(337, 219);
+            this.quantity.Location = new System.Drawing.Point(364, 274);
             this.quantity.Maximum = new decimal(new int[] {
             999,
             0,
@@ -161,17 +160,18 @@
             // 
             // pic
             // 
-            this.pic.Location = new System.Drawing.Point(214, 27);
+            this.pic.Location = new System.Drawing.Point(254, 26);
             this.pic.Name = "pic";
-            this.pic.Size = new System.Drawing.Size(174, 155);
+            this.pic.Size = new System.Drawing.Size(238, 213);
+            this.pic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic.TabIndex = 8;
             this.pic.TabStop = false;
             // 
             // convertButton
             // 
-            this.convertButton.Location = new System.Drawing.Point(214, 276);
+            this.convertButton.Location = new System.Drawing.Point(422, 273);
             this.convertButton.Name = "convertButton";
-            this.convertButton.Size = new System.Drawing.Size(174, 23);
+            this.convertButton.Size = new System.Drawing.Size(69, 23);
             this.convertButton.TabIndex = 9;
             this.convertButton.Text = "Convert";
             this.convertButton.UseVisualStyleBackColor = true;
@@ -180,11 +180,11 @@
             // resultBox
             // 
             this.resultBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.resultBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resultBox.Location = new System.Drawing.Point(214, 249);
+            this.resultBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resultBox.Location = new System.Drawing.Point(254, 302);
             this.resultBox.Name = "resultBox";
             this.resultBox.ReadOnly = true;
-            this.resultBox.Size = new System.Drawing.Size(174, 18);
+            this.resultBox.Size = new System.Drawing.Size(238, 20);
             this.resultBox.TabIndex = 10;
             // 
             // energyButton
@@ -201,7 +201,7 @@
             // shardButton
             // 
             this.shardButton.AutoSize = true;
-            this.shardButton.Location = new System.Drawing.Point(76, 13);
+            this.shardButton.Location = new System.Drawing.Point(92, 13);
             this.shardButton.Name = "shardButton";
             this.shardButton.Size = new System.Drawing.Size(53, 17);
             this.shardButton.TabIndex = 12;
@@ -212,7 +212,7 @@
             // scaleButton
             // 
             this.scaleButton.AutoSize = true;
-            this.scaleButton.Location = new System.Drawing.Point(135, 13);
+            this.scaleButton.Location = new System.Drawing.Point(167, 13);
             this.scaleButton.Name = "scaleButton";
             this.scaleButton.Size = new System.Drawing.Size(52, 17);
             this.scaleButton.TabIndex = 13;
@@ -234,7 +234,7 @@
             // crystalButton
             // 
             this.crystalButton.AutoSize = true;
-            this.crystalButton.Location = new System.Drawing.Point(76, 36);
+            this.crystalButton.Location = new System.Drawing.Point(92, 36);
             this.crystalButton.Name = "crystalButton";
             this.crystalButton.Size = new System.Drawing.Size(56, 17);
             this.crystalButton.TabIndex = 15;
@@ -246,7 +246,7 @@
             // 
             this.allButton.AutoSize = true;
             this.allButton.Checked = true;
-            this.allButton.Location = new System.Drawing.Point(135, 36);
+            this.allButton.Location = new System.Drawing.Point(167, 36);
             this.allButton.Name = "allButton";
             this.allButton.Size = new System.Drawing.Size(36, 17);
             this.allButton.TabIndex = 16;
@@ -263,9 +263,9 @@
             this.filterBox.Controls.Add(this.crystalButton);
             this.filterBox.Controls.Add(this.scaleButton);
             this.filterBox.Controls.Add(this.mantleButton);
-            this.filterBox.Location = new System.Drawing.Point(4, 240);
+            this.filterBox.Location = new System.Drawing.Point(4, 265);
             this.filterBox.Name = "filterBox";
-            this.filterBox.Size = new System.Drawing.Size(204, 60);
+            this.filterBox.Size = new System.Drawing.Size(244, 60);
             this.filterBox.TabIndex = 17;
             this.filterBox.TabStop = false;
             // 
@@ -273,7 +273,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(574, 307);
+            this.ClientSize = new System.Drawing.Size(713, 334);
             this.Controls.Add(this.filterBox);
             this.Controls.Add(this.resultBox);
             this.Controls.Add(this.convertButton);

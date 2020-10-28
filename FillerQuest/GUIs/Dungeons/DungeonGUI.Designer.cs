@@ -30,10 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DungeonGUI));
-            this.CombatLog = new System.Windows.Forms.TextBox();
-            this.NameBox = new System.Windows.Forms.TextBox();
-            this.PlayerHealth = new System.Windows.Forms.ProgressBar();
-            this.Skills = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enemyIndexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,65 +44,29 @@
             this.EnemyPic2 = new System.Windows.Forms.PictureBox();
             this.EnemyPic1 = new System.Windows.Forms.PictureBox();
             this.TurnBox = new System.Windows.Forms.TextBox();
-            this.TargetGroup = new System.Windows.Forms.GroupBox();
-            this.Target3 = new System.Windows.Forms.RadioButton();
-            this.Target2 = new System.Windows.Forms.RadioButton();
-            this.Target1 = new System.Windows.Forms.RadioButton();
             this.UseSkillButton = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.ProfilePic = new System.Windows.Forms.PictureBox();
             this.FightsLeft = new System.Windows.Forms.TextBox();
             this.CurrentFight = new System.Windows.Forms.TextBox();
-            this.rightButton = new System.Windows.Forms.Button();
             this.leftButton = new System.Windows.Forms.Button();
+            this.rightButton = new System.Windows.Forms.Button();
+            this.TargetGroup = new System.Windows.Forms.GroupBox();
+            this.Target3 = new System.Windows.Forms.RadioButton();
+            this.Target2 = new System.Windows.Forms.RadioButton();
+            this.Target1 = new System.Windows.Forms.RadioButton();
+            this.Skills = new System.Windows.Forms.ListBox();
+            this.PlayerHealth = new System.Windows.Forms.ProgressBar();
+            this.NameBox = new System.Windows.Forms.TextBox();
+            this.CombatLog = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.EnemyGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyPic3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyPic2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyPic1)).BeginInit();
-            this.TargetGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePic)).BeginInit();
+            this.TargetGroup.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // CombatLog
-            // 
-            this.CombatLog.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.CombatLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CombatLog.Location = new System.Drawing.Point(373, 316);
-            this.CombatLog.Multiline = true;
-            this.CombatLog.Name = "CombatLog";
-            this.CombatLog.ReadOnly = true;
-            this.CombatLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.CombatLog.Size = new System.Drawing.Size(235, 242);
-            this.CombatLog.TabIndex = 0;
-            // 
-            // NameBox
-            // 
-            this.NameBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.NameBox.Location = new System.Drawing.Point(187, 342);
-            this.NameBox.Name = "NameBox";
-            this.NameBox.ReadOnly = true;
-            this.NameBox.Size = new System.Drawing.Size(121, 20);
-            this.NameBox.TabIndex = 1;
-            this.NameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // PlayerHealth
-            // 
-            this.PlayerHealth.Location = new System.Drawing.Point(187, 316);
-            this.PlayerHealth.Name = "PlayerHealth";
-            this.PlayerHealth.Size = new System.Drawing.Size(180, 20);
-            this.PlayerHealth.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.PlayerHealth.TabIndex = 2;
-            // 
-            // Skills
-            // 
-            this.Skills.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Skills.FormattingEnabled = true;
-            this.Skills.ItemHeight = 12;
-            this.Skills.Location = new System.Drawing.Point(187, 368);
-            this.Skills.Name = "Skills";
-            this.Skills.Size = new System.Drawing.Size(180, 124);
-            this.Skills.TabIndex = 5;
             // 
             // menuStrip1
             // 
@@ -239,52 +199,6 @@
             this.TurnBox.Size = new System.Drawing.Size(601, 20);
             this.TurnBox.TabIndex = 8;
             // 
-            // TargetGroup
-            // 
-            this.TargetGroup.Controls.Add(this.Target3);
-            this.TargetGroup.Controls.Add(this.Target2);
-            this.TargetGroup.Controls.Add(this.Target1);
-            this.TargetGroup.Location = new System.Drawing.Point(187, 508);
-            this.TargetGroup.Name = "TargetGroup";
-            this.TargetGroup.Size = new System.Drawing.Size(180, 50);
-            this.TargetGroup.TabIndex = 9;
-            this.TargetGroup.TabStop = false;
-            this.TargetGroup.Text = "Targets";
-            // 
-            // Target3
-            // 
-            this.Target3.AutoSize = true;
-            this.Target3.Location = new System.Drawing.Point(117, 19);
-            this.Target3.Name = "Target3";
-            this.Target3.Size = new System.Drawing.Size(49, 17);
-            this.Target3.TabIndex = 2;
-            this.Target3.TabStop = true;
-            this.Target3.Text = "three";
-            this.Target3.UseVisualStyleBackColor = true;
-            // 
-            // Target2
-            // 
-            this.Target2.AutoSize = true;
-            this.Target2.Location = new System.Drawing.Point(69, 19);
-            this.Target2.Name = "Target2";
-            this.Target2.Size = new System.Drawing.Size(42, 17);
-            this.Target2.TabIndex = 1;
-            this.Target2.TabStop = true;
-            this.Target2.Text = "two";
-            this.Target2.UseVisualStyleBackColor = true;
-            // 
-            // Target1
-            // 
-            this.Target1.AutoSize = true;
-            this.Target1.Checked = true;
-            this.Target1.Location = new System.Drawing.Point(20, 19);
-            this.Target1.Name = "Target1";
-            this.Target1.Size = new System.Drawing.Size(43, 17);
-            this.Target1.TabIndex = 0;
-            this.Target1.TabStop = true;
-            this.Target1.Text = "one";
-            this.Target1.UseVisualStyleBackColor = true;
-            // 
             // UseSkillButton
             // 
             this.UseSkillButton.Location = new System.Drawing.Point(7, 480);
@@ -329,44 +243,129 @@
             this.CurrentFight.TabIndex = 36;
             this.CurrentFight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // rightButton
-            // 
-            this.rightButton.Location = new System.Drawing.Point(341, 340);
-            this.rightButton.Name = "rightButton";
-            this.rightButton.Size = new System.Drawing.Size(26, 23);
-            this.rightButton.TabIndex = 37;
-            this.rightButton.Text = ">";
-            this.rightButton.UseVisualStyleBackColor = true;
-            this.rightButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rightButton_MouseClick);
-            // 
             // leftButton
             // 
-            this.leftButton.Location = new System.Drawing.Point(314, 340);
+            this.leftButton.Location = new System.Drawing.Point(368, 340);
             this.leftButton.Name = "leftButton";
             this.leftButton.Size = new System.Drawing.Size(26, 23);
-            this.leftButton.TabIndex = 38;
+            this.leftButton.TabIndex = 47;
             this.leftButton.Text = "<";
             this.leftButton.UseVisualStyleBackColor = true;
-            this.leftButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leftButton_MouseClick);
+            // 
+            // rightButton
+            // 
+            this.rightButton.Location = new System.Drawing.Point(396, 340);
+            this.rightButton.Name = "rightButton";
+            this.rightButton.Size = new System.Drawing.Size(26, 23);
+            this.rightButton.TabIndex = 46;
+            this.rightButton.Text = ">";
+            this.rightButton.UseVisualStyleBackColor = true;
+            // 
+            // TargetGroup
+            // 
+            this.TargetGroup.Controls.Add(this.Target3);
+            this.TargetGroup.Controls.Add(this.Target2);
+            this.TargetGroup.Controls.Add(this.Target1);
+            this.TargetGroup.Location = new System.Drawing.Point(428, 504);
+            this.TargetGroup.Name = "TargetGroup";
+            this.TargetGroup.Size = new System.Drawing.Size(180, 50);
+            this.TargetGroup.TabIndex = 45;
+            this.TargetGroup.TabStop = false;
+            this.TargetGroup.Text = "Targets";
+            // 
+            // Target3
+            // 
+            this.Target3.AutoSize = true;
+            this.Target3.Enabled = false;
+            this.Target3.Location = new System.Drawing.Point(117, 19);
+            this.Target3.Name = "Target3";
+            this.Target3.Size = new System.Drawing.Size(49, 17);
+            this.Target3.TabIndex = 2;
+            this.Target3.TabStop = true;
+            this.Target3.Text = "three";
+            this.Target3.UseVisualStyleBackColor = true;
+            // 
+            // Target2
+            // 
+            this.Target2.AutoSize = true;
+            this.Target2.Enabled = false;
+            this.Target2.Location = new System.Drawing.Point(69, 19);
+            this.Target2.Name = "Target2";
+            this.Target2.Size = new System.Drawing.Size(42, 17);
+            this.Target2.TabIndex = 1;
+            this.Target2.TabStop = true;
+            this.Target2.Text = "two";
+            this.Target2.UseVisualStyleBackColor = true;
+            // 
+            // Target1
+            // 
+            this.Target1.AutoSize = true;
+            this.Target1.Checked = true;
+            this.Target1.Location = new System.Drawing.Point(20, 19);
+            this.Target1.Name = "Target1";
+            this.Target1.Size = new System.Drawing.Size(43, 17);
+            this.Target1.TabIndex = 0;
+            this.Target1.TabStop = true;
+            this.Target1.Text = "one";
+            this.Target1.UseVisualStyleBackColor = true;
+            // 
+            // Skills
+            // 
+            this.Skills.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Skills.FormattingEnabled = true;
+            this.Skills.Location = new System.Drawing.Point(187, 368);
+            this.Skills.Name = "Skills";
+            this.Skills.Size = new System.Drawing.Size(235, 186);
+            this.Skills.TabIndex = 44;
+            // 
+            // PlayerHealth
+            // 
+            this.PlayerHealth.Location = new System.Drawing.Point(187, 316);
+            this.PlayerHealth.Name = "PlayerHealth";
+            this.PlayerHealth.Size = new System.Drawing.Size(235, 20);
+            this.PlayerHealth.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.PlayerHealth.TabIndex = 43;
+            // 
+            // NameBox
+            // 
+            this.NameBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.NameBox.Location = new System.Drawing.Point(187, 342);
+            this.NameBox.Name = "NameBox";
+            this.NameBox.ReadOnly = true;
+            this.NameBox.Size = new System.Drawing.Size(176, 20);
+            this.NameBox.TabIndex = 42;
+            this.NameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // CombatLog
+            // 
+            this.CombatLog.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.CombatLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CombatLog.Location = new System.Drawing.Point(428, 316);
+            this.CombatLog.Multiline = true;
+            this.CombatLog.Name = "CombatLog";
+            this.CombatLog.ReadOnly = true;
+            this.CombatLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.CombatLog.Size = new System.Drawing.Size(180, 182);
+            this.CombatLog.TabIndex = 41;
             // 
             // DungeonGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 570);
+            this.ClientSize = new System.Drawing.Size(618, 565);
             this.Controls.Add(this.leftButton);
             this.Controls.Add(this.rightButton);
-            this.Controls.Add(this.CurrentFight);
-            this.Controls.Add(this.FightsLeft);
-            this.Controls.Add(this.ProfilePic);
-            this.Controls.Add(this.UseSkillButton);
             this.Controls.Add(this.TargetGroup);
-            this.Controls.Add(this.TurnBox);
-            this.Controls.Add(this.EnemyGroup);
             this.Controls.Add(this.Skills);
             this.Controls.Add(this.PlayerHealth);
             this.Controls.Add(this.NameBox);
             this.Controls.Add(this.CombatLog);
+            this.Controls.Add(this.CurrentFight);
+            this.Controls.Add(this.FightsLeft);
+            this.Controls.Add(this.ProfilePic);
+            this.Controls.Add(this.UseSkillButton);
+            this.Controls.Add(this.TurnBox);
+            this.Controls.Add(this.EnemyGroup);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -386,20 +385,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.EnemyPic3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyPic2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyPic1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProfilePic)).EndInit();
             this.TargetGroup.ResumeLayout(false);
             this.TargetGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ProfilePic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox CombatLog;
-        private System.Windows.Forms.TextBox NameBox;
-        private System.Windows.Forms.ProgressBar PlayerHealth;
-        private System.Windows.Forms.ListBox Skills;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
         private System.Windows.Forms.GroupBox EnemyGroup;
@@ -413,17 +407,21 @@
         private System.Windows.Forms.TextBox EnemyBox1;
         private System.Windows.Forms.TextBox EnemyBox3;
         private System.Windows.Forms.TextBox EnemyBox2;
-        private System.Windows.Forms.GroupBox TargetGroup;
-        private System.Windows.Forms.RadioButton Target2;
-        private System.Windows.Forms.RadioButton Target1;
-        private System.Windows.Forms.RadioButton Target3;
         private System.Windows.Forms.Button UseSkillButton;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.PictureBox ProfilePic;
         private System.Windows.Forms.TextBox FightsLeft;
         private System.Windows.Forms.TextBox CurrentFight;
         private System.Windows.Forms.ToolStripMenuItem enemyIndexToolStripMenuItem;
-        private System.Windows.Forms.Button rightButton;
         private System.Windows.Forms.Button leftButton;
+        private System.Windows.Forms.Button rightButton;
+        private System.Windows.Forms.GroupBox TargetGroup;
+        private System.Windows.Forms.RadioButton Target3;
+        private System.Windows.Forms.RadioButton Target2;
+        private System.Windows.Forms.RadioButton Target1;
+        private System.Windows.Forms.ListBox Skills;
+        private System.Windows.Forms.ProgressBar PlayerHealth;
+        private System.Windows.Forms.TextBox NameBox;
+        private System.Windows.Forms.TextBox CombatLog;
     }
 }

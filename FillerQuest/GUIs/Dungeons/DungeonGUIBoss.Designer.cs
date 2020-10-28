@@ -85,12 +85,12 @@
             // 
             this.CombatLog.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CombatLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CombatLog.Location = new System.Drawing.Point(373, 296);
+            this.CombatLog.Location = new System.Drawing.Point(428, 296);
             this.CombatLog.Multiline = true;
             this.CombatLog.Name = "CombatLog";
             this.CombatLog.ReadOnly = true;
             this.CombatLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.CombatLog.Size = new System.Drawing.Size(235, 242);
+            this.CombatLog.Size = new System.Drawing.Size(180, 182);
             this.CombatLog.TabIndex = 0;
             // 
             // NameBox
@@ -99,7 +99,7 @@
             this.NameBox.Location = new System.Drawing.Point(187, 322);
             this.NameBox.Name = "NameBox";
             this.NameBox.ReadOnly = true;
-            this.NameBox.Size = new System.Drawing.Size(122, 20);
+            this.NameBox.Size = new System.Drawing.Size(176, 20);
             this.NameBox.TabIndex = 1;
             this.NameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -107,18 +107,17 @@
             // 
             this.PlayerHealth.Location = new System.Drawing.Point(187, 296);
             this.PlayerHealth.Name = "PlayerHealth";
-            this.PlayerHealth.Size = new System.Drawing.Size(180, 20);
+            this.PlayerHealth.Size = new System.Drawing.Size(235, 20);
             this.PlayerHealth.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.PlayerHealth.TabIndex = 2;
             // 
             // Skills
             // 
-            this.Skills.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Skills.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Skills.FormattingEnabled = true;
-            this.Skills.ItemHeight = 12;
             this.Skills.Location = new System.Drawing.Point(187, 348);
             this.Skills.Name = "Skills";
-            this.Skills.Size = new System.Drawing.Size(180, 124);
+            this.Skills.Size = new System.Drawing.Size(235, 186);
             this.Skills.TabIndex = 5;
             // 
             // menuStrip1
@@ -451,7 +450,7 @@
             this.TargetGroup.Controls.Add(this.Target3);
             this.TargetGroup.Controls.Add(this.Target2);
             this.TargetGroup.Controls.Add(this.Target1);
-            this.TargetGroup.Location = new System.Drawing.Point(187, 488);
+            this.TargetGroup.Location = new System.Drawing.Point(428, 484);
             this.TargetGroup.Name = "TargetGroup";
             this.TargetGroup.Size = new System.Drawing.Size(180, 50);
             this.TargetGroup.TabIndex = 9;
@@ -540,7 +539,7 @@
             // 
             // leftButton
             // 
-            this.leftButton.Location = new System.Drawing.Point(315, 320);
+            this.leftButton.Location = new System.Drawing.Point(368, 320);
             this.leftButton.Name = "leftButton";
             this.leftButton.Size = new System.Drawing.Size(26, 23);
             this.leftButton.TabIndex = 40;
@@ -550,7 +549,7 @@
             // 
             // rightButton
             // 
-            this.rightButton.Location = new System.Drawing.Point(342, 320);
+            this.rightButton.Location = new System.Drawing.Point(396, 320);
             this.rightButton.Name = "rightButton";
             this.rightButton.Size = new System.Drawing.Size(26, 23);
             this.rightButton.TabIndex = 39;
@@ -562,7 +561,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 549);
+            this.ClientSize = new System.Drawing.Size(618, 545);
             this.Controls.Add(this.leftButton);
             this.Controls.Add(this.rightButton);
             this.Controls.Add(this.CurrentFight);

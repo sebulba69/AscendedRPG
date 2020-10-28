@@ -42,12 +42,14 @@ namespace AscendedRPG
         public void SetUpEnemyGUI()
         {
             boss = dgh.MakeBoss();
-            bc.CheckDefault(boss.HP);
-            bc.SetSubBars(boss.HP);
-            bossBar.Maximum = bc.hp_default;
-            bossBar.Value = bc.baseBar;
-            for (int i = 0; i < bc.subbars; i++)
+
+            bc.SetupBars(boss.HP);
+
+            bossBar.Value = bc.GetBBPercent();
+
+            for (int i = 0; i < bc.GetSubbars(); i++)
                 subbars[i].Visible = true;
+
             bossName.Text = boss.Name + $" [{_state.Player.GetWeaknessString(boss, _state.SManager)}]";
             bossPic.ImageLocation = boss.Image;
         }
@@ -62,10 +64,10 @@ namespace AscendedRPG
             int s = 0;
             // for all subbars greater than what's supposed to be visible, reduce their value to 0
             foreach (ProgressBar sub in subbars)
-                if (s++ >= bc.subbars)
+                if (s++ >= bc.GetSubbars())
                     sub.Value = 0;
 
-            bossBar.Value = bc.baseBar;
+            bossBar.Value = bc.GetBBPercent();
         }
 
         public bool IsTroopDead() => boss.HP == 0;

@@ -51,13 +51,13 @@
             this.minionBox.FormattingEnabled = true;
             this.minionBox.Location = new System.Drawing.Point(12, 61);
             this.minionBox.Name = "minionBox";
-            this.minionBox.Size = new System.Drawing.Size(179, 147);
+            this.minionBox.Size = new System.Drawing.Size(189, 147);
             this.minionBox.TabIndex = 0;
             this.minionBox.SelectedIndexChanged += new System.EventHandler(this.minionBox_SelectedIndexChanged);
             // 
             // mpicBox
             // 
-            this.mpicBox.Location = new System.Drawing.Point(197, 37);
+            this.mpicBox.Location = new System.Drawing.Point(207, 37);
             this.mpicBox.Name = "mpicBox";
             this.mpicBox.Size = new System.Drawing.Size(174, 155);
             this.mpicBox.TabIndex = 1;
@@ -66,7 +66,7 @@
             // minionName
             // 
             this.minionName.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.minionName.Location = new System.Drawing.Point(197, 198);
+            this.minionName.Location = new System.Drawing.Point(207, 198);
             this.minionName.Name = "minionName";
             this.minionName.ReadOnly = true;
             this.minionName.Size = new System.Drawing.Size(174, 20);
@@ -77,7 +77,7 @@
             // 
             this.minionWeapon.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.minionWeapon.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minionWeapon.Location = new System.Drawing.Point(197, 224);
+            this.minionWeapon.Location = new System.Drawing.Point(207, 224);
             this.minionWeapon.Name = "minionWeapon";
             this.minionWeapon.ReadOnly = true;
             this.minionWeapon.Size = new System.Drawing.Size(174, 18);
@@ -88,7 +88,7 @@
             // 
             this.delete.Location = new System.Drawing.Point(106, 212);
             this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(85, 23);
+            this.delete.Size = new System.Drawing.Size(95, 23);
             this.delete.TabIndex = 32;
             this.delete.Text = "Delete";
             this.delete.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@
             // minionSkills
             // 
             this.minionSkills.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.minionSkills.Location = new System.Drawing.Point(197, 250);
+            this.minionSkills.Location = new System.Drawing.Point(207, 250);
             this.minionSkills.Multiline = true;
             this.minionSkills.Name = "minionSkills";
             this.minionSkills.ReadOnly = true;
@@ -110,7 +110,7 @@
             this.moveToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(381, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(393, 24);
             this.menuStrip1.TabIndex = 35;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -137,7 +137,7 @@
             this.msCount.Location = new System.Drawing.Point(12, 37);
             this.msCount.Name = "msCount";
             this.msCount.ReadOnly = true;
-            this.msCount.Size = new System.Drawing.Size(179, 20);
+            this.msCount.Size = new System.Drawing.Size(189, 20);
             this.msCount.TabIndex = 37;
             this.msCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -145,7 +145,7 @@
             // 
             this.create.Location = new System.Drawing.Point(12, 241);
             this.create.Name = "create";
-            this.create.Size = new System.Drawing.Size(179, 23);
+            this.create.Size = new System.Drawing.Size(189, 23);
             this.create.TabIndex = 33;
             this.create.Text = "Summon (10 MS)";
             this.create.UseVisualStyleBackColor = true;
@@ -165,9 +165,9 @@
             // godFormButton
             // 
             this.godFormButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.godFormButton.Location = new System.Drawing.Point(103, 269);
+            this.godFormButton.Location = new System.Drawing.Point(106, 269);
             this.godFormButton.Name = "godFormButton";
-            this.godFormButton.Size = new System.Drawing.Size(88, 23);
+            this.godFormButton.Size = new System.Drawing.Size(95, 23);
             this.godFormButton.TabIndex = 39;
             this.godFormButton.Text = "ABGF (1000 MS)";
             this.godFormButton.UseVisualStyleBackColor = true;
@@ -177,7 +177,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(381, 300);
+            this.ClientSize = new System.Drawing.Size(393, 300);
             this.Controls.Add(this.godFormButton);
             this.Controls.Add(this.boostButton);
             this.Controls.Add(this.msCount);

@@ -44,25 +44,25 @@
             this.recipeList.FormattingEnabled = true;
             this.recipeList.Location = new System.Drawing.Point(12, 27);
             this.recipeList.Name = "recipeList";
-            this.recipeList.Size = new System.Drawing.Size(216, 147);
+            this.recipeList.Size = new System.Drawing.Size(240, 147);
             this.recipeList.TabIndex = 0;
             this.recipeList.SelectedIndexChanged += new System.EventHandler(this.recipeList_SelectedIndexChanged);
             // 
             // recipeIngredients
             // 
             this.recipeIngredients.FormattingEnabled = true;
-            this.recipeIngredients.Location = new System.Drawing.Point(235, 118);
+            this.recipeIngredients.Location = new System.Drawing.Point(258, 117);
             this.recipeIngredients.Name = "recipeIngredients";
-            this.recipeIngredients.Size = new System.Drawing.Size(220, 82);
+            this.recipeIngredients.Size = new System.Drawing.Size(243, 82);
             this.recipeIngredients.TabIndex = 2;
             // 
             // resultBox
             // 
             this.resultBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.resultBox.Location = new System.Drawing.Point(235, 27);
+            this.resultBox.Location = new System.Drawing.Point(258, 26);
             this.resultBox.Name = "resultBox";
             this.resultBox.ReadOnly = true;
-            this.resultBox.Size = new System.Drawing.Size(220, 20);
+            this.resultBox.Size = new System.Drawing.Size(243, 20);
             this.resultBox.TabIndex = 3;
             this.resultBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -72,7 +72,7 @@
             this.enemyIndexToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(467, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(513, 24);
             this.menuStrip1.TabIndex = 40;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -86,16 +86,16 @@
             // skillBox
             // 
             this.skillBox.FormattingEnabled = true;
-            this.skillBox.Location = new System.Drawing.Point(235, 56);
+            this.skillBox.Location = new System.Drawing.Point(258, 55);
             this.skillBox.Name = "skillBox";
-            this.skillBox.Size = new System.Drawing.Size(220, 56);
+            this.skillBox.Size = new System.Drawing.Size(243, 56);
             this.skillBox.TabIndex = 41;
             // 
             // deleteRecipe
             // 
             this.deleteRecipe.Location = new System.Drawing.Point(12, 180);
             this.deleteRecipe.Name = "deleteRecipe";
-            this.deleteRecipe.Size = new System.Drawing.Size(216, 20);
+            this.deleteRecipe.Size = new System.Drawing.Size(240, 20);
             this.deleteRecipe.TabIndex = 39;
             this.deleteRecipe.Text = "Delete from Wishlist";
             this.deleteRecipe.UseVisualStyleBackColor = true;
@@ -105,7 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 211);
+            this.ClientSize = new System.Drawing.Size(513, 211);
             this.Controls.Add(this.skillBox);
             this.Controls.Add(this.deleteRecipe);
             this.Controls.Add(this.resultBox);

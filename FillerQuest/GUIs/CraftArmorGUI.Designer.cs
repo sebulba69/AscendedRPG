@@ -54,31 +54,31 @@
             this.recipeList.FormattingEnabled = true;
             this.recipeList.Location = new System.Drawing.Point(12, 27);
             this.recipeList.Name = "recipeList";
-            this.recipeList.Size = new System.Drawing.Size(244, 147);
+            this.recipeList.Size = new System.Drawing.Size(336, 147);
             this.recipeList.TabIndex = 0;
             this.recipeList.SelectedIndexChanged += new System.EventHandler(this.recipeList_SelectedIndexChanged);
             // 
             // recipeIngredients
             // 
             this.recipeIngredients.FormattingEnabled = true;
-            this.recipeIngredients.Location = new System.Drawing.Point(262, 116);
+            this.recipeIngredients.Location = new System.Drawing.Point(354, 116);
             this.recipeIngredients.Name = "recipeIngredients";
-            this.recipeIngredients.Size = new System.Drawing.Size(220, 82);
+            this.recipeIngredients.Size = new System.Drawing.Size(241, 108);
             this.recipeIngredients.TabIndex = 2;
             // 
             // resultBox
             // 
             this.resultBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.resultBox.Location = new System.Drawing.Point(262, 25);
+            this.resultBox.Location = new System.Drawing.Point(354, 27);
             this.resultBox.Name = "resultBox";
             this.resultBox.ReadOnly = true;
-            this.resultBox.Size = new System.Drawing.Size(220, 20);
+            this.resultBox.Size = new System.Drawing.Size(241, 20);
             this.resultBox.TabIndex = 3;
             this.resultBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // craftButton
             // 
-            this.craftButton.Location = new System.Drawing.Point(261, 202);
+            this.craftButton.Location = new System.Drawing.Point(127, 201);
             this.craftButton.Name = "craftButton";
             this.craftButton.Size = new System.Drawing.Size(107, 20);
             this.craftButton.TabIndex = 38;
@@ -88,7 +88,7 @@
             // 
             // deleteRecipe
             // 
-            this.deleteRecipe.Location = new System.Drawing.Point(374, 202);
+            this.deleteRecipe.Location = new System.Drawing.Point(240, 201);
             this.deleteRecipe.Name = "deleteRecipe";
             this.deleteRecipe.Size = new System.Drawing.Size(108, 20);
             this.deleteRecipe.TabIndex = 39;
@@ -103,7 +103,7 @@
             this.enemyIndexToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(494, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(607, 24);
             this.menuStrip1.TabIndex = 40;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -124,16 +124,16 @@
             // skillBox
             // 
             this.skillBox.FormattingEnabled = true;
-            this.skillBox.Location = new System.Drawing.Point(262, 54);
+            this.skillBox.Location = new System.Drawing.Point(354, 54);
             this.skillBox.Name = "skillBox";
-            this.skillBox.Size = new System.Drawing.Size(220, 56);
+            this.skillBox.Size = new System.Drawing.Size(241, 56);
             this.skillBox.TabIndex = 41;
             // 
             // saveRecipe
             // 
             this.saveRecipe.Location = new System.Drawing.Point(12, 201);
             this.saveRecipe.Name = "saveRecipe";
-            this.saveRecipe.Size = new System.Drawing.Size(188, 20);
+            this.saveRecipe.Size = new System.Drawing.Size(109, 20);
             this.saveRecipe.TabIndex = 42;
             this.saveRecipe.Text = "Save Recipe";
             this.saveRecipe.UseVisualStyleBackColor = true;
@@ -142,7 +142,7 @@
             // headButton
             // 
             this.headButton.AutoSize = true;
-            this.headButton.Location = new System.Drawing.Point(12, 181);
+            this.headButton.Location = new System.Drawing.Point(40, 180);
             this.headButton.Name = "headButton";
             this.headButton.Size = new System.Drawing.Size(33, 17);
             this.headButton.TabIndex = 43;
@@ -153,7 +153,7 @@
             // torsoButton
             // 
             this.torsoButton.AutoSize = true;
-            this.torsoButton.Location = new System.Drawing.Point(51, 181);
+            this.torsoButton.Location = new System.Drawing.Point(79, 180);
             this.torsoButton.Name = "torsoButton";
             this.torsoButton.Size = new System.Drawing.Size(32, 17);
             this.torsoButton.TabIndex = 44;
@@ -164,7 +164,7 @@
             // armsButton
             // 
             this.armsButton.AutoSize = true;
-            this.armsButton.Location = new System.Drawing.Point(89, 181);
+            this.armsButton.Location = new System.Drawing.Point(117, 180);
             this.armsButton.Name = "armsButton";
             this.armsButton.Size = new System.Drawing.Size(32, 17);
             this.armsButton.TabIndex = 45;
@@ -175,7 +175,7 @@
             // waistButton
             // 
             this.waistButton.AutoSize = true;
-            this.waistButton.Location = new System.Drawing.Point(127, 181);
+            this.waistButton.Location = new System.Drawing.Point(155, 180);
             this.waistButton.Name = "waistButton";
             this.waistButton.Size = new System.Drawing.Size(36, 17);
             this.waistButton.TabIndex = 46;
@@ -186,7 +186,7 @@
             // legButton
             // 
             this.legButton.AutoSize = true;
-            this.legButton.Location = new System.Drawing.Point(169, 181);
+            this.legButton.Location = new System.Drawing.Point(197, 180);
             this.legButton.Name = "legButton";
             this.legButton.Size = new System.Drawing.Size(31, 17);
             this.legButton.TabIndex = 47;
@@ -198,7 +198,7 @@
             // 
             this.allButton.AutoSize = true;
             this.allButton.Checked = true;
-            this.allButton.Location = new System.Drawing.Point(206, 181);
+            this.allButton.Location = new System.Drawing.Point(234, 180);
             this.allButton.Name = "allButton";
             this.allButton.Size = new System.Drawing.Size(36, 17);
             this.allButton.TabIndex = 48;
@@ -210,7 +210,7 @@
             // wlistButton
             // 
             this.wlistButton.AutoSize = true;
-            this.wlistButton.Location = new System.Drawing.Point(206, 204);
+            this.wlistButton.Location = new System.Drawing.Point(276, 180);
             this.wlistButton.Name = "wlistButton";
             this.wlistButton.Size = new System.Drawing.Size(55, 17);
             this.wlistButton.TabIndex = 49;
@@ -222,7 +222,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 236);
+            this.ClientSize = new System.Drawing.Size(607, 236);
             this.Controls.Add(this.wlistButton);
             this.Controls.Add(this.allButton);
             this.Controls.Add(this.legButton);
