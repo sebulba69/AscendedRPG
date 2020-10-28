@@ -94,8 +94,7 @@ namespace AscendedRPG.Files
             enemy.HP = GetEnemyHP(dtype, t, r);
             enemy.Image = LoadEnemyImage(path, index);
 
-            int multiplier = ((int)Math.Pow((dtype + 1), (dtype + 1))) * dtype;
-            t = tier * multiplier;
+            t += ((int)Math.Pow((dtype + 1), 3));
 
             enemy.Skills.ForEach(s => SetSkillDamage(dtype+1, s, t, r));
 
@@ -181,8 +180,7 @@ namespace AscendedRPG.Files
 
             boss.HP = BossHPCalc(t * hp);
 
-            int multiplier = ((int)Math.Pow((dtype + 1), 3));
-            t += multiplier;
+            t += ((int)Math.Pow((dtype + 1), 3));
 
             boss.Skills.ForEach(s => SetSkillDamage(dtype + 1, s, t * (dtype + 1), r));
             boss.Image = LoadEnemyImage(Path.Combine(PATH,bossPath), index);
