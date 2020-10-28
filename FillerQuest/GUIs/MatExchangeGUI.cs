@@ -47,9 +47,8 @@ namespace AscendedRPG.GUIs
         {
             try
             {
-                string query = enemySearch.Text;
-                query = query[0].ToString().ToUpper() + query.Substring(1);
-                var search = index.FindAll(q => q.Name.StartsWith(query));
+                string query = enemySearch.Text.ToLower();
+                var search = index.FindAll(q => q.Name.ToLower().StartsWith(query));
                 enemyList.DataSource = search;
             }
             catch (IndexOutOfRangeException)

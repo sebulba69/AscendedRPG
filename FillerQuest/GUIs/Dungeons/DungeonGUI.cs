@@ -53,6 +53,8 @@ namespace AscendedRPG
         #region Enemy GUI Management
         public void SetUpEnemyGUI()
         {
+            timer.Stop();
+
             loading = true;
 
             troop = dgh.MakeTroop();

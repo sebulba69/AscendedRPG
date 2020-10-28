@@ -37,7 +37,7 @@ namespace AscendedRPG
 
             if (!_state.Music.IsPlaying())
             {
-                _state.Music.SetIdleTheme(player.Tiers[type]);
+                _state.Music.SetIdleTheme(player.GetLevel());
                 _state.Music.PlaySong();
             }
         }

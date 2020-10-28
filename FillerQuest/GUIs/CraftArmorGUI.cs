@@ -43,25 +43,39 @@ namespace AscendedRPG.GUIs
 
                     string namePrefix = "";
 
-                    var ex = x.Ingredients.Find(i => i.Name.Contains("EX"));
-                    var asc = x.Ingredients.Find(i => i.Name.Contains("ASC"));
+                    int normal = 0;
+                    int ex = 0;
+                    int asc = 0;
+
+                    x.Ingredients.ForEach(i =>
+                    {
+                        if (i.Name.Contains("EX "))
+                            ex++;
+                        else if (i.Name.Contains("ASC"))
+                            asc++;
+                        else
+                            normal++;
+                    });
                     
                     int ex_boost = 95;
                     int asc_boost = 325;
 
-                    if (ex != null) // there is an ex ingredient
+                    if(normal >= 1)
                     {
+                        // do nothing if there is at least 1 normal mat
+                        tier *= 1;
+                    }
+                    else if(ex >= 1)
+                    {
+                        // if there is at least 1 ex mat and no normal mats, it's ex
                         tier *= ex_boost;
                         namePrefix = "EX ";
                     }
-                    else // there is no ex ingredient
+                    else
                     {
-                        // there is an ascended ingredient
-                        if(asc != null)
-                        {
-                            tier *= asc_boost;
-                            namePrefix = "ASC ";
-                        }
+                        // if there aren't any normal mats and no ex mats, it's ascended
+                        tier *= asc_boost;
+                        namePrefix = "ASC ";
                     }
 
                     x.Result = _state.AManager.GetRandomArmorPiece(_state, tier, _state.Random.Next(0, 5));

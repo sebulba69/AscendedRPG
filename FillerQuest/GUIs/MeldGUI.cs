@@ -22,6 +22,7 @@ namespace AscendedRPG
 
         private void UpdateAllScreens()
         {
+            int s_index = InventoryList.SelectedIndex;
             InventoryList.Items.Clear();
             InventoryList.Items.Add($"~ Inventory ({_state.Player.Inventory.Inventory.Count}/100)~");
             InventoryList.Items.AddRange(_state.Player.Inventory.Inventory.ToArray());
@@ -38,8 +39,7 @@ namespace AscendedRPG
             }
             skillDisplay.AppendText($"{_state.SManager.ElementToString(elementals.Count - 1)} +{elementals.Last()}");
 
-            if (_state.Player.Inventory.Inventory.Count > 0)
-                InventoryList.SelectedIndex = 1;
+            _state.HandleSelectedIndex(InventoryList, s_index);
         }
 
         private void UpdateInventoryList(Armor[] array)
@@ -165,7 +165,17 @@ namespace AscendedRPG
                 {
                     var skill = s.Skill;
                     if (skill.S_Type == SkillType.OFFENSIVE)
-                        _state.Player.ElementalAttack[skill.Element] += skill.Multiplier;
+                    {
+                        try
+                        {
+
+                            _state.Player.ElementalAttack[skill.Element] = checked(_state.Player.ElementalAttack[skill.Element] + skill.Multiplier);
+                        }
+                        catch (OverflowException)
+                        {
+                            _state.Player.ElementalAttack[skill.Element] = int.MaxValue;
+                        }
+                    }
                 });
                 inventory.Remove(armor);
                 _state.Save.SaveGame(_state.Player);

@@ -100,7 +100,7 @@
             "Scale",
             "Mantle",
             "Crystal"});
-            this.matType.Location = new System.Drawing.Point(254, 272);
+            this.matType.Location = new System.Drawing.Point(254, 274);
             this.matType.Name = "matType";
             this.matType.Size = new System.Drawing.Size(104, 21);
             this.matType.TabIndex = 1;
