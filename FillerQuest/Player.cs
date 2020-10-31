@@ -61,6 +61,9 @@ namespace AscendedRPG
         [ProtoMember(33)]
         public List<Enemies.Minion> Minions { get; set; }
 
+        [ProtoMember(34)]
+        public List<bool> CompletionTracker { get; set; }
+
         public BattleStats Stats { get; set; } // stats exclusively used in battle
 
         public Player()
@@ -82,6 +85,9 @@ namespace AscendedRPG
 
             if (VendorCap < 250)
                 VendorCap = 250;
+
+            if (CompletionTracker == null)
+                CompletionTracker = new List<bool>();
         }
 
         public void ProcessWeakness(Enemy e, int element)

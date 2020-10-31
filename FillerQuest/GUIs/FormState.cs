@@ -68,6 +68,10 @@ namespace AscendedRPG.GUIs
             }
         }
 
+        public int GetCap(int type) => CAPS[type];
+
+        public int GetCapCount() => CAPS.Length;
+
         public int GetCap()
         {
             int total = 0;

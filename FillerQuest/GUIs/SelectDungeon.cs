@@ -59,8 +59,7 @@ namespace AscendedRPG
             }
 
 
-            int level = _state.Player.GetLevel();
-            if(level == _state.GetCap())
+            if(_state.Player.CompletionTracker.Count == _state.GetCapCount())
                 finalAscentButton.Enabled = true;
         }
 

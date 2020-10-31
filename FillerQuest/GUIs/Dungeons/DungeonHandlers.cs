@@ -1,4 +1,5 @@
-﻿using AscendedRPG.LootClasses;
+﻿using AscendedRPG.Enemies;
+using AscendedRPG.LootClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,40 +38,47 @@ namespace AscendedRPG.GUIs
             }
             else
             {
-                var loot = _lh.GetEnemyDrop(e.Name, state.Random, state.dungeonTiers[state.DungeonType]);
-                var eLoot = state.Player.Loot.EnemyLoot; // make pointer to list so we can check it easily
-                var l = eLoot.Find(x => x.GetName().Equals(loot.GetName()));
+                if(state.DungeonType != DungeonType.FINAL)
+                {
+                    var loot = _lh.GetEnemyDrop(e.Name, state.Random, state.dungeonTiers[state.DungeonType]);
+                    var eLoot = state.Player.Loot.EnemyLoot; // make pointer to list so we can check it easily
+                    var l = eLoot.Find(x => x.GetName().Equals(loot.GetName()));
 
-                if (l == null)
-                    eLoot.Add(loot);
-                else
-                    l.Quantity += loot.Quantity;
+                    if (l == null)
+                        eLoot.Add(loot);
+                    else
+                        l.Quantity += loot.Quantity;
+                }
+
             }
         }
 
         public void LogEnemyIntoIndex(Enemy enemy, FormState state, bool isBoss)
         {
-            int d_tier = state.dungeonTiers[state.DungeonType];
-            var e_index = state.Player.EnemyIndex;
-            if (e_index.ContainsKey(enemy.Name))
+            if(state.DungeonType != DungeonType.FINAL)
             {
-                var key = e_index[enemy.Name];
-                key.Tier = (key.Tier < d_tier) ? d_tier : key.Tier;
-            }
-            else
-            {
-                var e_index_val = new EIndexEntry()
+                int d_tier = state.dungeonTiers[state.DungeonType];
+                var e_index = state.Player.EnemyIndex;
+                if (e_index.ContainsKey(enemy.Name))
                 {
-                    Name = enemy.Name,
-                    DType = state.DungeonType,
-                    Image = enemy.Image,
-                    Tier = d_tier,
-                    IsBoss = isBoss
-                };
+                    var key = e_index[enemy.Name];
+                    key.Tier = (key.Tier < d_tier) ? d_tier : key.Tier;
+                }
+                else
+                {
+                    var e_index_val = new EIndexEntry()
+                    {
+                        Name = enemy.Name,
+                        DType = state.DungeonType,
+                        Image = enemy.Image,
+                        Tier = d_tier,
+                        IsBoss = isBoss
+                    };
 
-                e_index.Add(enemy.Name, e_index_val);
+                    e_index.Add(enemy.Name, e_index_val);
+                }
+                state.Save.SaveGame(state.Player);
             }
-            state.Save.SaveGame(state.Player);
         }
 
         public void SetTurns(int turns) => _ah.SetTurns(turns);

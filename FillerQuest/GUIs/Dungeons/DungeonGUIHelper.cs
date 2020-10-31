@@ -286,6 +286,8 @@ namespace AscendedRPG.GUIs
                         {
                             MessageBox.Show("Dungeon Complete.");
                             _state.ProcessCompletedTier(battleMembers.Count);
+                            if (_state.dungeonTiers[_state.DungeonType] == _state.GetCap(_state.DungeonType))
+                                _state.Player.CompletionTracker.Add(true);
                         }
 
                         _dungeon.CloseGUI();
