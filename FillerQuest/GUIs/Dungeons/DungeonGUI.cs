@@ -48,6 +48,8 @@ namespace AscendedRPG
             dgh = new DungeonGUIHelper(_state, this);
 
             dgh.Start();
+
+            Skills.SelectedIndex = 1;
         }
 
         #region Enemy GUI Management

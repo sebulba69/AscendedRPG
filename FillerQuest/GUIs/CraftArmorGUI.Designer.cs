@@ -94,7 +94,7 @@
             this.deleteRecipe.TabIndex = 39;
             this.deleteRecipe.Text = "Delete Recipe";
             this.deleteRecipe.UseVisualStyleBackColor = true;
-            this.deleteRecipe.MouseClick += new System.Windows.Forms.MouseEventHandler(this.deleteRecipe_MouseClick);
+            this.deleteRecipe.Click += new System.EventHandler(this.deleteRecipe_Click);
             // 
             // menuStrip1
             // 

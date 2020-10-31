@@ -18,6 +18,10 @@ namespace AscendedRPG.Files
 
         private string[] armorNames;
 
+        public readonly int EX_MODIFIER = 25;
+
+        public readonly int ASC_MODIFIER = 50;
+
         public ArmorManager()
         {
             armorNames = EncryptionManager.DeCrypt<string[]>(path);
@@ -29,7 +33,7 @@ namespace AscendedRPG.Files
             int i = state.Random.Next(0, armorNames.Length);
             armor.Name = $"{armorNames[i]} {pieces[piece]}";
             armor.Piece = piece;
-            armor.Defense = state.Random.Next(tier * 3, (tier + 5) * 4);
+            armor.Defense = state.Random.Next(tier * 10, (tier + 10) * 10);
             armor.Skills = new List<ArmorSkill>();
             armor.UpgradeLevel = 1;
             armor.UpXP = 0;

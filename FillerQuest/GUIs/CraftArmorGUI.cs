@@ -56,9 +56,6 @@ namespace AscendedRPG.GUIs
                         else
                             normal++;
                     });
-                    
-                    int ex_boost = 95;
-                    int asc_boost = 325;
 
                     if(normal >= 1)
                     {
@@ -68,13 +65,13 @@ namespace AscendedRPG.GUIs
                     else if(ex >= 1)
                     {
                         // if there is at least 1 ex mat and no normal mats, it's ex
-                        tier *= ex_boost;
+                        tier *= _state.AManager.EX_MODIFIER;
                         namePrefix = "EX ";
                     }
                     else
                     {
                         // if there aren't any normal mats and no ex mats, it's ascended
-                        tier *= asc_boost;
+                        tier *= _state.AManager.ASC_MODIFIER;
                         namePrefix = "ASC ";
                     }
 
@@ -168,21 +165,6 @@ namespace AscendedRPG.GUIs
 
         }
 
-        private void deleteRecipe_MouseClick(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                var selected = recipeList.SelectedItem as Recipes.Recipe;
-                RemoveRecipeFromList(selected, recipeList.SelectedIndex);
-                _state.Save.SaveGame(_state.Player);
-
-            }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("You don't have any recipes to delete.");
-            }
-        }
-
         private void saveRecipe_MouseClick(object sender, MouseEventArgs e)
         {
             var selected = recipeList.SelectedItem as Recipes.Recipe;
@@ -251,6 +233,7 @@ namespace AscendedRPG.GUIs
 
         private void CraftArmorGUI_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _state.Save.SaveGame(_state.Player);
             if (_state.Type == FTypes.CRAFTING_ARMOR)
                 _state.Type = FTypes.CLOSE;
         }
@@ -317,6 +300,10 @@ namespace AscendedRPG.GUIs
             }
         }
 
-
+        private void deleteRecipe_Click(object sender, EventArgs e)
+        {
+            var selected = recipeList.SelectedItem as Recipes.Recipe;
+            RemoveRecipeFromList(selected, recipeList.SelectedIndex);
+        }
     }
 }

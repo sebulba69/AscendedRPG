@@ -23,6 +23,8 @@ namespace AscendedRPG.GUIs
         // normal, ex, asc, bounty, exbounty, ascbounty, elder
         private readonly int[] CAPS = { 250, 250, 250, 20, 20, 20, 21 };
 
+        public readonly int MAX_MULT = 500000;
+
         public int DungeonType { get; set; }
 
         public FormState()
@@ -60,8 +62,8 @@ namespace AscendedRPG.GUIs
                 Player.Weapon.IncreaseXP(xp);
                 Player.Minions.ForEach(m =>
                 {
-                    m.IncreaseXP(xp + Random.Next(100, 201));
-                    m.Weapon.IncreaseXP(xp + 200);
+                    m.IncreaseXP(xp, MAX_MULT);
+                    m.Weapon.IncreaseXP(xp);
                 });
             }
         }

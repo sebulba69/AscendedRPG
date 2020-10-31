@@ -100,7 +100,7 @@ namespace AscendedRPG.GUIs
                     }
                     else
                     {
-                        selected.LevelUp();
+                        selected.LevelUp(_state.MAX_MULT);
                         selected.XP = 0;
                         wallet.MinionShards -= 100;
                         ResetMBox();
@@ -128,7 +128,7 @@ namespace AscendedRPG.GUIs
                     }
                     else
                     {
-                        selected.GodForm();
+                        selected.GodForm(_state.MAX_MULT);
                         wallet.MinionShards -= 1000;
                         ResetMBox();
                         _state.Save.SaveGame(_state.Player);

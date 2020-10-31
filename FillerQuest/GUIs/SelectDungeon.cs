@@ -29,7 +29,36 @@ namespace AscendedRPG
 
         private void SelectDungeon_Load(object sender, EventArgs e)
         {
-            normalButton.Checked = true;
+            
+            switch(_state.DungeonType)
+            {
+                case DungeonType.EX:
+                    exButton.Checked = true;
+                    break;
+                case DungeonType.ASCENDED:
+                    ascButton.Checked = true;
+                    break;
+                case DungeonType.ELDER:
+                    elderButton.Checked = true;
+                    break;
+                case DungeonType.BOUNTY:
+                    bountyCheckbox.Checked = true;
+                    normalButton.Checked = true;
+                    break;
+                case DungeonType.EXBOUNTY:
+                    bountyCheckbox.Checked = true;
+                    exButton.Checked = true;
+                    break;
+                case DungeonType.ASCBOUNTY:
+                    bountyCheckbox.Checked = true;
+                    ascButton.Checked = true;
+                    break;
+                default:
+                    normalButton.Checked = true;
+                    break;
+            }
+
+
             int level = _state.Player.GetLevel();
             if(level == _state.GetCap())
                 finalAscentButton.Enabled = true;

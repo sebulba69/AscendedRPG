@@ -166,15 +166,12 @@ namespace AscendedRPG
                     var skill = s.Skill;
                     if (skill.S_Type == SkillType.OFFENSIVE)
                     {
-                        try
-                        {
-
-                            _state.Player.ElementalAttack[skill.Element] = checked(_state.Player.ElementalAttack[skill.Element] + skill.Multiplier);
-                        }
-                        catch (OverflowException)
-                        {
-                            _state.Player.ElementalAttack[skill.Element] = int.MaxValue;
-                        }
+                        int element = _state.Player.ElementalAttack[skill.Element];
+                        
+                        if (element + skill.Multiplier >= _state.MAX_MULT)
+                            _state.Player.ElementalAttack[skill.Element] = _state.MAX_MULT;
+                        else
+                            _state.Player.ElementalAttack[skill.Element] = element + skill.Multiplier;
                     }
                 });
                 inventory.Remove(armor);

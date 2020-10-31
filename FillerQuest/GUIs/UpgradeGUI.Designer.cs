@@ -97,7 +97,6 @@
             this.boostButton.Text = "Boost Armor";
             this.boostButton.UseVisualStyleBackColor = true;
             this.boostButton.Click += new System.EventHandler(this.boostButton_Click);
-            this.boostButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boostButton_MouseClick);
             // 
             // materialBox
             // 

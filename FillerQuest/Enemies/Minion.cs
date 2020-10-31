@@ -32,13 +32,13 @@ namespace AscendedRPG.Enemies
 
         public Minion() { }
 
-        public void IncreaseXP(long xp)
+        public void IncreaseXP(long xp, int max)
         {
             if(Level < 100)
             {
                 XP += xp;
                 if (XP >= XPtoNext)
-                    LevelUp();
+                    LevelUp(max);
             }
             else
             {
@@ -46,24 +46,40 @@ namespace AscendedRPG.Enemies
             }
         }
 
-        public void LevelUp()
+        public void LevelUp(int max)
         {
-            if(Level + 1 <= 100)
+            if (Level + 1 <= 100)
             {
                 Level++;
                 XP -= XPtoNext;
                 XPtoNext = GetRequiredXP();
-                Skills.ForEach(s => s.Multiplier += (3 + Prestige));
+
+                int p_mult = Prestige + 1;
+                int init_mult = 3 + Prestige;
+
+                Skills.ForEach(s =>
+                {
+                    if (s.Multiplier + (init_mult * p_mult) >= max)
+                        s.Multiplier = max;
+                    else
+                        s.Multiplier += (init_mult * p_mult);
+                });
             }
         }
 
-        public void GodForm()
+        public void GodForm(int max)
         {
             Level = 1;
             XP = 0;
             XPtoNext = GetRequiredXP();
-            Skills.ForEach(s => s.Multiplier += 50);
-            Prestige++;
+            Skills.ForEach(s =>
+            {
+                if (s.Multiplier + 90 >= max)
+                    s.Multiplier = max;
+                else
+                    s.Multiplier += 90;
+            });
+            Prestige += (Prestige + 5 >= max) ? 0 : 5;
         }
 
         // bs formula that scales with level ups

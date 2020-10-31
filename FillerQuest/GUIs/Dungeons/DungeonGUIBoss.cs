@@ -36,6 +36,8 @@ namespace AscendedRPG
             bc = new BossCalculator(subbars.Count);
 
             dgh.Start();
+
+            Skills.SelectedIndex = 1;
         }
 
         #region Boss GUI Management

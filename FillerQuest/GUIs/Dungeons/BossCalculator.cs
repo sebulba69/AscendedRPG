@@ -36,6 +36,8 @@ namespace AscendedRPG.Enemies
                     max = hpDefault * subDefault;
                 }
             }
+
+            hpDefault = Math.Abs(hpDefault);
         }
 
         public void SetSubBars(int hp)

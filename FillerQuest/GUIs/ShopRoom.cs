@@ -68,32 +68,46 @@ namespace AscendedRPG.GUIs
 
             for (int i = 0; i < 10; i++)
             {
-                Armor charm = _state.AManager.GetRandomArmorPiece(_state, _state.Player.GetVendorCap(), ArmorPiece.CHARM);
+                Armor charm = _state.AManager.GetRandomArmorPiece(_state, GetCharmLevel(), ArmorPiece.CHARM);
 
                 wares_charms.Add(charm.ToString());
                 charms.Add(charm);
-                AddCost(charm.ToString(), GetCost(r, 8000, 9000));
+                int cost = Math.Abs(GetCost(r, 8000, 9000));
+                AddCost(charm.ToString(), cost);
             }
 
-            AddCost("Upgrade", GetCost(r, 8000,9000));
+            AddCost("Upgrade", Math.Abs(GetCost(r, 8000,9000)));
 
             AddKeysToShopList(r);
 
             UpdateVendorDisplay();
         }
 
+        private int GetCharmLevel()
+        {
+            int vcap = _state.Player.GetVendorCap();
+            int mult;
+            if (vcap <= 250)
+                mult = 1;
+            else if (vcap > 250 && vcap <= 500)
+                mult = _state.AManager.EX_MODIFIER;
+            else
+                mult = _state.AManager.ASC_MODIFIER;
+
+            return Math.Abs(vcap * mult);
+        }
+
         private void AddKeysToShopList(Random r)
         {
-           int d_cost = GetCost(r, 4000, 5000);
+           int d_cost = GetCost(r, 5000, 6000);
            string[] names = { "EX Dungeon Key", "ASC Dungeon Key", "Bounty Key", "EX Bounty Key", "ASC Bounty Key", "Elder Key" };
            for(int i = 0; i < names.Length; i++)
             {
                 wares_keys.Add(names[i]);
 
-                if (d_cost != int.MaxValue)
-                    d_cost = d_cost * (i + 3);
+                int cost = d_cost * (i + 1);
 
-                AddCost(names[i], d_cost);
+                AddCost(names[i], Math.Abs(cost/2));
             }
         }
 
@@ -258,12 +272,20 @@ namespace AscendedRPG.GUIs
                     MessageBox.Show("You have to max out your Normal Tier before being able to uncap the vendor.");
                 else
                 {
-                    _state.Player.Wallet.Coins -= cost;
-                    _state.Player.VendorCap++;
-                    VendorTextBox.Text = vendorDialog[vendor][1];
-                    UpdatePlayerCoins(_state.Player.Wallet.Coins);
-                    RollWares();
-                    _state.Save.SaveGame(_state.Player);
+                    if (_state.Player.VendorCap + 1 <= _state.GetCap())
+                    {
+                        _state.Player.Wallet.Coins -= cost;
+                        _state.Player.VendorCap++;
+                        VendorTextBox.Text = vendorDialog[vendor][1];
+                        UpdatePlayerCoins(_state.Player.Wallet.Coins);
+                        RollWares();
+                        _state.Save.SaveGame(_state.Player);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your shop is currently at max level.");
+                    }
+
                 }
             }
 

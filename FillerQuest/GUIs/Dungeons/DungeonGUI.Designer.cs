@@ -118,6 +118,7 @@
             this.EnemyBox3.ReadOnly = true;
             this.EnemyBox3.Size = new System.Drawing.Size(192, 20);
             this.EnemyBox3.TabIndex = 8;
+            this.EnemyBox3.TabStop = false;
             this.EnemyBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // EnemyBox2
@@ -128,6 +129,7 @@
             this.EnemyBox2.ReadOnly = true;
             this.EnemyBox2.Size = new System.Drawing.Size(192, 20);
             this.EnemyBox2.TabIndex = 7;
+            this.EnemyBox2.TabStop = false;
             this.EnemyBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // EnemyBox1
@@ -138,6 +140,7 @@
             this.EnemyBox1.ReadOnly = true;
             this.EnemyBox1.Size = new System.Drawing.Size(192, 20);
             this.EnemyBox1.TabIndex = 6;
+            this.EnemyBox1.TabStop = false;
             this.EnemyBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // EnemyBar3
@@ -198,6 +201,7 @@
             this.TurnBox.ReadOnly = true;
             this.TurnBox.Size = new System.Drawing.Size(601, 20);
             this.TurnBox.TabIndex = 8;
+            this.TurnBox.TabStop = false;
             // 
             // UseSkillButton
             // 

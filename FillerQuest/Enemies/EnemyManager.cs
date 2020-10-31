@@ -1,6 +1,7 @@
 ﻿using AscendedRPG.Enemies;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -94,7 +95,7 @@ namespace AscendedRPG.Files
             enemy.HP = GetEnemyHP(dtype, t, r);
             enemy.Image = LoadEnemyImage(path, index);
 
-            t += ((int)Math.Pow((dtype + 1), 3));
+            t += ((int)Math.Pow((dtype + 1), 4));
 
             enemy.Skills.ForEach(s => SetSkillDamage(dtype+1, s, t, r));
 
@@ -175,14 +176,16 @@ namespace AscendedRPG.Files
             index = index % b_list.Count;
             
             Enemy boss = (Enemy)b_list[index].Clone();
-            
-            int t = (tier * (dtype + 1));
+
+            int mult = (dtype + 1);
+
+            int t = (tier * mult);
 
             boss.HP = BossHPCalc(t * hp);
 
             t += ((int)Math.Pow((dtype + 1), 3));
 
-            boss.Skills.ForEach(s => SetSkillDamage(dtype + 1, s, t * (dtype + 1), r));
+            boss.Skills.ForEach(s => SetSkillDamage(dtype + 1, s, t * mult, r));
             boss.Image = LoadEnemyImage(Path.Combine(PATH,bossPath), index);
             return boss;
         }

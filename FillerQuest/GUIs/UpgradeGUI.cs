@@ -133,15 +133,6 @@ namespace AscendedRPG.GUIs
             BoostArmor();
         }
 
-        private void boostButton_MouseClick(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                BoostArmor();
-            }
-            catch (NullReferenceException) { }
-        }
-
         private void BoostArmor()
         {
             int quantity = (int)lootQuantity.Value;
